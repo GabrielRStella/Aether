@@ -1,3 +1,8 @@
+#project-specific
+.settings/
+bin/
+code/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -14,9 +19,6 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
-# Windows shortcuts
-*.lnk
-
 # =========================
 # Operating System Files
 # =========================
@@ -27,6 +29,9 @@ $RECYCLE.BIN/
 .DS_Store
 .AppleDouble
 .LSOverride
+
+# Icon must end with two \r
+Icon
 
 # Thumbnails
 ._*
@@ -41,3 +46,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+.settings/org.eclipse.jdt.core.prefs
+.classpath
+.project
