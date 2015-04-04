@@ -61,6 +61,14 @@ public class Body {
 		return velocity;
 	}
 	
+	public float getMass() {
+		return mass.value();
+	}
+	
+	public Variable getMassVariable() {
+		return mass;
+	}
+	
 	public void accelerate(Vector2d acceleration) {
 		velocity.add(acceleration);
 	}
@@ -69,5 +77,9 @@ public class Body {
 	//a = F/m
 	public void applyForce(Vector2d force) {
 		velocity.add(force.scaleCopy(mass.value()));
+	}
+	
+	public void accelerate(float scale) {
+		velocity.multiply(scale);
 	}
 }
