@@ -14,6 +14,10 @@ public class AetherWorld {
 	 * The distance used to prune and produce worlds
 	 */
 	private static final float DISTANCE = 10F; /* placeholder value. TODO: tune this */
+	/**
+	 * scale used to not prune worlds near viewbox
+	 */
+	private static final float SCALE = 1.2F; /* placeholder value. TODO: tune this */
 	
 	private AetherGame game;
 	
@@ -40,6 +44,7 @@ public class AetherWorld {
 		//remove planets a certain distance away from players
 		//add planets in direction of player motion
 		Box box = game.getViewBox().getViewBox();
+		BoxScaled check = new BoxScaled(box, SCALE);
 		Iterator<Planet> planets = worldPlanets.iterator();
 		while(planets.hasNext()) {
 			Planet planet = planets.next();
@@ -51,7 +56,7 @@ public class AetherWorld {
 			Point2d p = body.getPosition();
 			int x = (int)p.getX();
 			int y = (int)p.getY();
-			if(!checkDist(p, playerPlanet1.getBody().getPosition()) && !checkDist(p, playerPlanet1.getBody().getPosition()) && !box.contains(x, y)) {
+			if(!checkDist(p, playerPlanet1.getBody().getPosition()) && !checkDist(p, playerPlanet1.getBody().getPosition()) && !check.contains(x, y)) {
 				planets.remove();
 			}
 		}
