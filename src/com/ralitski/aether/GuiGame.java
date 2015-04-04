@@ -1,16 +1,19 @@
 package com.ralitski.aether;
 
 import com.ralitski.util.gui.Gui;
+import com.ralitski.util.input.ControllerMonitor;
 import com.ralitski.util.input.event.KeyEvent;
 import com.ralitski.util.input.event.MouseEvent;
 
 public class GuiGame extends Gui {
 	
+	private ControllerMonitor controller;
 	private AetherGame game;
 
-	public GuiGame(Gui parent, AetherGame game) {
+	public GuiGame(Gui parent) {
 		super(parent);
-		this.game = game;
+		this.game = new AetherGame(this);
+		controller = new ControllerMonitor(game);
 	}
 	
 	public boolean renderParent() {
@@ -34,6 +37,7 @@ public class GuiGame extends Gui {
 	
 	@Override
 	public void update() {
+		controller.update();
 		game.update();
 	}
 

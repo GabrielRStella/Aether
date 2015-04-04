@@ -14,15 +14,15 @@ public class AetherWorld {
 	/**
 	 * The distance used to prune and produce worlds
 	 */
-	private static final float DISTANCE = 10F; /* placeholder value. TODO: tune this */
+	private static final float DISTANCE = 50F; /* placeholder value. TODO: tune this */
 	/**
 	 * scale used to not prune worlds near viewbox
 	 */
-	private static final float SCALE = 1.2F; /* placeholder value. TODO: tune this */
+	private static final float SCALE = 1.3F; /* placeholder value. TODO: tune this */
 	/**
 	 * scale used to add planets
 	 */
-	private static final float SPAWN_SCALE = 0.3F; /* placeholder value. TODO: tune this */
+	private static final float SPAWN_SCALE = 0.01F; /* placeholder value. TODO: tune this */
 	/**
 	 * highest of planets spawned at a time
 	 */
@@ -32,6 +32,7 @@ public class AetherWorld {
 	
 	private Player playerPlanet1;
 	private Player playerPlanet2;
+	private PlayerMovementController movement;
 	private List<Planet> worldPlanets;
 	private Random random;
 	private PlanetCreator planetCreator;
@@ -39,6 +40,9 @@ public class AetherWorld {
 	public AetherWorld(AetherGame game, PlanetCreator planetCreator) {
 		this.game = game;
 		this.planetCreator = planetCreator;
+		playerPlanet1 = planetCreator.createPlayer1();
+		playerPlanet2 = planetCreator.createPlayer2();
+		movement = new PlayerMovementControllerDefault(playerPlanet1, playerPlanet2);
 		worldPlanets = new LinkedList<>();
 		random = new Random();
 	}
@@ -49,6 +53,14 @@ public class AetherWorld {
 	
 	public Player getPlayer2() {
 		return playerPlanet2;
+	}
+
+	public PlayerMovementController getPlayerMovementController() {
+		return movement;
+	}
+	
+	public Iterable<Planet> getPlanets() {
+		return worldPlanets;
 	}
 	
 	public void update() {
@@ -64,17 +76,23 @@ public class AetherWorld {
 			Body body = planet.getBody();
 			force.act(body, playerPlanet1.getBody());
 			force.act(body, playerPlanet2.getBody());
-			//remove planets a certain distance away from the player (when they are unlikely to have a noticeable force)
+			
+			//remove planets a certain distance away from the player (when they are not visible and unlikely to have a noticeable force)
 			Point2d p = body.getPosition();
 			int x = (int)p.getX();
 			int y = (int)p.getY();
-			if(!checkDist(p, playerPlanet1.getBody().getPosition()) && !checkDist(p, playerPlanet1.getBody().getPosition()) && !check.contains(x, y)) {
+			if(!check.contains(x, y) && !checkDist(p, playerPlanet1.getBody().getPosition()) && !checkDist(p, playerPlanet2.getBody().getPosition())) {
 				planets.remove();
 			}
 		}
-		int size = check.getWidth() * check.getHeight();
-		float fill = worldPlanets.size() / size;
-		if(fill < SPAWN_SCALE) {
+		playerPlanet1.move();
+		playerPlanet2.move();
+		float slow = 0.9F;
+		playerPlanet1.getBody().accelerate(slow);
+		playerPlanet2.getBody().accelerate(slow);
+		int size = (int)Math.sqrt(check.getWidth() * check.getHeight());
+		float fill = worldPlanets.size() / (size == 0 ? 1 : size);
+		if(fill < SPAWN_SCALE && random.nextInt(10) == 0) {
 			//spawn a few more planets
 			int toSpawn = random.nextInt(SPAWN_COUNT);
 			for(int i = 0; i <= toSpawn; i++) {

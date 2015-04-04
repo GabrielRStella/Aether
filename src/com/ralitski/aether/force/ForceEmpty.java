@@ -9,4 +9,9 @@ public class ForceEmpty implements Force {
 	public void act(Body source, Body toForce) {
 	}
 
+	@Override
+	public Force getOpposite() {
+		return this;
+	}
+
 }

@@ -13,9 +13,26 @@ public class PlanetCreatorSimple implements PlanetCreator {
 	public Planet createPlanet(Box boundary, Random random) {
 		Point2d position = new Point2d(boundary.getMinX() + random.nextFloat() * boundary.getWidth(),
 				boundary.getMinY() + random.nextFloat() * boundary.getHeight());
-		Body body = new Body(Color.GRAY, position, 1);
+		if(random.nextBoolean()) {
+			position.setX(random.nextBoolean() ? boundary.getMinX() : boundary.getMaxX());
+		} else {
+			position.setY(random.nextBoolean() ? boundary.getMinY() : boundary.getMaxY());
+		}
+		Body body = new Body(Color.GREEN, position, 1);
 		Force force = new ForceEmpty();
 		return new Planet(body, force);
+	}
+
+	@Override
+	public Player createPlayer1() {
+		Body body = new Body(Color.RED, 1);
+		return new Player(body);
+	}
+
+	@Override
+	public Player createPlayer2() {
+		Body body = new Body(Color.BLUE, 1);
+		return new Player(body);
 	}
 
 }

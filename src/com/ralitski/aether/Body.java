@@ -64,6 +64,11 @@ public class Body {
 	public Vector2d getVelocity() {
 		return velocity;
 	}
+
+	public void move() {
+		Point2d p = shape.getPosition();
+		p.add(velocity);
+	}
 	
 	public float getMass() {
 		return density.value() * shape.getArea();

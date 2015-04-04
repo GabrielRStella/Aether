@@ -12,7 +12,7 @@ public class AetherDisplay extends GuiOwnerGL {
 
 	@Override
 	public void onTopLevelGuiClose() {
-		close();
+		stop();
 	}
 
 	@Override
@@ -39,9 +39,11 @@ public class AetherDisplay extends GuiOwnerGL {
 
 	@Override
 	protected Gui getMainMenu(GuiManager guiManager) {
+		time(20);
 		Gui gui = new Gui(guiManager);
+		GuiGame game = new GuiGame(gui);
 		//TODO: add menu stuff
-		return gui;
+		return game;
 	}
 
 }
