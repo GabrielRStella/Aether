@@ -14,7 +14,7 @@ public class AetherGame extends ControllerMonitor implements InputUser {
 	
 	public AetherGame() {
 		viewBox = new ViewBox(this);
-		world = new AetherWorld(this);
+		world = new AetherWorld(this, new PlanetCreatorSimple());
 	}
 
 	public AetherWorld getWorld() {

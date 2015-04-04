@@ -1,5 +1,6 @@
-package com.ralitski.aether;
+package com.ralitski.aether.force;
 
+import com.ralitski.aether.Body;
 import com.ralitski.util.math.geom.d2.Vector2d;
 
 public interface ForceSimple {

@@ -1,4 +1,7 @@
-package com.ralitski.aether;
+package com.ralitski.aether.force;
+
+import com.ralitski.aether.Body;
+import com.ralitski.aether.Force;
 
 public class ForceRedirect implements Force {
 	

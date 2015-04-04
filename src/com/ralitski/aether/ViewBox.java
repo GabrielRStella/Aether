@@ -18,5 +18,7 @@ public class ViewBox {
 
 	public void update() {
 		AetherWorld world = game.getWorld();
+		Player player1 = world.getPlayer1();
+		Player player2 = world.getPlayer2();
 	}
 }

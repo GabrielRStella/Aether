@@ -13,38 +13,37 @@ public class Body {
 	private Shape2d shape;
 	private Vector2d velocity;
 	
-	//just in case I have something that changes mass, idk...
-	private Variable mass;
+	private Variable density;
 	
-	public Body(Color color, float mass) {
-		this(color, Point2d.origin(), mass);
+	public Body(Color color, float density) {
+		this(color, Point2d.origin(), density);
 	}
 	
-	public Body(Color color, Variable mass) {
-		this(color, Point2d.origin(), mass);
+	public Body(Color color, Variable density) {
+		this(color, Point2d.origin(), density);
 	}
 
-	public Body(Color color, Shape2d shape, float mass) {
-		this(color, shape, new Vector2d(), mass);
+	public Body(Color color, Shape2d shape, float density) {
+		this(color, shape, new Vector2d(), density);
 	}
 
-	public Body(Color color, Shape2d shape, Variable mass) {
-		this(color, shape, new Vector2d(), mass);
+	public Body(Color color, Shape2d shape, Variable density) {
+		this(color, shape, new Vector2d(), density);
 	}
 
-	public Body(Color color, Vector2d velocity, float mass) {
-		this(color, Point2d.origin(), velocity, mass);
+	public Body(Color color, Vector2d velocity, float density) {
+		this(color, Point2d.origin(), velocity, density);
 	}
 
-	public Body(Color color, Vector2d velocity, Variable mass) {
-		this(color, Point2d.origin(), velocity, mass);
+	public Body(Color color, Vector2d velocity, Variable density) {
+		this(color, Point2d.origin(), velocity, density);
 	}
 
-	public Body(Color color, Shape2d shape, Vector2d velocity, float mass) {
-		this(color, shape, velocity, new VariableFixed(mass));
+	public Body(Color color, Shape2d shape, Vector2d velocity, float density) {
+		this(color, shape, velocity, new VariableFixed(density));
 	}
 
-	public Body(Color color, Shape2d shape, Vector2d velocity, Variable mass) {
+	public Body(Color color, Shape2d shape, Vector2d velocity, Variable density) {
 		this.color = color;
 		this.shape = shape;
 		this.velocity = velocity;
@@ -67,11 +66,15 @@ public class Body {
 	}
 	
 	public float getMass() {
-		return mass.value();
+		return density.value() * shape.getArea();
 	}
 	
-	public Variable getMassVariable() {
-		return mass;
+	public float getDensity() {
+		return density.value();
+	}
+	
+	public Variable getDensityVariable() {
+		return density;
 	}
 	
 	public void accelerate(Vector2d acceleration) {
@@ -81,7 +84,7 @@ public class Body {
 	//F = ma
 	//a = F/m
 	public void applyForce(Vector2d force) {
-		velocity.add(force.scaleCopy(mass.value()));
+		velocity.add(force.descaleCopy(getMass()));
 	}
 	
 	public void accelerate(float scale) {

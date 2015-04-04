@@ -3,6 +3,7 @@ package com.ralitski.aether;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import com.ralitski.util.gui.Box;
 import com.ralitski.util.gui.BoxScaled;
@@ -18,17 +19,28 @@ public class AetherWorld {
 	 * scale used to not prune worlds near viewbox
 	 */
 	private static final float SCALE = 1.2F; /* placeholder value. TODO: tune this */
+	/**
+	 * scale used to add planets
+	 */
+	private static final float SPAWN_SCALE = 0.3F; /* placeholder value. TODO: tune this */
+	/**
+	 * highest of planets spawned at a time
+	 */
+	private static final int SPAWN_COUNT = 5; /* placeholder value. TODO: tune this */
 	
 	private AetherGame game;
 	
 	private Player playerPlanet1;
 	private Player playerPlanet2;
-	
 	private List<Planet> worldPlanets;
+	private Random random;
+	private PlanetCreator planetCreator;
 	
-	public AetherWorld(AetherGame game) {
+	public AetherWorld(AetherGame game, PlanetCreator planetCreator) {
 		this.game = game;
+		this.planetCreator = planetCreator;
 		worldPlanets = new LinkedList<>();
+		random = new Random();
 	}
 	
 	public Player getPlayer1() {
@@ -58,6 +70,16 @@ public class AetherWorld {
 			int y = (int)p.getY();
 			if(!checkDist(p, playerPlanet1.getBody().getPosition()) && !checkDist(p, playerPlanet1.getBody().getPosition()) && !check.contains(x, y)) {
 				planets.remove();
+			}
+		}
+		int size = check.getWidth() * check.getHeight();
+		float fill = worldPlanets.size() / size;
+		if(fill < SPAWN_SCALE) {
+			//spawn a few more planets
+			int toSpawn = random.nextInt(SPAWN_COUNT);
+			for(int i = 0; i <= toSpawn; i++) {
+				Planet planet = planetCreator.createPlanet(check, random);
+				worldPlanets.add(planet);
 			}
 		}
 	}
