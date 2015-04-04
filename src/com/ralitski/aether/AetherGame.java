@@ -6,6 +6,7 @@ import com.ralitski.util.input.event.ControllerEvent;
 import com.ralitski.util.input.event.KeyEvent;
 import com.ralitski.util.input.event.MouseEvent;
 
+//TODO: keyboard/controller -> game abstraction layer
 public class AetherGame extends ControllerMonitor implements InputUser {
 
 	@Override
