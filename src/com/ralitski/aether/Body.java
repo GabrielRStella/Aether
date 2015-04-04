@@ -1,6 +1,7 @@
 package com.ralitski.aether;
 
 import com.ralitski.util.math.geom.d2.Point2d;
+import com.ralitski.util.math.geom.d2.Shape2d;
 import com.ralitski.util.math.geom.d2.Vector2d;
 import com.ralitski.util.math.var.Variable;
 import com.ralitski.util.math.var.VariableFixed;
@@ -9,7 +10,7 @@ import com.ralitski.util.render.img.Color;
 public class Body {
 	
 	private Color color;
-	private Point2d position;
+	private Shape2d shape;
 	private Vector2d velocity;
 	
 	//just in case I have something that changes mass, idk...
@@ -23,12 +24,12 @@ public class Body {
 		this(color, Point2d.origin(), mass);
 	}
 
-	public Body(Color color, Point2d position, float mass) {
-		this(color, position, new Vector2d(), mass);
+	public Body(Color color, Shape2d shape, float mass) {
+		this(color, shape, new Vector2d(), mass);
 	}
 
-	public Body(Color color, Point2d position, Variable mass) {
-		this(color, position, new Vector2d(), mass);
+	public Body(Color color, Shape2d shape, Variable mass) {
+		this(color, shape, new Vector2d(), mass);
 	}
 
 	public Body(Color color, Vector2d velocity, float mass) {
@@ -39,13 +40,13 @@ public class Body {
 		this(color, Point2d.origin(), velocity, mass);
 	}
 
-	public Body(Color color, Point2d position, Vector2d velocity, float mass) {
-		this(color, position, velocity, new VariableFixed(mass));
+	public Body(Color color, Shape2d shape, Vector2d velocity, float mass) {
+		this(color, shape, velocity, new VariableFixed(mass));
 	}
 
-	public Body(Color color, Point2d position, Vector2d velocity, Variable mass) {
+	public Body(Color color, Shape2d shape, Vector2d velocity, Variable mass) {
 		this.color = color;
-		this.position = position;
+		this.shape = shape;
 		this.velocity = velocity;
 	}
 	
@@ -53,8 +54,12 @@ public class Body {
 		return color;
 	}
 	
+	public Shape2d getShape() {
+		return shape;
+	}
+	
 	public Point2d getPosition() {
-		return position;
+		return shape.getPosition();
 	}
 	
 	public Vector2d getVelocity() {
