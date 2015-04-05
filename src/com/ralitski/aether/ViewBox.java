@@ -8,10 +8,10 @@ import com.ralitski.util.math.geom.d2.Vector2d;
 public class ViewBox {
 	
 	public static final float SCALE_BASE = 1.5F;
-	public static final float SCALE_SPEED = 5F;
+	public static final float SCALE_SPEED = 7F;
 	
-	public static final float MIN_WIDTH = 20;
-	public static final float MIN_HEIGHT = 20;
+	public static final float MIN_WIDTH = 100;
+	public static final float MIN_HEIGHT = 100;
 
 	private AetherGame game;
 	private Box viewBox;
@@ -81,11 +81,6 @@ public class ViewBox {
 		maxX += maxVX * SCALE_SPEED;
 		minY += minVY * SCALE_SPEED;
 		maxY += maxVY * SCALE_SPEED;
-		//fit to screen ratio
-		GuiManager manager = game.getOwner().getOwner();
-		float x = manager.getWindowWidth();
-		float y = manager.getWindowHeight();
-		float ratio = y / x;
 		width = maxX - minX;
 		height = maxY - minY;
 		minX = Math.min(minX, aMinX);
@@ -106,6 +101,11 @@ public class ViewBox {
 			minY -= extra;
 			maxY += extra;
 		}
+		//fit to screen ratio
+//		GuiManager manager = game.getOwner().getOwner();
+//		float x = manager.getWindowWidth();
+//		float y = manager.getWindowHeight();
+//		float ratio = y / x;
 //		float currentRatio = height / width;
 //		//adjust the viewbox to be bigger than necessary
 //		if(ratio > currentRatio) {

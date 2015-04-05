@@ -75,9 +75,15 @@ public class AetherGame implements InputUser, ControllerUser {
 		GL11.glPopMatrix();
 	}
 	
+	//TODO: bg is right size, but not positioned
 	private void rescale() {
-		GuiManager manager = owner.getOwner();
-		Box box = viewBox.getViewBox();
-		
+//		GuiManager manager = owner.getOwner();
+//		Box box = viewBox.getViewBox();
+//		GL11.glTranslatef(box.getMinX(), box.getMinY(), 0);
+//		float xScale = (float)manager.getWindowWidth() / (float)box.getWidth();
+//		float yScale = (float)manager.getWindowHeight() / (float)box.getHeight();
+//		GL11.glScalef(xScale, yScale, 1);
+////		System.out.println(box.getMinX() + " " + box.getMinY());
+//		GL11.glTranslatef(((float)-box.getMinX()) / xScale, ((float)-box.getMinY()) / yScale, 0);
 	}
 }
