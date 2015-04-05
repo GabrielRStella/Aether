@@ -8,6 +8,7 @@ import com.ralitski.aether.force.ForceRedirect;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Circle;
 import com.ralitski.util.math.geom.d2.Point2d;
+import com.ralitski.util.math.geom.d2.Vector2d;
 import com.ralitski.util.render.img.Color;
 
 public class PlanetCreatorSimple implements PlanetCreator {
@@ -29,12 +30,14 @@ public class PlanetCreatorSimple implements PlanetCreator {
 	@Override
 	public Player createPlayer1() {
 		Body body = new Body(Color.RED, new Circle(Point2d.origin(), 1));
+		body.accelerate(new Vector2d(-5, 5));
 		return new Player(body);
 	}
 
 	@Override
 	public Player createPlayer2() {
 		Body body = new Body(Color.BLUE, new Circle(Point2d.origin(), 1));
+		body.accelerate(new Vector2d(5, -5));
 		return new Player(body);
 	}
 	

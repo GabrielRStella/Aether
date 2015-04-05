@@ -2,7 +2,7 @@ package com.ralitski.aether;
 
 import org.lwjgl.opengl.GL11;
 
-import com.ralitski.util.gui.Box;
+import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.render.img.Color;
 import com.ralitski.util.render.list.GLListHelper;
@@ -10,7 +10,7 @@ import com.ralitski.util.render.list.GLListHelper;
 public class RendererSimple implements Renderer {
 
 	@Override
-	public void renderBackground(Box box) {
+	public void renderBackground(BoundingBox2d box) {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(box.getMinX(), box.getMinY(), 0);

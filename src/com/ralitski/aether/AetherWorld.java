@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import com.ralitski.util.gui.Box;
-import com.ralitski.util.gui.BoxScaled;
+import com.ralitski.aether.force.Boundary;
+import com.ralitski.aether.force.ForceRedirect;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
 
@@ -15,7 +15,11 @@ public class AetherWorld {
 	/**
 	 * The distance used to prune and produce worlds
 	 */
-	private static final float DISTANCE = 50F; /* placeholder value. TODO: tune this */
+	private static final float DISTANCE_PLAYER = 30F; /* placeholder value. TODO: tune this */
+	/**
+	 * The distance used to prune and produce worlds
+	 */
+	private static final float DISTANCE_PLANET = 50F; /* placeholder value. TODO: tune this */
 	/**
 	 * scale used to not prune worlds near viewbox
 	 */
@@ -33,6 +37,7 @@ public class AetherWorld {
 	
 	private Player playerPlanet1;
 	private Player playerPlanet2;
+	private Force playerBounds;
 	private PlayerMovementController movement;
 	private List<Planet> worldPlanets;
 	private Random random;
@@ -46,6 +51,7 @@ public class AetherWorld {
 		movement = new PlayerMovementControllerDefault(playerPlanet1, playerPlanet2);
 		worldPlanets = new LinkedList<>();
 		random = new Random();
+		playerBounds = new ForceRedirect(new Boundary(500, 1));
 	}
 	
 	public Player getPlayer1() {
@@ -86,6 +92,8 @@ public class AetherWorld {
 				planets.remove();
 			}
 		}
+		playerBounds.act(playerPlanet1.getBody(), playerPlanet2.getBody());
+		playerBounds.act(playerPlanet2.getBody(), playerPlanet1.getBody());
 		playerPlanet1.move();
 		playerPlanet2.move();
 		float slow = 0.4F;
@@ -98,12 +106,19 @@ public class AetherWorld {
 			int toSpawn = random.nextInt(SPAWN_COUNT);
 			for(int i = 0; i <= toSpawn; i++) {
 				Planet planet = planetCreator.createPlanet(check, random);
-				worldPlanets.add(planet);
+				if(checkLocation(planet.getBody().getPosition())) worldPlanets.add(planet);
 			}
 		}
 	}
 	
 	private boolean checkDist(Point2d point, Point2d check) {
-		return point.length(check) < DISTANCE;
+		return point.length(check) < DISTANCE_PLAYER;
+	}
+	
+	public boolean checkLocation(Point2d p) {
+		for(Planet planet : worldPlanets) {
+			if(planet.getBody().getPosition().length(p) < DISTANCE_PLANET) return false;
+		}
+		return true;
 	}
 }

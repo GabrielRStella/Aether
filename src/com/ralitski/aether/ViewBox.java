@@ -1,7 +1,7 @@
 package com.ralitski.aether;
 
-import com.ralitski.util.gui.Box;
 import com.ralitski.util.gui.GuiManager;
+import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.math.geom.d2.Vector2d;
 
@@ -14,14 +14,17 @@ public class ViewBox {
 	public static final float MIN_HEIGHT = 100;
 
 	private AetherGame game;
-	private Box viewBox;
+	private BoundingBox2d viewBox;
+	
+	private Vector2d prevVelocity1 = new Vector2d();
+	private Vector2d prevVelocity2 = new Vector2d();
 	
 	public ViewBox(AetherGame game) {
 		this.game = game;
-		viewBox = new Box();
+		viewBox = new BoundingBox2d();
 	}
 	
-	public Box getViewBox() {
+	public BoundingBox2d getViewBox() {
 		return viewBox;
 	}
 
@@ -34,9 +37,15 @@ public class ViewBox {
 		Body body1 = player1.getBody();
 		Point2d pos1 = body1.getPosition();
 		Vector2d v1 = body1.getVelocity();
+		Vector2d temp = prevVelocity1;
+		prevVelocity1 = v1;
+		v1 = v1.subtractCopy(temp);
 		Body body2 = player2.getBody();
 		Point2d pos2 = body2.getPosition();
 		Vector2d v2 = body2.getVelocity();
+		temp = prevVelocity2;
+		prevVelocity2 = v2;
+		v2 = v2.subtractCopy(temp);
 		float x1 = pos1.getX();
 		float x2 = pos2.getX();
 		float y1 = pos1.getY();
@@ -121,6 +130,6 @@ public class ViewBox {
 //			minX -= dif;
 //			maxX += dif;
 //		}
-		viewBox = new Box((int)minX, (int)minY, (int)maxX, (int)maxY);
+		viewBox = new BoundingBox2d(minX, minY, maxX, maxY);
 	}
 }

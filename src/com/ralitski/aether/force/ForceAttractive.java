@@ -12,8 +12,7 @@ public class ForceAttractive implements ForceSimple {
 		Point2d dst = toForce.getPosition();
 		float dist = src.length(dst);
 		Vector2d v = new Vector2d(dst, src);
-		System.out.println(v + " " + source.getMass() + " " + toForce.getMass() + " " + dist + " " + (source.getMass() * toForce.getMass() / dist / dist));
-		v.multiply(source.getMass() * toForce.getMass() / dist / dist);
+		v.multiply(source.getMass() * toForce.getMass() / dist / dist / dist);
 		return v;
 	}
 
