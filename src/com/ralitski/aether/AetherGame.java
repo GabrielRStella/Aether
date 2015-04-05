@@ -10,6 +10,7 @@ import com.ralitski.util.input.InputUser;
 import com.ralitski.util.input.event.ControllerEvent;
 import com.ralitski.util.input.event.KeyEvent;
 import com.ralitski.util.input.event.MouseEvent;
+import com.ralitski.util.math.geom.d2.BoundingBox2d;
 
 //TODO: keyboard/controller -> game abstraction layer
 public class AetherGame implements InputUser, ControllerUser {
@@ -77,13 +78,14 @@ public class AetherGame implements InputUser, ControllerUser {
 	
 	//TODO: bg is right size, but not positioned
 	private void rescale() {
-//		GuiManager manager = owner.getOwner();
-//		Box box = viewBox.getViewBox();
-//		GL11.glTranslatef(box.getMinX(), box.getMinY(), 0);
-//		float xScale = (float)manager.getWindowWidth() / (float)box.getWidth();
-//		float yScale = (float)manager.getWindowHeight() / (float)box.getHeight();
-//		GL11.glScalef(xScale, yScale, 1);
-////		System.out.println(box.getMinX() + " " + box.getMinY());
+		GuiManager manager = owner.getOwner();
+		BoundingBox2d box = viewBox.getViewBox();
+		GL11.glTranslatef(box.getMinX(), box.getMinY(), 0);
+		float xScale = (float)manager.getWindowWidth() / (float)box.getWidth();
+		float yScale = (float)manager.getWindowHeight() / (float)box.getHeight();
+		GL11.glScalef(xScale, yScale, 1);
+//		System.out.println(box.getMinX() + " " + box.getMinY());
 //		GL11.glTranslatef(((float)-box.getMinX()) / xScale, ((float)-box.getMinY()) / yScale, 0);
+		GL11.glTranslatef(-box.getMinX(), -box.getMinY(), 0);
 	}
 }

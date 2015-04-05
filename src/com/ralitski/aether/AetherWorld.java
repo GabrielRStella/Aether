@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.ralitski.util.gui.Box;
 import com.ralitski.util.gui.BoxScaled;
+import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
 
 public class AetherWorld {
@@ -22,7 +23,7 @@ public class AetherWorld {
 	/**
 	 * scale used to add planets
 	 */
-	private static final float SPAWN_SCALE = 0.01F; /* placeholder value. TODO: tune this */
+	private static final float SPAWN_SCALE = 0.001F; /* placeholder value. TODO: tune this */
 	/**
 	 * highest of planets spawned at a time
 	 */
@@ -67,8 +68,8 @@ public class AetherWorld {
 		//apply forces to players
 		//remove planets a certain distance away from players
 		//add planets in direction of player motion
-		Box box = game.getViewBox().getViewBox();
-		BoxScaled check = new BoxScaled(box, SCALE);
+		BoundingBox2d box = game.getViewBox().getViewBox();
+		BoundingBox2d check = box.scale(SCALE);
 		Iterator<Planet> planets = worldPlanets.iterator();
 		while(planets.hasNext()) {
 			Planet planet = planets.next();
@@ -87,7 +88,7 @@ public class AetherWorld {
 		}
 		playerPlanet1.move();
 		playerPlanet2.move();
-		float slow = 0.9F;
+		float slow = 0.4F;
 		playerPlanet1.getBody().accelerate(slow);
 		playerPlanet2.getBody().accelerate(slow);
 		int size = (int)Math.sqrt(check.getWidth() * check.getHeight());

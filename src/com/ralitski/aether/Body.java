@@ -15,12 +15,20 @@ public class Body {
 	
 	private Variable density;
 	
+	public Body(Color color) {
+		this(color, 1);
+	}
+	
 	public Body(Color color, float density) {
 		this(color, Point2d.origin(), density);
 	}
 	
 	public Body(Color color, Variable density) {
 		this(color, Point2d.origin(), density);
+	}
+
+	public Body(Color color, Shape2d shape) {
+		this(color, shape, 1);
 	}
 
 	public Body(Color color, Shape2d shape, float density) {
@@ -31,12 +39,20 @@ public class Body {
 		this(color, shape, new Vector2d(), density);
 	}
 
+	public Body(Color color, Vector2d velocity) {
+		this(color, velocity, 1);
+	}
+
 	public Body(Color color, Vector2d velocity, float density) {
 		this(color, Point2d.origin(), velocity, density);
 	}
 
 	public Body(Color color, Vector2d velocity, Variable density) {
 		this(color, Point2d.origin(), velocity, density);
+	}
+
+	public Body(Color color, Shape2d shape, Vector2d velocity) {
+		this(color, shape, velocity, 1);
 	}
 
 	public Body(Color color, Shape2d shape, Vector2d velocity, float density) {
@@ -47,6 +63,7 @@ public class Body {
 		this.color = color;
 		this.shape = shape;
 		this.velocity = velocity;
+		this.density = density;
 	}
 	
 	public Color getColor() {

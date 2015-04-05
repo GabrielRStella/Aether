@@ -22,12 +22,12 @@ public class InputAbstractor implements InputUser, ControllerUser {
 	private static final int KEY_UP_2 = Keyboard.KEY_UP;
 	private static final int KEY_DOWN_2 = Keyboard.KEY_DOWN;
 
-	private static final float speed = 0.1F;
+	private static final float speed = 0.3F;
 	private static final Vector2d UP = new Vector2d(0, speed);
 	private static final Vector2d DOWN = new Vector2d(0, -speed);
 	private static final Vector2d LEFT = new Vector2d(-speed, 0);
 	private static final Vector2d RIGHT = new Vector2d(speed, 0);
-	private static final float speed2 = 0.3F;
+	private static final float speed2 = 2F;
 	private static final Vector2d UP2 = new Vector2d(0, speed2);
 	private static final Vector2d DOWN2 = new Vector2d(0, -speed2);
 	private static final Vector2d LEFT2 = new Vector2d(-speed2, 0);
