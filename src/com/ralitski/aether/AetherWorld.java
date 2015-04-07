@@ -51,7 +51,7 @@ public class AetherWorld {
 		movement = new PlayerMovementControllerDefault(playerPlanet1, playerPlanet2);
 		worldPlanets = new LinkedList<>();
 		random = new Random();
-		playerBounds = new ForceRedirect(new Boundary(500, 1));
+		playerBounds = new ForceRedirect(new Boundary(200, 1));
 	}
 	
 	public Player getPlayer1() {
