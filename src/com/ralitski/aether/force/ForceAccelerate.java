@@ -6,6 +6,8 @@ import com.ralitski.util.math.geom.d2.Point2d;
 
 public class ForceAccelerate implements Force {
 	
+	private static final float STRENGTH = 0.001F;
+	
 	private boolean inverse;
 	private float scale;
 	
@@ -28,7 +30,7 @@ public class ForceAccelerate implements Force {
 
 	@Override
 	public void act(Body source, Body toForce) {
-		float accel = (source.getMass() + toForce.getMass()) * scale;
+		float accel = source.getMass() * toForce.getMass() * scale * STRENGTH;
 		Point2d src = source.getPosition();
 		Point2d dst = toForce.getPosition();
 		float dist = src.length(dst);

@@ -20,12 +20,12 @@ public class AetherGame implements InputUser, ControllerUser {
 	private InputHandler input;
 	private WorldRender renderer;
 	
-	public AetherGame(Gui owner, GameContext context) {
+	public AetherGame(Gui owner, AetherDisplay display, GameContext context) {
 		this.owner = owner;
 		this.context = context;
 		viewBox = context.getViewBox(this);
-		world = new AetherWorld(this, context.getPlanetCreator(this));
-		input = context.getInputHandler(this, world);
+		world = new AetherWorld(this, context, context.getPlanetCreator(this));
+		input = context.getInputHandler(display, this, world);
 		renderer = context.getRenderer();
 	}
 	

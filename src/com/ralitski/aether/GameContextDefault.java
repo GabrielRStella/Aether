@@ -1,10 +1,19 @@
 package com.ralitski.aether;
 
+import com.ralitski.aether.force.ForceAccelerate;
+import com.ralitski.aether.force.ForceAttractive;
+import com.ralitski.aether.force.ForceTorque;
+import com.ralitski.util.render.img.Color;
+
 public class GameContextDefault implements GameContext {
 
 	@Override
 	public PlanetCreator getPlanetCreator(AetherGame game) {
-		return new DebugPlanetCreator();
+		PlanetCreatorSimple creator = new PlanetCreatorSimple();
+		creator.addType(Color.RED, Color.MAGENTA, new ForceAccelerate());
+		creator.addType(Color.BLUE, Color.CYAN, new ForceAttractive());
+		creator.addType(Color.GREEN, Color.YELLOW, new ForceTorque());
+		return creator;
 	}
 
 	@Override
@@ -13,7 +22,7 @@ public class GameContextDefault implements GameContext {
 	}
 
 	@Override
-	public InputHandler getInputHandler(AetherGame game, AetherWorld world) {
+	public InputHandler getInputHandler(AetherDisplay display, AetherGame game, AetherWorld world) {
 		return new DebugInputHandler(world.getPlayer1(), world.getPlayer2());
 	}
 
@@ -39,5 +48,20 @@ public class GameContextDefault implements GameContext {
 
 	@Override
 	public void update(float timeStep) {}
+
+	@Override
+	public float getPlayerBoundaryDistance() {
+		return 100;
+	}
+
+	@Override
+	public float getBoundaryStrength() {
+		return 4;
+	}
+
+	@Override
+	public float getMaxPlayerDistance() {
+		return 150;
+	}
 
 }

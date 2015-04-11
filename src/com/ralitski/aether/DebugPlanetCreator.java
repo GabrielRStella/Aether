@@ -50,7 +50,7 @@ public class DebugPlanetCreator implements PlanetCreator {
 	
 	private Force[] forces = new Force[]{
 			new ForceRedirect(new ForceAttractive()),
-			new ForceEmpty(),
+			ForceEmpty.INSTANCE,
 			new ForceRedirect(new ForceTorque()),
 			new ForceAccelerate()
 	};

@@ -19,6 +19,22 @@ public class ColorRange {
 		return blend(min, max, grad);
 	}
 	
+	public Color getMin() {
+		return min;
+	}
+
+	public void setMin(Color min) {
+		this.min = min;
+	}
+
+	public Color getMax() {
+		return max;
+	}
+
+	public void setMax(Color max) {
+		this.max = max;
+	}
+
 	public Color createRough(Random random) {
 		float grad = random.nextFloat();
 		float grad2 = 1F - grad;

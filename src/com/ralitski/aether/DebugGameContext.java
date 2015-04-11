@@ -13,7 +13,7 @@ public class DebugGameContext implements GameContext {
 	}
 
 	@Override
-	public InputHandler getInputHandler(AetherGame game, AetherWorld world) {
+	public InputHandler getInputHandler(AetherDisplay display, AetherGame game, AetherWorld world) {
 		return new DebugInputHandler(world.getPlayer1(), world.getPlayer2());
 	}
 
@@ -36,6 +36,21 @@ public class DebugGameContext implements GameContext {
 	@Override
 	public String getTitle() {
 		return "Aether Testing";
+	}
+
+	@Override
+	public float getMaxPlayerDistance() {
+		return 250;
+	}
+
+	@Override
+	public float getBoundaryStrength() {
+		return 5;
+	}
+
+	@Override
+	public float getPlayerBoundaryDistance() {
+		return 150;
 	}
 
 }

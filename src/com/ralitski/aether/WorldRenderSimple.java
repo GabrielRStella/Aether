@@ -7,7 +7,9 @@ import javax.imageio.ImageIO;
 import org.lwjgl.opengl.GL11;
 
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
+import com.ralitski.util.math.geom.d2.Circle;
 import com.ralitski.util.math.geom.d2.Point2d;
+import com.ralitski.util.math.geom.d2.Shape2d;
 import com.ralitski.util.render.img.Color;
 import com.ralitski.util.render.img.GLImage;
 import com.ralitski.util.render.img.GLTexture;
@@ -62,10 +64,16 @@ public class WorldRenderSimple implements WorldRender {
 		GL11.glPushMatrix();
 		Point2d pos = body.getShape().getPosition();
 		GL11.glTranslatef(pos.getX(), pos.getY(), 0);
-		GL11.glScalef(10, 10, 1);
+		
+		float scale = 1;
+		Shape2d shape = body.getShape();
+		if(shape instanceof Circle) {
+			scale = ((Circle)shape).getRadius();
+		}
+		
+		GL11.glScalef(scale, scale, 1);
 		body.getColor().glColor();
 		TexturedCenteredSquareRenderListCW.FULL.call();
-//		GLListHelper.getSquareListCenteredCW().call();
 		GL11.glPopMatrix();
 	}
 

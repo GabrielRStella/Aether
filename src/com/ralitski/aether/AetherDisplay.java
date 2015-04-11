@@ -44,7 +44,7 @@ public class AetherDisplay extends GuiOwnerGL {
 		context.setup();
 		setTitle(context.getTitle());
 		Gui gui = new Gui(guiManager);
-		GuiGame game = new GuiGame(gui, context);
+		GuiGame game = new GuiGame(gui, display, context);
 		//TODO: add menu stuff
 		return game;
 	}

@@ -38,18 +38,21 @@ public class AetherWorld {
 	private Player playerPlanet1;
 	private Player playerPlanet2;
 	private Force playerBounds;
+	private Force playerBounds2;
 	private List<Planet> worldPlanets;
 	private Random random;
 	private PlanetCreator planetCreator;
 	
-	public AetherWorld(AetherGame game, PlanetCreator planetCreator) {
+	public AetherWorld(AetherGame game, GameContext context, PlanetCreator planetCreator) {
 		this.game = game;
 		this.planetCreator = planetCreator;
 		playerPlanet1 = planetCreator.createPlayer1();
 		playerPlanet2 = planetCreator.createPlayer2();
 		worldPlanets = new LinkedList<>();
 		random = new Random();
-		playerBounds = new ForceRedirect(new Boundary(750, 2.5F));
+		float str = context.getBoundaryStrength();
+		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), str));
+		playerBounds2 = new ForceRedirect(new Boundary(context.getMaxPlayerDistance(), str * str));
 	}
 	
 	public Player getPlayer1() {
@@ -88,11 +91,13 @@ public class AetherWorld {
 		}
 		playerBounds.act(playerPlanet1.getBody(), playerPlanet2.getBody());
 		playerBounds.act(playerPlanet2.getBody(), playerPlanet1.getBody());
-		playerPlanet1.move();
-		playerPlanet2.move();
+		playerBounds2.act(playerPlanet1.getBody(), playerPlanet2.getBody());
+		playerBounds2.act(playerPlanet2.getBody(), playerPlanet1.getBody());
 		float slow = 0.4F;
 		playerPlanet1.getBody().accelerate(slow);
 		playerPlanet2.getBody().accelerate(slow);
+		playerPlanet1.move();
+		playerPlanet2.move();
 		int size = (int)Math.sqrt(check.getWidth() * check.getHeight());
 		float fill = worldPlanets.size() / (size == 0 ? 1 : size);
 		if(fill < SPAWN_SCALE && random.nextInt(10) == 0) {
