@@ -64,6 +64,7 @@ public class AetherGame implements InputUser, ControllerUser {
 		input.update();
 		world.update();
 		viewBox.update();
+		context.update();
 	}
 	
 	public void render() {

@@ -3,8 +3,10 @@ package com.ralitski.aether;
 /**
  * TODO:
  * GameContext
- * modding/plugins
+ * modding/plugins (loader, hooks)
  * ViewBox
+ * replace timer with timestep calculator
+ * possibly add GameContext rendering? idk
  * 
  * @author ralitski
  *

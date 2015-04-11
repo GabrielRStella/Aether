@@ -8,10 +8,12 @@ import com.ralitski.util.input.event.MouseEvent;
 public class GuiGame extends Gui {
 	
 	private ControllerMonitor controller;
+	private GameContext context;
 	private AetherGame game;
 
 	public GuiGame(Gui parent, GameContext context) {
 		super(parent);
+		this.context = context;
 		this.game = new AetherGame(this, context);
 		controller = new ControllerMonitor(game);
 	}
@@ -23,6 +25,7 @@ public class GuiGame extends Gui {
 	public void render2d(float partial) {
 		game.render();
 		super.render2d(partial);
+		//render context?
 	}
 
 	@Override

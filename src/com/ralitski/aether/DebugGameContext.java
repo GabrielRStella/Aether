@@ -22,4 +22,12 @@ public class DebugGameContext implements GameContext {
 		return new ViewBox(game);
 	}
 
+	@Override
+	public String getTitle() {
+		return "Aether Testing";
+	}
+
+	@Override
+	public void update() {}
+
 }

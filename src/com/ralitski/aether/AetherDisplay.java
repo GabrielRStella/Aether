@@ -40,10 +40,16 @@ public class AetherDisplay extends GuiOwnerGL {
 	@Override
 	protected Gui getMainMenu(GuiManager guiManager) {
 		time(20);
+		GameContext context = getGameContext();
+		setTitle(context.getTitle());
 		Gui gui = new Gui(guiManager);
-		GuiGame game = new GuiGame(gui, new DebugGameContext());
+		GuiGame game = new GuiGame(gui, context);
 		//TODO: add menu stuff
 		return game;
+	}
+	
+	private GameContext getGameContext() {
+		return new DebugGameContext();
 	}
 
 }

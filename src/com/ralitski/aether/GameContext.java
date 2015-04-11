@@ -5,5 +5,7 @@ public interface GameContext {
 	WorldRender getRenderer();
 	InputHandler getInputHandler(AetherGame game, AetherWorld world);
 	ViewBox getViewBox(AetherGame game);
+	void update();
 	//TODO: add constants
+	String getTitle();
 }
