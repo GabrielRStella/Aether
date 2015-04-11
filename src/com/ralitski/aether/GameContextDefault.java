@@ -1,6 +1,6 @@
 package com.ralitski.aether;
 
-public class DebugGameContext implements GameContext {
+public class GameContextDefault implements GameContext {
 
 	@Override
 	public PlanetCreator getPlanetCreator(AetherGame game) {
@@ -9,7 +9,7 @@ public class DebugGameContext implements GameContext {
 
 	@Override
 	public WorldRender getRenderer() {
-		return new DebugWorldRender();
+		return new WorldRenderSimple();
 	}
 
 	@Override
@@ -28,14 +28,16 @@ public class DebugGameContext implements GameContext {
 	}
 
 	@Override
-	public void setup() {}
+	public String getTitle() {
+		return "Aether";
+	}
+	
+	@Override
+	public void setup() {
+		//TODO: add icons
+	}
 
 	@Override
 	public void update(float timeStep) {}
-
-	@Override
-	public String getTitle() {
-		return "Aether Testing";
-	}
 
 }

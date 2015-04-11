@@ -2,6 +2,7 @@ package com.ralitski.aether;
 
 import java.util.Random;
 
+import com.ralitski.aether.force.ForceAccelerate;
 import com.ralitski.aether.force.ForceAttractive;
 import com.ralitski.aether.force.ForceEmpty;
 import com.ralitski.aether.force.ForceRedirect;
@@ -50,7 +51,8 @@ public class DebugPlanetCreator implements PlanetCreator {
 	private Force[] forces = new Force[]{
 			new ForceRedirect(new ForceAttractive()),
 			new ForceEmpty(),
-			new ForceRedirect(new ForceTorque())
+			new ForceRedirect(new ForceTorque()),
+			new ForceAccelerate()
 	};
 
 }

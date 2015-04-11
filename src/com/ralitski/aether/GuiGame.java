@@ -8,7 +8,7 @@ import com.ralitski.util.input.event.MouseEvent;
 public class GuiGame extends Gui {
 	
 	private ControllerMonitor controller;
-	private GameContext context;
+	private GameContext context; //may be used...eventually...idk
 	private AetherGame game;
 
 	public GuiGame(Gui parent, GameContext context) {

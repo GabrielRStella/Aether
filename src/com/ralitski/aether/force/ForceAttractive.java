@@ -5,6 +5,16 @@ import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.math.geom.d2.Vector2d;
 
 public class ForceAttractive implements ForceSimple {
+	
+	private float scale;
+	
+	public ForceAttractive() {
+		this(1);
+	}
+	
+	public ForceAttractive(float scale) {
+		this.scale = scale;
+	}
 
 	@Override
 	public Vector2d act(Body source, Body toForce) {
@@ -12,7 +22,7 @@ public class ForceAttractive implements ForceSimple {
 		Point2d dst = toForce.getPosition();
 		float dist = src.length(dst);
 		Vector2d v = new Vector2d(dst, src);
-		v.multiply(source.getMass() * toForce.getMass() / dist / dist / 4F);
+		v.multiply(scale * source.getMass() * toForce.getMass() / dist / dist / dist);
 		return v;
 	}
 

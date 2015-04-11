@@ -41,6 +41,7 @@ public class AetherDisplay extends GuiOwnerGL {
 	protected Gui getMainMenu(GuiManager guiManager) {
 		time(20);
 		GameContext context = getGameContext();
+		context.setup();
 		setTitle(context.getTitle());
 		Gui gui = new Gui(guiManager);
 		GuiGame game = new GuiGame(gui, context);
@@ -49,7 +50,7 @@ public class AetherDisplay extends GuiOwnerGL {
 	}
 	
 	private GameContext getGameContext() {
-		return new DebugGameContext();
+		return new GameContextDefault();
 	}
 
 }

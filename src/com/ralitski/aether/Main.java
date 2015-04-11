@@ -7,6 +7,7 @@ package com.ralitski.aether;
  * ViewBox
  * replace timer with timestep calculator
  * possibly add GameContext rendering? idk
+ * allow player to switch between GameContexts and WorldRenderers
  * 
  * @author ralitski
  *

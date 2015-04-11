@@ -5,7 +5,9 @@ public interface GameContext {
 	WorldRender getRenderer();
 	InputHandler getInputHandler(AetherGame game, AetherWorld world);
 	ViewBox getViewBox(AetherGame game);
-	void update();
+	CollisionDetector getCollisionDetector();
+	void setup();
+	void update(float timeStep);
 	//TODO: add constants
 	String getTitle();
 }
