@@ -5,4 +5,5 @@ public interface GameContext {
 	WorldRender getRenderer();
 	InputHandler getInputHandler(AetherGame game, AetherWorld world);
 	ViewBox getViewBox(AetherGame game);
+	//TODO: add constants
 }

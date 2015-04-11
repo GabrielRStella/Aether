@@ -10,7 +10,7 @@ public class Boundary implements ForceSimple {
 	
 	public Boundary(float maxDist, float maxValue) {
 		this.maxDist = maxDist;
-		this.maxValue = 1F / maxValue;
+		this.maxValue = 1F / (maxValue + 1F);
 	}
 
 	@Override

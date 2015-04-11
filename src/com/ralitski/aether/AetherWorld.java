@@ -49,7 +49,7 @@ public class AetherWorld {
 		playerPlanet2 = planetCreator.createPlayer2();
 		worldPlanets = new LinkedList<>();
 		random = new Random();
-		playerBounds = new ForceRedirect(new Boundary(200, 1));
+		playerBounds = new ForceRedirect(new Boundary(400, 2.5F));
 	}
 	
 	public Player getPlayer1() {
