@@ -2,6 +2,8 @@ package com.ralitski.aether;
 
 import org.lwjgl.input.Keyboard;
 
+import com.ralitski.util.input.event.ControllerAxisEvent;
+import com.ralitski.util.input.event.ControllerAxisEvent.ControllerAxisType;
 import com.ralitski.util.input.event.ControllerEvent;
 import com.ralitski.util.input.event.KeyEvent;
 import com.ralitski.util.input.event.MouseEvent;
@@ -43,6 +45,18 @@ public class DebugInputHandler implements InputHandler {
 	@Override
 	public void onControllerEvent(ControllerEvent event) {
 		//TODO
+		System.out.println(event);
+		if(event instanceof ControllerAxisEvent) {
+			ControllerAxisEvent aEvent = (ControllerAxisEvent)event;
+			ControllerAxisType type = aEvent.getType();
+			System.out.println(aEvent.getValue());
+			switch(type) {
+			case AXIS_X:
+			case AXIS_Y:
+			case POV_X:
+			case POV_Y:
+			}
+		}
 	}
 
 	@Override
