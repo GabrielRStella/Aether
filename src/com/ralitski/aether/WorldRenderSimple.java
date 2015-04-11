@@ -6,11 +6,16 @@ import javax.imageio.ImageIO;
 
 import org.lwjgl.opengl.GL11;
 
+import com.ralitski.util.Ticker;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Circle;
 import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.math.geom.d2.Shape2d;
 import com.ralitski.util.render.img.Color;
+import com.ralitski.util.render.img.ColorHelper;
+import com.ralitski.util.render.img.ColorRange;
+import com.ralitski.util.render.img.ColorRangeSet;
+import com.ralitski.util.render.img.ColorSet;
 import com.ralitski.util.render.img.GLImage;
 import com.ralitski.util.render.img.GLTexture;
 import com.ralitski.util.render.img.Image;
@@ -20,6 +25,8 @@ import com.ralitski.util.render.list.TexturedCenteredSquareRenderListCW;
 public class WorldRenderSimple implements WorldRender {
 	
 	private GLTexture circle;
+
+	private ColorRangeSet colors;
 	
 	public WorldRenderSimple() {
 		TexturedCenteredSquareRenderListCW.FULL.compile();
@@ -30,6 +37,12 @@ public class WorldRenderSimple implements WorldRender {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		colors = new ColorRangeSet(new ColorRange[]{
+		new ColorRange(new Color("F0B67F"), new Color("B15E6C")),
+		new ColorRange(new Color("CEC2FF"), new Color("FFEEDD")),
+		new ColorRange(new Color("FFD8BE"), new Color("C0F5FA")),
+		}, 20);
+		colors.setTicker(Ticker.ticksPerSecond(1));
 	}
 
 	@Override
@@ -44,7 +57,7 @@ public class WorldRenderSimple implements WorldRender {
 	}
 	
 	private Color nextBgColor() {
-		
+		return colors.next();
 	}
 
 	@Override
