@@ -5,6 +5,7 @@ import java.util.Random;
 import com.ralitski.aether.force.ForceAttractive;
 import com.ralitski.aether.force.ForceEmpty;
 import com.ralitski.aether.force.ForceRedirect;
+import com.ralitski.aether.force.ForceTorque;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Circle;
 import com.ralitski.util.math.geom.d2.Point2d;
@@ -42,8 +43,14 @@ public class DebugPlanetCreator implements PlanetCreator {
 	}
 	
 	private Force getRandomForce(Random random) {
-//		return new ForceEmpty();
-		return random.nextBoolean() ? new ForceEmpty() : (random.nextBoolean() ? new ForceRedirect(new ForceAttractive()) : new ForceRedirect(new ForceAttractive()).getOpposite());
+		Force force = forces[random.nextInt(forces.length)];
+		return random.nextBoolean() ? force : force.getOpposite();
 	}
+	
+	private Force[] forces = new Force[]{
+//			new ForceRedirect(new ForceAttractive()),
+//			new ForceEmpty(),
+			new ForceRedirect(new ForceTorque())
+	};
 
 }
