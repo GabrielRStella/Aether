@@ -2,9 +2,10 @@ package com.ralitski.aether;
 
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 
-public interface Renderer {
+public interface WorldRender {
 	//methods defined in order of call
 	void renderBackground(BoundingBox2d box);
 	void renderPlanet(Planet planet);
-	void renderPlayer(Player player);
+	void renderPlayer1(Player player);
+	void renderPlayer2(Player player);
 }

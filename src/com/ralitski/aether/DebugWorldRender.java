@@ -7,7 +7,7 @@ import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.render.img.Color;
 import com.ralitski.util.render.list.GLListHelper;
 
-public class RendererSimple implements Renderer {
+public class DebugWorldRender implements WorldRender {
 
 	@Override
 	public void renderBackground(BoundingBox2d box) {
@@ -26,7 +26,12 @@ public class RendererSimple implements Renderer {
 	}
 
 	@Override
-	public void renderPlayer(Player player) {
+	public void renderPlayer1(Player player) {
+		renderBody(player.getBody());
+	}
+
+	@Override
+	public void renderPlayer2(Player player) {
 		renderBody(player.getBody());
 	}
 	

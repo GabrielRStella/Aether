@@ -11,7 +11,7 @@ import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.math.geom.d2.Vector2d;
 import com.ralitski.util.render.img.Color;
 
-public class PlanetCreatorSimple implements PlanetCreator {
+public class DebugPlanetCreator implements PlanetCreator {
 
 	@Override
 	public Planet createPlanet(BoundingBox2d boundary, Random random) {

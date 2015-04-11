@@ -10,9 +10,9 @@ public class GuiGame extends Gui {
 	private ControllerMonitor controller;
 	private AetherGame game;
 
-	public GuiGame(Gui parent) {
+	public GuiGame(Gui parent, GameContext context) {
 		super(parent);
-		this.game = new AetherGame(this);
+		this.game = new AetherGame(this, context);
 		controller = new ControllerMonitor(game);
 	}
 	

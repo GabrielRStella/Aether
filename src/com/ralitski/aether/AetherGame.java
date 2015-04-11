@@ -14,21 +14,27 @@ import com.ralitski.util.math.geom.d2.BoundingBox2d;
 public class AetherGame implements InputUser, ControllerUser {
 	
 	private Gui owner;
+	private GameContext context;
 	private ViewBox viewBox;
 	private AetherWorld world;
-	private InputAbstractor input;
-	private Renderer renderer;
+	private InputHandler input;
+	private WorldRender renderer;
 	
-	public AetherGame(Gui owner) {
+	public AetherGame(Gui owner, GameContext context) {
 		this.owner = owner;
-		viewBox = new ViewBox(this);
-		world = new AetherWorld(this, new PlanetCreatorSimple());
-		input = new InputAbstractor(world.getPlayerMovementController());
-		renderer = new RendererSimple();
+		this.context = context;
+		viewBox = context.getViewBox(this);
+		world = new AetherWorld(this, context.getPlanetCreator(this));
+		input = context.getInputHandler(this, world);
+		renderer = context.getRenderer();
 	}
 	
 	public Gui getOwner() {
 		return owner;
+	}
+	
+	public GameContext getContext() {
+		return context;
 	}
 
 	public AetherWorld getWorld() {
@@ -69,8 +75,8 @@ public class AetherGame implements InputUser, ControllerUser {
 		for(Planet planet : world.getPlanets()) {
 			renderer.renderPlanet(planet);
 		}
-		renderer.renderPlayer(world.getPlayer1());
-		renderer.renderPlayer(world.getPlayer2());
+		renderer.renderPlayer1(world.getPlayer1());
+		renderer.renderPlayer2(world.getPlayer2());
 		GL11.glPopMatrix();
 	}
 	

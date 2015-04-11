@@ -38,7 +38,6 @@ public class AetherWorld {
 	private Player playerPlanet1;
 	private Player playerPlanet2;
 	private Force playerBounds;
-	private PlayerMovementController movement;
 	private List<Planet> worldPlanets;
 	private Random random;
 	private PlanetCreator planetCreator;
@@ -48,7 +47,6 @@ public class AetherWorld {
 		this.planetCreator = planetCreator;
 		playerPlanet1 = planetCreator.createPlayer1();
 		playerPlanet2 = planetCreator.createPlayer2();
-		movement = new PlayerMovementControllerDefault(playerPlanet1, playerPlanet2);
 		worldPlanets = new LinkedList<>();
 		random = new Random();
 		playerBounds = new ForceRedirect(new Boundary(200, 1));
@@ -60,10 +58,6 @@ public class AetherWorld {
 	
 	public Player getPlayer2() {
 		return playerPlanet2;
-	}
-
-	public PlayerMovementController getPlayerMovementController() {
-		return movement;
 	}
 	
 	public Iterable<Planet> getPlanets() {
