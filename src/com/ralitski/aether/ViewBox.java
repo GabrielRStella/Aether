@@ -1,5 +1,6 @@
 package com.ralitski.aether;
 
+import com.ralitski.util.gui.GuiManager;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.math.geom.d2.Vector2d;
@@ -110,25 +111,25 @@ public class ViewBox {
 			maxY += extra;
 		}
 		//fit to screen ratio
-//		GuiManager manager = game.getOwner().getOwner();
-//		float x = manager.getWindowWidth();
-//		float y = manager.getWindowHeight();
-//		float ratio = y / x;
-//		float currentRatio = height / width;
-//		//adjust the viewbox to be bigger than necessary
-//		if(ratio > currentRatio) {
-//			//make it taller
-//			float newHeight = ratio * height;
-//			float dif = (newHeight - height) / 2F;
-//			minY -= dif;
-//			maxY += dif;
-//		} else {
-//			//make it wider
-//			float newWidth = width / ratio;
-//			float dif = (newWidth - width) / 2F;
-//			minX -= dif;
-//			maxX += dif;
-//		}
+		GuiManager manager = game.getOwner().getOwner();
+		float x = manager.getWindowWidth();
+		float y = manager.getWindowHeight();
+		float ratio = y / x;
+		float currentRatio = height / width;
+		//adjust the viewbox to be bigger than necessary
+		if(ratio > currentRatio) {
+			//make it taller
+			float newHeight = ratio * width;
+			float dif = (newHeight - height) / 2F;
+			minY -= dif;
+			maxY += dif;
+		} else {
+			//make it wider
+			float newWidth = height / ratio;
+			float dif = (newWidth - width) / 2F;
+			minX -= dif;
+			maxX += dif;
+		}
 		viewBox = new BoundingBox2d(minX, minY, maxX, maxY);
 	}
 }
