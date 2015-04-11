@@ -38,27 +38,18 @@ public class WorldRenderSimple implements WorldRender {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(box.getMinX(), box.getMinY(), 0);
 		GL11.glScalef(box.getWidth(), box.getHeight(), 1);
-		Color.GRAY.glColor();
+		nextBgColor().glColor();
 		GLListHelper.getSquareListUncenteredCW().call();
 		GL11.glPopMatrix();
+	}
+	
+	private Color nextBgColor() {
+		
 	}
 
 	@Override
 	public void renderPlanet(Planet planet) {
-		renderBody(planet.getBody());
-	}
-
-	@Override
-	public void renderPlayer1(Player player) {
-		renderBody(player.getBody());
-	}
-
-	@Override
-	public void renderPlayer2(Player player) {
-		renderBody(player.getBody());
-	}
-	
-	private void renderBody(Body body) {
+		Body body = planet.getBody();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		circle.glBind();
 		GL11.glPushMatrix();
@@ -74,6 +65,46 @@ public class WorldRenderSimple implements WorldRender {
 		GL11.glScalef(scale, scale, 1);
 		body.getColor().glColor();
 		TexturedCenteredSquareRenderListCW.FULL.call();
+		GL11.glPopMatrix();
+	}
+
+	@Override
+	public void renderPlayer1(Player player) {
+		renderPlayer(player);
+	}
+
+	@Override
+	public void renderPlayer2(Player player) {
+		renderPlayer(player);
+	}
+	
+	private void renderPlayer(Player player) {
+		Body body = player.getBody();
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		circle.glBind();
+		GL11.glPushMatrix();
+		Point2d pos = body.getShape().getPosition();
+		GL11.glTranslatef(pos.getX(), pos.getY(), 0);
+		
+		float scale = 1;
+		Shape2d shape = body.getShape();
+		if(shape instanceof Circle) {
+			scale = ((Circle)shape).getRadius();
+		}
+		
+		GL11.glScalef(scale, scale, 1);
+		
+		body.getColor().glColor();
+		TexturedCenteredSquareRenderListCW.FULL.call();
+
+		GL11.glScalef(1F / scale, 1F / scale, 1);
+		scale = scale * 0.6F;
+		GL11.glScalef(scale, scale, 1);
+		
+		body.getColor().inverse().glColor();
+		TexturedCenteredSquareRenderListCW.FULL.call();
+		
+		
 		GL11.glPopMatrix();
 	}
 

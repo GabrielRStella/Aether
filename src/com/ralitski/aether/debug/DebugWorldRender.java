@@ -1,7 +1,11 @@
-package com.ralitski.aether;
+package com.ralitski.aether.debug;
 
 import org.lwjgl.opengl.GL11;
 
+import com.ralitski.aether.Body;
+import com.ralitski.aether.Planet;
+import com.ralitski.aether.Player;
+import com.ralitski.aether.WorldRender;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.render.img.Color;

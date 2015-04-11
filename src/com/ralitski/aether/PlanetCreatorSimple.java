@@ -13,6 +13,7 @@ import com.ralitski.util.math.geom.d2.Circle;
 import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.math.geom.d2.Vector2d;
 import com.ralitski.util.render.img.Color;
+import com.ralitski.util.render.img.ColorRange;
 
 public class PlanetCreatorSimple implements PlanetCreator {
 	

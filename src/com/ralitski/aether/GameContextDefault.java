@@ -1,5 +1,6 @@
 package com.ralitski.aether;
 
+import com.ralitski.aether.debug.DebugInputHandler;
 import com.ralitski.aether.force.ForceAccelerate;
 import com.ralitski.aether.force.ForceAttractive;
 import com.ralitski.aether.force.ForceTorque;

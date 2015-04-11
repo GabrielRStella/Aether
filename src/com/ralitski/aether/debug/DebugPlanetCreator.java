@@ -1,7 +1,12 @@
-package com.ralitski.aether;
+package com.ralitski.aether.debug;
 
 import java.util.Random;
 
+import com.ralitski.aether.Body;
+import com.ralitski.aether.Force;
+import com.ralitski.aether.Planet;
+import com.ralitski.aether.PlanetCreator;
+import com.ralitski.aether.Player;
 import com.ralitski.aether.force.ForceAccelerate;
 import com.ralitski.aether.force.ForceAttractive;
 import com.ralitski.aether.force.ForceEmpty;

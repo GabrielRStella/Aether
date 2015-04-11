@@ -1,7 +1,9 @@
-package com.ralitski.aether;
+package com.ralitski.aether.debug;
 
 import org.lwjgl.input.Keyboard;
 
+import com.ralitski.aether.InputHandler;
+import com.ralitski.aether.Player;
 import com.ralitski.util.input.event.ControllerAxisEvent;
 import com.ralitski.util.input.event.ControllerAxisEvent.ControllerAxisType;
 import com.ralitski.util.input.event.ControllerEvent;
