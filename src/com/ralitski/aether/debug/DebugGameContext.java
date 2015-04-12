@@ -50,11 +50,6 @@ public class DebugGameContext implements GameContext {
 	}
 
 	@Override
-	public float getMaxPlayerDistance() {
-		return 250;
-	}
-
-	@Override
 	public float getBoundaryStrength() {
 		return 5;
 	}

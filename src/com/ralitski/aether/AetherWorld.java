@@ -38,7 +38,6 @@ public class AetherWorld {
 	private Player playerPlanet1;
 	private Player playerPlanet2;
 	private Force playerBounds;
-	private Force playerBounds2;
 	private List<Planet> worldPlanets;
 	private Random random;
 	private PlanetCreator planetCreator;
@@ -50,9 +49,7 @@ public class AetherWorld {
 		playerPlanet2 = planetCreator.createPlayer2();
 		worldPlanets = new LinkedList<>();
 		random = new Random();
-		float str = context.getBoundaryStrength();
-		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), str));
-		playerBounds2 = new ForceRedirect(new Boundary(context.getMaxPlayerDistance(), str * str));
+		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), context.getBoundaryStrength()));
 	}
 	
 	public Player getPlayer1() {
@@ -91,8 +88,6 @@ public class AetherWorld {
 		}
 		playerBounds.act(playerPlanet1.getBody(), playerPlanet2.getBody());
 		playerBounds.act(playerPlanet2.getBody(), playerPlanet1.getBody());
-		playerBounds2.act(playerPlanet1.getBody(), playerPlanet2.getBody());
-		playerBounds2.act(playerPlanet2.getBody(), playerPlanet1.getBody());
 		float slow = 0.4F;
 		playerPlanet1.getBody().accelerate(slow);
 		playerPlanet2.getBody().accelerate(slow);

@@ -12,5 +12,4 @@ public interface GameContext {
 	String getTitle();
 	float getPlayerBoundaryDistance();
 	float getBoundaryStrength();
-	float getMaxPlayerDistance();
 }

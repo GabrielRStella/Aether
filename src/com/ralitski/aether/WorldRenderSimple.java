@@ -12,6 +12,8 @@ import com.ralitski.util.math.geom.d2.Circle;
 import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.math.geom.d2.Shape2d;
 import com.ralitski.util.render.img.Color;
+import com.ralitski.util.render.img.ColorRange;
+import com.ralitski.util.render.img.ColorRangeSet;
 import com.ralitski.util.render.img.ColorSet;
 import com.ralitski.util.render.img.GLImage;
 import com.ralitski.util.render.img.GLTexture;
@@ -40,7 +42,7 @@ public class WorldRenderSimple implements WorldRender {
 		new ColorRange(new Color("CEC2FF"), new Color("FFEEDD")),
 		new ColorRange(new Color("FFD8BE"), new Color("C0F5FA")),
 		}, 20);
-		colors.setTicker(Ticker.ticksPerSecond(1));
+		colors.setTicker(Ticker.ticksPerSecond(0.05F));
 	}
 
 	@Override

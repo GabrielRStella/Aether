@@ -60,9 +60,4 @@ public class GameContextDefault implements GameContext {
 		return 4;
 	}
 
-	@Override
-	public float getMaxPlayerDistance() {
-		return 150;
-	}
-
 }
