@@ -75,6 +75,14 @@ public class WorldRenderSimple implements WorldRender {
 			scale = ((Circle)shape).getRadius();
 		}
 		
+		float scale2 = scale + 1F;
+		
+		GL11.glScalef(scale2, scale2, 1);
+		Color.WHITE.glColor();
+		TexturedCenteredSquareRenderListCW.FULL.call();
+		scale2 = 1F / scale2;
+		GL11.glScalef(scale2, scale2, 1);
+		
 		GL11.glScalef(scale, scale, 1);
 		body.getColor().glColor();
 		TexturedCenteredSquareRenderListCW.FULL.call();

@@ -41,6 +41,7 @@ public class AetherWorld {
 	private List<Planet> worldPlanets;
 	private Random random;
 	private PlanetCreator planetCreator;
+	private CollisionDetector detector;
 	
 	public AetherWorld(AetherGame game, GameContext context, PlanetCreator planetCreator) {
 		this.game = game;
@@ -50,6 +51,7 @@ public class AetherWorld {
 		worldPlanets = new LinkedList<>();
 		random = new Random();
 		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), context.getBoundaryStrength()));
+		this.detector = context.getCollisionDetector();
 	}
 	
 	public Player getPlayer1() {
@@ -75,8 +77,8 @@ public class AetherWorld {
 			Planet planet = planets.next();
 			Force force = planet.getForce();
 			Body body = planet.getBody();
-			force.act(body, playerPlanet1.getBody());
-			force.act(body, playerPlanet2.getBody());
+			if(!detector.detectCollision(playerPlanet1, planet)) force.act(body, playerPlanet1.getBody());
+			if(!detector.detectCollision(playerPlanet2, planet)) force.act(body, playerPlanet2.getBody());
 			
 			//remove planets a certain distance away from the player (when they are not visible and unlikely to have a noticeable force)
 			Point2d p = body.getPosition();
