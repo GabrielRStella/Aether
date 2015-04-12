@@ -14,11 +14,9 @@ import com.ralitski.util.math.geom.d2.Shape2d;
 import com.ralitski.util.render.img.Color;
 import com.ralitski.util.render.img.ColorRange;
 import com.ralitski.util.render.img.ColorRangeSet;
-import com.ralitski.util.render.img.ColorSet;
 import com.ralitski.util.render.img.GLImage;
 import com.ralitski.util.render.img.GLTexture;
 import com.ralitski.util.render.img.Image;
-import com.ralitski.util.render.img.IterableColorSet;
 import com.ralitski.util.render.list.GLListHelper;
 import com.ralitski.util.render.list.TexturedCenteredSquareRenderListCW;
 

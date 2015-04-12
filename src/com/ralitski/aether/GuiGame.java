@@ -9,16 +9,17 @@ import com.ralitski.util.input.event.MouseEvent;
 public class GuiGame extends Gui {
 	
 	private ControllerMonitor controller;
-	private GameContext context; //may be used...eventually...idk
+//	private GameContext context; //may be used...eventually...idk
 	private AetherGame game;
 	private Ticker ticker;
 
 	public GuiGame(Gui parent, AetherDisplay display, GameContext context) {
 		super(parent);
-		this.context = context;
+//		this.context = context;
 		this.game = new AetherGame(this, display, context);
 		controller = new ControllerMonitor(game);
-		ticker = Ticker.ticksPerSecond(20);
+		ticker = Ticker.ticksPerSecond(10);
+		ticker.time();
 	}
 	
 	public boolean renderParent() {
@@ -44,7 +45,8 @@ public class GuiGame extends Gui {
 	@Override
 	public void update() {
 		controller.update();
-		game.update(ticker.time());
+		double d = ticker.time();
+		if(d != 0D) game.update(d);
 	}
 
 }

@@ -24,7 +24,7 @@ public class DebugInputHandler implements InputHandler {
 	private static final int KEY_UP_2 = Keyboard.KEY_UP;
 	private static final int KEY_DOWN_2 = Keyboard.KEY_DOWN;
 	
-	private static final float speed2 = 4F;
+	private static final float speed2 = 0.4F;
 	private static final Vector2d UP2 = new Vector2d(0, speed2);
 	private static final Vector2d DOWN2 = new Vector2d(0, -speed2);
 	private static final Vector2d LEFT2 = new Vector2d(-speed2, 0);

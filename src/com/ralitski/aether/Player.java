@@ -17,7 +17,7 @@ public class Player {
 		return body;
 	}
 
-	public void move() {
-		body.move();
+	public void move(double timeStep) {
+		body.move(timeStep);
 	}
 }

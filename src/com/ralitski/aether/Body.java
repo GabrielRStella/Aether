@@ -82,9 +82,9 @@ public class Body {
 		return velocity;
 	}
 
-	public void move() {
+	public void move(double timeStep) {
 		Point2d p = shape.getPosition();
-		p.add(velocity);
+		p.add(velocity.scaleCopy((float)timeStep));
 	}
 	
 	public float getMass() {

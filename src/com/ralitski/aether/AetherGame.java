@@ -48,13 +48,11 @@ public class AetherGame implements InputUser, ControllerUser {
 	@Override
 	public void onMouseEvent(MouseEvent event) {
 		input.onMouseEvent(event);
-		System.out.println(event);
 	}
 
 	@Override
 	public void onKeyEvent(KeyEvent event) {
 		input.onKeyEvent(event);
-		System.out.println(event);
 	}
 
 	@Override

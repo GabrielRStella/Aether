@@ -12,12 +12,12 @@ import com.ralitski.util.math.geom.d2.Point2d;
 
 public class AetherWorld {
 	
+//	/**
+//	 * The distance used to prune and produce worlds
+//	 */
+//	private static final float DISTANCE_PLAYER = 30F; /* placeholder value. TODO: tune this */
 	/**
-	 * The distance used to prune and produce worlds
-	 */
-	private static final float DISTANCE_PLAYER = 30F; /* placeholder value. TODO: tune this */
-	/**
-	 * The distance used to prune and produce worlds
+	 * The distance used to produce worlds
 	 */
 	private static final float DISTANCE_PLANET = 50F; /* placeholder value. TODO: tune this */
 	/**
@@ -34,7 +34,7 @@ public class AetherWorld {
 	private Random random;
 	private PlanetCreator planetCreator;
 	//will be used to detect collisions in consumption mode
-	private CollisionDetector detector;
+//	private CollisionDetector detector;
 	
 	public AetherWorld(AetherGame game, GameContext context, PlanetCreator planetCreator) {
 		this.game = game;
@@ -44,7 +44,7 @@ public class AetherWorld {
 		worldPlanets = new LinkedList<>();
 		random = new Random();
 		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), context.getBoundaryStrength()));
-		this.detector = context.getCollisionDetector();
+//		this.detector = context.getCollisionDetector();
 	}
 	
 	public Player getPlayer1() {
@@ -60,6 +60,7 @@ public class AetherWorld {
 	}
 	
 	public void update(double timeStep) {
+//		timeStep *= 100F;
 		//apply forces to players
 		//remove planets a certain distance away from players
 		//add planets in direction of player motion
@@ -88,11 +89,11 @@ public class AetherWorld {
 		}
 		playerBounds.act(playerPlanet1.getBody(), playerPlanet2.getBody(), timeStep);
 		playerBounds.act(playerPlanet2.getBody(), playerPlanet1.getBody(), timeStep);
-		float slow = 0.4F / (float)timeStep;
+		float slow = 0.9F * (1F - (float)timeStep);
 		playerPlanet1.getBody().accelerate(slow);
 		playerPlanet2.getBody().accelerate(slow);
-		playerPlanet1.move();
-		playerPlanet2.move();
+		playerPlanet1.move(timeStep);
+		playerPlanet2.move(timeStep);
 		int size = (int)Math.sqrt(check.getWidth() * check.getHeight());
 		float fill = worldPlanets.size() / (size == 0 ? 1 : size);
 		if(fill < planetCreator.getPlanetDensity() && random.nextInt(10) == 0) {
@@ -105,9 +106,9 @@ public class AetherWorld {
 		}
 	}
 	
-	private boolean checkDist(Point2d point, Point2d check) {
-		return point.length(check) < DISTANCE_PLAYER;
-	}
+//	private boolean checkDist(Point2d point, Point2d check) {
+//		return point.length(check) < DISTANCE_PLAYER;
+//	}
 	
 	public boolean checkLocation(Point2d p) {
 		for(Planet planet : worldPlanets) {
