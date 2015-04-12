@@ -59,7 +59,7 @@ public class AetherWorld {
 		return worldPlanets;
 	}
 	
-	public void update() {
+	public void update(double timeStep) {
 		//apply forces to players
 		//remove planets a certain distance away from players
 		//add planets in direction of player motion
@@ -72,8 +72,8 @@ public class AetherWorld {
 			Body body = planet.getBody();
 //			if(!detector.detectCollision(playerPlanet1, planet)) force.act(body, playerPlanet1.getBody());
 //			if(!detector.detectCollision(playerPlanet2, planet)) force.act(body, playerPlanet2.getBody());
-			force.act(body, playerPlanet1.getBody());
-			force.act(body, playerPlanet2.getBody());
+			force.act(body, playerPlanet1.getBody(), timeStep);
+			force.act(body, playerPlanet2.getBody(), timeStep);
 			
 			//remove planets a certain distance away from the player (when they are not visible and unlikely to have a noticeable force)
 			Point2d p = body.getPosition();
@@ -86,9 +86,9 @@ public class AetherWorld {
 				planets.remove();
 			}
 		}
-		playerBounds.act(playerPlanet1.getBody(), playerPlanet2.getBody());
-		playerBounds.act(playerPlanet2.getBody(), playerPlanet1.getBody());
-		float slow = 0.4F;
+		playerBounds.act(playerPlanet1.getBody(), playerPlanet2.getBody(), timeStep);
+		playerBounds.act(playerPlanet2.getBody(), playerPlanet1.getBody(), timeStep);
+		float slow = 0.4F / (float)timeStep;
 		playerPlanet1.getBody().accelerate(slow);
 		playerPlanet2.getBody().accelerate(slow);
 		playerPlanet1.move();

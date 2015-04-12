@@ -7,7 +7,7 @@ public interface GameContext {
 	ViewBox getViewBox(AetherGame game);
 	CollisionDetector getCollisionDetector();
 	void setup();
-	void update(float timeStep);
+	void update(double timeStep);
 	//TODO: add constants
 	String getTitle();
 	float getPlayerBoundaryDistance();

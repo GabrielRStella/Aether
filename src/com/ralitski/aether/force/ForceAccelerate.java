@@ -29,7 +29,7 @@ public class ForceAccelerate implements Force {
 	}
 
 	@Override
-	public void act(Body source, Body toForce) {
+	public void act(Body source, Body toForce, double timeStep) {
 		float accel = source.getMass() * toForce.getMass() * scale * STRENGTH;
 		Point2d src = source.getPosition();
 		Point2d dst = toForce.getPosition();
@@ -37,7 +37,7 @@ public class ForceAccelerate implements Force {
 		accel = accel / dist / dist;
 		accel += 1F;
 		if(inverse) accel = 1F / accel;
-		toForce.accelerate(accel);
+		toForce.accelerate(accel * (float)timeStep);
 	}
 
 	@Override

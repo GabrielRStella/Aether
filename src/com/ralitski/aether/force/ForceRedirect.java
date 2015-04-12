@@ -12,8 +12,8 @@ public class ForceRedirect implements Force {
 	}
 
 	@Override
-	public void act(Body source, Body toForce) {
-		toForce.accelerate(force.act(source, toForce));
+	public void act(Body source, Body toForce, double timeStep) {
+		toForce.accelerate(force.act(source, toForce, timeStep));
 	}
 
 	@Override
@@ -24,8 +24,8 @@ public class ForceRedirect implements Force {
 	private class ForceRedirectOpposite implements Force {
 
 		@Override
-		public void act(Body source, Body toForce) {
-			toForce.accelerate(force.act(source, toForce).negateCopy());
+		public void act(Body source, Body toForce, double timeStep) {
+			toForce.accelerate(force.act(source, toForce, timeStep).negateCopy());
 		}
 
 		@Override

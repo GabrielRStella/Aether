@@ -1,5 +1,6 @@
 package com.ralitski.aether;
 
+import com.ralitski.util.Ticker;
 import com.ralitski.util.gui.Gui;
 import com.ralitski.util.input.ControllerMonitor;
 import com.ralitski.util.input.event.KeyEvent;
@@ -10,12 +11,14 @@ public class GuiGame extends Gui {
 	private ControllerMonitor controller;
 	private GameContext context; //may be used...eventually...idk
 	private AetherGame game;
+	private Ticker ticker;
 
 	public GuiGame(Gui parent, AetherDisplay display, GameContext context) {
 		super(parent);
 		this.context = context;
 		this.game = new AetherGame(this, display, context);
 		controller = new ControllerMonitor(game);
+		ticker = Ticker.ticksPerSecond(20);
 	}
 	
 	public boolean renderParent() {
@@ -41,7 +44,7 @@ public class GuiGame extends Gui {
 	@Override
 	public void update() {
 		controller.update();
-		game.update();
+		game.update(ticker.time());
 	}
 
 }

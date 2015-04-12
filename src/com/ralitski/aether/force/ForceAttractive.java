@@ -19,12 +19,12 @@ public class ForceAttractive implements ForceSimple {
 	}
 
 	@Override
-	public Vector2d act(Body source, Body toForce) {
+	public Vector2d act(Body source, Body toForce, double timeStep) {
 		Point2d src = source.getPosition();
 		Point2d dst = toForce.getPosition();
 		float dist = src.length(dst);
 		Vector2d v = new Vector2d(dst, src);
-		v.multiply(scale * STRENGTH * source.getMass() * toForce.getMass() / dist / dist / dist);
+		v.multiply((float)timeStep * scale * STRENGTH * source.getMass() * toForce.getMass() / dist / dist / dist);
 		return v;
 	}
 

@@ -48,11 +48,13 @@ public class AetherGame implements InputUser, ControllerUser {
 	@Override
 	public void onMouseEvent(MouseEvent event) {
 		input.onMouseEvent(event);
+		System.out.println(event);
 	}
 
 	@Override
 	public void onKeyEvent(KeyEvent event) {
 		input.onKeyEvent(event);
+		System.out.println(event);
 	}
 
 	@Override
@@ -60,11 +62,11 @@ public class AetherGame implements InputUser, ControllerUser {
 		input.onControllerEvent(event);
 	}
 	
-	public void update() {
+	public void update(double timeStep) {
 		input.update();
-		world.update();
+		world.update(timeStep);
 		viewBox.update();
-		context.update(1); //placeholder timestep
+		context.update(timeStep);
 	}
 	
 	public void render() {

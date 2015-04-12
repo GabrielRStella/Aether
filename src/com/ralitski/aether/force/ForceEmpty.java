@@ -10,7 +10,7 @@ public class ForceEmpty implements Force {
 	private ForceEmpty(){}
 
 	@Override
-	public void act(Body source, Body toForce) {
+	public void act(Body source, Body toForce, double timeStep) {
 	}
 
 	@Override

@@ -48,7 +48,7 @@ public class GameContextDefault implements GameContext {
 	}
 
 	@Override
-	public void update(float timeStep) {}
+	public void update(double timeStep) {}
 
 	@Override
 	public float getPlayerBoundaryDistance() {

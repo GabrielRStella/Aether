@@ -42,7 +42,7 @@ public class DebugGameContext implements GameContext {
 	public void setup() {}
 
 	@Override
-	public void update(float timeStep) {}
+	public void update(double timeStep) {}
 
 	@Override
 	public String getTitle() {

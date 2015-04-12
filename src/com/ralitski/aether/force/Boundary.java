@@ -14,13 +14,13 @@ public class Boundary implements ForceSimple {
 	}
 
 	@Override
-	public Vector2d act(Body source, Body toForce) {
+	public Vector2d act(Body source, Body toForce, double timeStep) {
 		float dist = source.getPosition().length(toForce.getPosition());
 		dist -= maxDist;
 		if(dist > 0) {
 			Vector2d v = new Vector2d(toForce.getPosition(), source.getPosition());
 			float mag = (float)Math.sqrt(dist * maxValue);
-			v.setMagnitude(mag);
+			v.setMagnitude(mag * (float)timeStep);
 			return v;
 		}
 		return new Vector2d();

@@ -43,7 +43,6 @@ public class AetherDisplay extends GuiOwnerGL {
 
 	@Override
 	protected Gui getMainMenu(GuiManager guiManager) {
-		time(20);
 		GameContext context = getGameContext();
 		context.setup();
 		setTitle(context.getTitle());
