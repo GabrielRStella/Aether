@@ -8,4 +8,5 @@ public interface PlanetCreator {
 	Player createPlayer1();
 	Player createPlayer2();
 	Planet createPlanet(BoundingBox2d check, Random random);
+	float getPlanetDensity();
 }

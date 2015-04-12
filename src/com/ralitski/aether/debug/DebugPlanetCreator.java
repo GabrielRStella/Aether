@@ -21,6 +21,11 @@ import com.ralitski.util.render.img.Color;
 public class DebugPlanetCreator implements PlanetCreator {
 
 	@Override
+	public float getPlanetDensity() {
+		return 0.001F;
+	}
+
+	@Override
 	public Planet createPlanet(BoundingBox2d boundary, Random random) {
 		Point2d position = new Point2d(boundary.getMinX() + random.nextFloat() * boundary.getWidth(),
 				boundary.getMinY() + random.nextFloat() * boundary.getHeight());

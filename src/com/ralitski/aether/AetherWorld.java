@@ -23,15 +23,7 @@ public class AetherWorld {
 	/**
 	 * scale used to not prune worlds near viewbox
 	 */
-	private static final float SCALE = 1.3F; /* placeholder value. TODO: tune this */
-	/**
-	 * scale used to add planets
-	 */
-	private static final float SPAWN_SCALE = 0.001F; /* placeholder value. TODO: tune this */
-	/**
-	 * highest of planets spawned at a time
-	 */
-	private static final int SPAWN_COUNT = 5; /* placeholder value. TODO: tune this */
+	private static final float SCALE_PRUNE = 1.3F;
 	
 	private AetherGame game;
 	
@@ -41,6 +33,7 @@ public class AetherWorld {
 	private List<Planet> worldPlanets;
 	private Random random;
 	private PlanetCreator planetCreator;
+	//will be used to detect collisions in consumption mode
 	private CollisionDetector detector;
 	
 	public AetherWorld(AetherGame game, GameContext context, PlanetCreator planetCreator) {
@@ -71,20 +64,25 @@ public class AetherWorld {
 		//remove planets a certain distance away from players
 		//add planets in direction of player motion
 		BoundingBox2d box = game.getViewBox().getViewBox();
-		BoundingBox2d check = box.scale(SCALE);
+		BoundingBox2d check = box.scale(SCALE_PRUNE);
 		Iterator<Planet> planets = worldPlanets.iterator();
 		while(planets.hasNext()) {
 			Planet planet = planets.next();
 			Force force = planet.getForce();
 			Body body = planet.getBody();
-			if(!detector.detectCollision(playerPlanet1, planet)) force.act(body, playerPlanet1.getBody());
-			if(!detector.detectCollision(playerPlanet2, planet)) force.act(body, playerPlanet2.getBody());
+//			if(!detector.detectCollision(playerPlanet1, planet)) force.act(body, playerPlanet1.getBody());
+//			if(!detector.detectCollision(playerPlanet2, planet)) force.act(body, playerPlanet2.getBody());
+			force.act(body, playerPlanet1.getBody());
+			force.act(body, playerPlanet2.getBody());
 			
 			//remove planets a certain distance away from the player (when they are not visible and unlikely to have a noticeable force)
 			Point2d p = body.getPosition();
 			int x = (int)p.getX();
 			int y = (int)p.getY();
-			if(!check.contains(x, y) && !checkDist(p, playerPlanet1.getBody().getPosition()) && !checkDist(p, playerPlanet2.getBody().getPosition())) {
+//			if(!check.contains(x, y) && !checkDist(p, playerPlanet1.getBody().getPosition()) && !checkDist(p, playerPlanet2.getBody().getPosition())) {
+//				planets.remove();
+//			}
+			if(!check.contains(x, y)) {
 				planets.remove();
 			}
 		}
@@ -97,9 +95,9 @@ public class AetherWorld {
 		playerPlanet2.move();
 		int size = (int)Math.sqrt(check.getWidth() * check.getHeight());
 		float fill = worldPlanets.size() / (size == 0 ? 1 : size);
-		if(fill < SPAWN_SCALE && random.nextInt(10) == 0) {
+		if(fill < planetCreator.getPlanetDensity() && random.nextInt(10) == 0) {
 			//spawn a few more planets
-			int toSpawn = random.nextInt(SPAWN_COUNT);
+			int toSpawn = random.nextInt(4) + 1;
 			for(int i = 0; i <= toSpawn; i++) {
 				Planet planet = planetCreator.createPlanet(check, random);
 				if(checkLocation(planet.getBody().getPosition())) worldPlanets.add(planet);

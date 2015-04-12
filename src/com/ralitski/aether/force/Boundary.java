@@ -21,7 +21,6 @@ public class Boundary implements ForceSimple {
 			Vector2d v = new Vector2d(toForce.getPosition(), source.getPosition());
 			float mag = (float)Math.sqrt(dist * maxValue);
 			v.setMagnitude(mag);
-			System.out.println(dist);
 			return v;
 		}
 		return new Vector2d();

@@ -44,6 +44,11 @@ public class PlanetCreatorSimple implements PlanetCreator {
 	}
 
 	@Override
+	public float getPlanetDensity() {
+		return 0.0005F;
+	}
+
+	@Override
 	public Player createPlayer1() {
 		Body body = new Body(Color.WHITE, new Circle(Point2d.origin(), 3));
 		body.accelerate(new Vector2d(-5, 5));
@@ -78,7 +83,7 @@ public class PlanetCreatorSimple implements PlanetCreator {
 			Body body = new Body(color, new Circle(position, size));
 			Force force = type.generator.next();
 			int minDif = Color.difference(range.getMin(), color);
-			int maxDif = Color.difference(range.getMin(), color);
+			int maxDif = Color.difference(range.getMax(), color);
 			if(maxDif < minDif) force = force.getOpposite();
 			return new Planet(body, force);
 		} else {

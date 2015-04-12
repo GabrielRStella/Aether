@@ -36,6 +36,10 @@ public class AetherDisplay extends GuiOwnerGL {
 	public void getError(int source, Throwable e) {
 		e.printStackTrace();
 	}
+	
+	public void updateTick() {
+		super.updateTick();
+	}
 
 	@Override
 	protected Gui getMainMenu(GuiManager guiManager) {
