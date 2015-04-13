@@ -1,8 +1,6 @@
 package com.ralitski.aether.debug;
 
-import com.ralitski.aether.AetherDisplay;
 import com.ralitski.aether.AetherGame;
-import com.ralitski.aether.AetherWorld;
 import com.ralitski.aether.CollisionDetector;
 import com.ralitski.aether.CollisionDetectorSimple;
 import com.ralitski.aether.GameContext;

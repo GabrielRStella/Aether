@@ -14,8 +14,6 @@ import com.ralitski.util.math.geom.d2.Circle;
 import com.ralitski.util.math.geom.d2.Point2d;
 import com.ralitski.util.math.geom.d2.Shape2d;
 import com.ralitski.util.render.img.Color;
-import com.ralitski.util.render.img.ColorRange;
-import com.ralitski.util.render.img.ColorRangeSet;
 import com.ralitski.util.render.img.GLImage;
 import com.ralitski.util.render.img.GLTexture;
 import com.ralitski.util.render.img.Image;
