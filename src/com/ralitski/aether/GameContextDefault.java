@@ -1,6 +1,5 @@
 package com.ralitski.aether;
 
-import com.ralitski.aether.debug.DebugInputHandler;
 import com.ralitski.aether.force.ForceAccelerate;
 import com.ralitski.aether.force.ForceAttractive;
 import com.ralitski.aether.force.ForceTorque;
@@ -20,11 +19,6 @@ public class GameContextDefault implements GameContext {
 	@Override
 	public WorldRender getRenderer() {
 		return new WorldRenderSimple();
-	}
-
-	@Override
-	public InputHandler getInputHandler(AetherDisplay display, AetherGame game, AetherWorld world) {
-		return new DebugInputHandler(world.getPlayer1(), world.getPlayer2());
 	}
 
 	@Override

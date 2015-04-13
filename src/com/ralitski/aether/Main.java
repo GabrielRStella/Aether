@@ -8,6 +8,7 @@ package com.ralitski.aether;
  * replace timer with timestep calculator
  * possibly add GameContext rendering? idk
  * allow player to switch between GameContexts and WorldRenderers
+ * add support for random textures (ie, circle1.png circle2.png circle3.png)
  * 
  * @author ralitski
  *

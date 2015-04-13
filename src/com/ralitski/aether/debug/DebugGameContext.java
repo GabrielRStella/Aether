@@ -6,7 +6,6 @@ import com.ralitski.aether.AetherWorld;
 import com.ralitski.aether.CollisionDetector;
 import com.ralitski.aether.CollisionDetectorSimple;
 import com.ralitski.aether.GameContext;
-import com.ralitski.aether.InputHandler;
 import com.ralitski.aether.PlanetCreator;
 import com.ralitski.aether.ViewBox;
 import com.ralitski.aether.WorldRender;
@@ -21,11 +20,6 @@ public class DebugGameContext implements GameContext {
 	@Override
 	public WorldRender getRenderer() {
 		return new DebugWorldRender();
-	}
-
-	@Override
-	public InputHandler getInputHandler(AetherDisplay display, AetherGame game, AetherWorld world) {
-		return new DebugInputHandler(world.getPlayer1(), world.getPlayer2());
 	}
 
 	@Override
