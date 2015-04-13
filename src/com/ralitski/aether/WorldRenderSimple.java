@@ -1,6 +1,8 @@
 package com.ralitski.aether;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -17,14 +19,16 @@ import com.ralitski.util.render.img.ColorRangeSet;
 import com.ralitski.util.render.img.GLImage;
 import com.ralitski.util.render.img.GLTexture;
 import com.ralitski.util.render.img.Image;
+import com.ralitski.util.render.img.IterableColorSet;
 import com.ralitski.util.render.list.GLListHelper;
 import com.ralitski.util.render.list.TexturedCenteredSquareRenderListCW;
 
 public class WorldRenderSimple implements WorldRender {
 	
 	private GLTexture circle;
-
-	private ColorRangeSet colors;
+	
+	private Pastel colorIter;
+	private IterableColorSet colors;
 	
 	public WorldRenderSimple() {
 		TexturedCenteredSquareRenderListCW.FULL.compile();
@@ -35,12 +39,10 @@ public class WorldRenderSimple implements WorldRender {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		colors = new ColorRangeSet(new ColorRange[]{
-		new ColorRange(new Color("F0B67F"), new Color("B15E6C")),
-		new ColorRange(new Color("CEC2FF"), new Color("FFEEDD")),
-		new ColorRange(new Color("FFD8BE"), new Color("C0F5FA")),
-		}, 20);
-		colors.setTicker(Ticker.ticksPerSecond(0.05F));
+		colorIter = new Pastel();
+		colors = new IterableColorSet(colorIter, 20);
+//		colors.setTicker(Ticker.ticksPerSecond(0.05F));
+		colors.setTicker(Ticker.ticksPerSecond(0.1F));
 	}
 
 	@Override
@@ -125,6 +127,61 @@ public class WorldRenderSimple implements WorldRender {
 		
 		
 		GL11.glPopMatrix();
+	}
+	
+	private class Pastel implements Iterator<Color> {
+
+		@Override
+		public boolean hasNext() {
+			return true;
+		}
+
+		@Override
+		public Color next() {
+				Random random = new Random();
+				int main = random.nextInt(3);
+				int sub = random.nextInt(2);
+				
+				int c1 = 220 + random.nextInt(36); //220-255
+				int c2 = 190 + random.nextInt(46); //190-235
+				int c3 = 170 + random.nextInt(46); //170-215
+				
+				int r, g, b;
+				if(main == 0) {
+					r = c1;
+					if(sub == 0) {
+						g = c2;
+						b = c3;
+					} else {
+						g = c3;
+						b = c2;
+					}
+				} else if(main == 1) {
+					g = c1;
+					if(sub == 0) {
+						r = c2;
+						b = c3;
+					} else {
+						r = c3;
+						b = c2;
+					}
+				} else {
+					b = c1;
+					if(sub == 0) {
+						r = c2;
+						g = c3;
+					} else {
+						r = c3;
+						g = c2;
+					}
+				}
+				return new Color(r, g, b);
+		}
+
+		@Override
+		public void remove() {
+		}
+		
 	}
 
 }
