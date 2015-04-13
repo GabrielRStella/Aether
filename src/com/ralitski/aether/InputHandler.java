@@ -32,20 +32,24 @@ public class InputHandler implements InputUser, ControllerUser {
 	
 	//
 	
+	private AetherGame game;
 	private Player player1;
 	private Player player2;
 	
-	public InputHandler(AetherWorld world) {
-		this(world.getPlayer1(), world.getPlayer2());
+	public InputHandler(AetherGame game, AetherWorld world) {
+		this(game, world.getPlayer1(), world.getPlayer2());
 	}
 	
-	public InputHandler(Player player1, Player player2) {
+	public InputHandler(AetherGame game, Player player1, Player player2) {
+		this.game = game;
 		this.player1 = player1;
 		this.player2 = player2;
 	}
 	
 	public void update(double timeStep) {
 		//TODO: dont use input events, check per tick
+		GameContext context = game.getContext();
+		float rot = context.getRotationDegrees();
 	}
 
 	@Override

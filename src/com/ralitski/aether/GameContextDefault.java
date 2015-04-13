@@ -8,7 +8,7 @@ import com.ralitski.util.render.img.Color;
 public class GameContextDefault implements GameContext {
 
 	@Override
-	public PlanetCreator getPlanetCreator(AetherGame game) {
+	public PlanetCreator getPlanetCreator() {
 		PlanetCreatorSimple creator = new PlanetCreatorSimple();
 		creator.addType(Color.RED, Color.MAGENTA, new ForceAccelerate());
 		creator.addType(Color.BLUE, Color.CYAN, new ForceAttractive());
@@ -53,5 +53,12 @@ public class GameContextDefault implements GameContext {
 	public float getBoundaryStrength() {
 		return 4;
 	}
+
+	@Override
+	public float getRotationDegrees() {
+		return (prevRot += 0.01F);
+	}
+	
+	private float prevRot;
 
 }

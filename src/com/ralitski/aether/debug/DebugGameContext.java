@@ -11,7 +11,7 @@ import com.ralitski.aether.WorldRender;
 public class DebugGameContext implements GameContext {
 
 	@Override
-	public PlanetCreator getPlanetCreator(AetherGame game) {
+	public PlanetCreator getPlanetCreator() {
 		return new DebugPlanetCreator();
 	}
 
@@ -49,6 +49,11 @@ public class DebugGameContext implements GameContext {
 	@Override
 	public float getPlayerBoundaryDistance() {
 		return 150;
+	}
+
+	@Override
+	public float getRotationDegrees() {
+		return 0;
 	}
 
 }

@@ -36,9 +36,9 @@ public class AetherWorld {
 	//will be used to detect collisions in consumption mode
 //	private CollisionDetector detector;
 	
-	public AetherWorld(AetherGame game, GameContext context, PlanetCreator planetCreator) {
+	public AetherWorld(AetherGame game, GameContext context) {
 		this.game = game;
-		this.planetCreator = planetCreator;
+		this.planetCreator = context.getPlanetCreator();
 		playerPlanet1 = planetCreator.createPlayer1();
 		playerPlanet2 = planetCreator.createPlayer2();
 		worldPlanets = new LinkedList<>();

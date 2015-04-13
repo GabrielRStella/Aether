@@ -24,8 +24,8 @@ public class AetherGame implements InputUser, ControllerUser {
 		this.owner = owner;
 		this.context = context;
 		viewBox = context.getViewBox(this);
-		world = new AetherWorld(this, context, context.getPlanetCreator(this));
-		input = new InputHandler(world);
+		world = new AetherWorld(this, context);
+		input = new InputHandler(this, world);
 		renderer = context.getRenderer();
 	}
 	
@@ -84,8 +84,17 @@ public class AetherGame implements InputUser, ControllerUser {
 	private void rescale() {
 		GuiManager manager = owner.getOwner();
 		BoundingBox2d box = viewBox.getViewBox();
-		float xScale = (float)manager.getWindowWidth() / box.getWidth();
-		float yScale = (float)manager.getWindowHeight() / box.getHeight();
+		float w2 = manager.getWindowWidth();
+		float h2 = manager.getWindowHeight();
+		float xScale = w2 / box.getWidth();
+		float yScale = h2 / box.getHeight();
+		w2 /= 2F;
+		h2 /= 2F;
+		//this no werk
+		GL11.glTranslatef(w2, w2, 0);
+		GL11.glRotatef(context.getRotationDegrees(), 0, 0, 1);
+		GL11.glTranslatef(-w2, -w2, 0);
+		
 		GL11.glScalef(xScale, yScale, 1);
 		GL11.glTranslatef(-box.getMinX(), -box.getMinY(), 0);
 	}
