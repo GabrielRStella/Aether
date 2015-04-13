@@ -24,7 +24,7 @@ public class InputHandler implements InputUser, ControllerUser {
 	private static final int KEY_UP_2 = Keyboard.KEY_UP;
 	private static final int KEY_DOWN_2 = Keyboard.KEY_DOWN;
 	
-	private static final float speed2 = 0.4F;
+	private static final float speed2 = 0.3F;
 	private static final Vector2d UP2 = new Vector2d(0, speed2);
 	private static final Vector2d DOWN2 = new Vector2d(0, -speed2);
 	private static final Vector2d LEFT2 = new Vector2d(-speed2, 0);
@@ -44,8 +44,8 @@ public class InputHandler implements InputUser, ControllerUser {
 		this.player2 = player2;
 	}
 	
-	public void update() {
-		//just in case...
+	public void update(double timeStep) {
+		//TODO: dont use input events, check per tick
 	}
 
 	@Override

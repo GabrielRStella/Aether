@@ -61,7 +61,7 @@ public class AetherGame implements InputUser, ControllerUser {
 	}
 	
 	public void update(double timeStep) {
-		input.update();
+		input.update(timeStep);
 		world.update(timeStep);
 		viewBox.update();
 		context.update(timeStep);
