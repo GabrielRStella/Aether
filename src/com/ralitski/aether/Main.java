@@ -9,7 +9,8 @@ package com.ralitski.aether;
  * possibly add GameContext rendering? idk
  * allow player to switch between GameContexts and WorldRenderers
  * add support for random textures (ie, circle1.png circle2.png circle3.png)
- * handle rotating screen
+ * change BoundingBox2d to support rotation (for screen and world stuff)
+ * change input to support rotated movement
  * 
  * @author ralitski
  *

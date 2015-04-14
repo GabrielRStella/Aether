@@ -70,32 +70,34 @@ public class AetherGame implements InputUser, ControllerUser {
 	public void render() {
 		//fit to viewbox
 		GL11.glPushMatrix();
-		rescale();
-		//render stuff
-		renderer.renderBackground(viewBox.getViewBox());
+		
+		GuiManager manager = owner.getOwner();
+		BoundingBox2d box = viewBox.getViewBox();
+		float w2 = manager.getWindowWidth();
+		float h2 = manager.getWindowHeight();
+		float rot = context.getRotationDegrees();
+		float xScale = w2 / box.getWidth();
+		float yScale = h2 / box.getHeight();
+		w2 /= 2F;
+		h2 /= 2F;
+		
+		GL11.glScalef(xScale, yScale, 1);
+		GL11.glTranslatef(-box.getMinX(), -box.getMinY(), 0);
+		renderer.renderBackground(viewBox.getViewBox(), rot);
+
+		GL11.glTranslatef(box.getMinX(), box.getMinY(), 0);
+		w2 = box.getWidth() / 2F;
+		h2 = box.getHeight() / 2F;
+		GL11.glTranslatef(w2, h2, 0);
+		GL11.glRotatef(rot, 0, 0, 1);
+		GL11.glTranslatef(-w2, -h2, 0);
+		GL11.glTranslatef(-box.getMinX(), -box.getMinY(), 0);
+		
 		for(Planet planet : world.getPlanets()) {
 			renderer.renderPlanet(planet);
 		}
 		renderer.renderPlayer1(world.getPlayer1());
 		renderer.renderPlayer2(world.getPlayer2());
 		GL11.glPopMatrix();
-	}
-	
-	private void rescale() {
-		GuiManager manager = owner.getOwner();
-		BoundingBox2d box = viewBox.getViewBox();
-		float w2 = manager.getWindowWidth();
-		float h2 = manager.getWindowHeight();
-		float xScale = w2 / box.getWidth();
-		float yScale = h2 / box.getHeight();
-		w2 /= 2F;
-		h2 /= 2F;
-		//this no werk
-		GL11.glTranslatef(w2, w2, 0);
-		GL11.glRotatef(context.getRotationDegrees(), 0, 0, 1);
-		GL11.glTranslatef(-w2, -w2, 0);
-		
-		GL11.glScalef(xScale, yScale, 1);
-		GL11.glTranslatef(-box.getMinX(), -box.getMinY(), 0);
 	}
 }

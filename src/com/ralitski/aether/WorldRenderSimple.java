@@ -44,7 +44,7 @@ public class WorldRenderSimple implements WorldRender {
 	}
 
 	@Override
-	public void renderBackground(BoundingBox2d box) {
+	public void renderBackground(BoundingBox2d box, float rot) {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(box.getMinX(), box.getMinY(), 0);

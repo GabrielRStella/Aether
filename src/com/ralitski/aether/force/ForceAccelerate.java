@@ -34,7 +34,7 @@ public class ForceAccelerate implements Force {
 		Point2d src = source.getPosition();
 		Point2d dst = toForce.getPosition();
 		float dist = src.length(dst);
-		accel = accel / dist / dist;
+		accel = accel / dist;
 		accel += 1F;
 		if(inverse) accel = 1F / accel;
 		toForce.accelerate(accel);
