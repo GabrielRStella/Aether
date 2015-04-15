@@ -56,7 +56,7 @@ public class GameContextDefault implements GameContext {
 
 	@Override
 	public float getRotationDegrees() {
-		return (prevRot += 0.01F);
+		return (prevRot += 0.005F);
 	}
 	
 	private float prevRot;

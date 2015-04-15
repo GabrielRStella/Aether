@@ -6,7 +6,7 @@ import com.ralitski.util.math.geom.d2.Vector2d;
 
 public class ForceAttractive implements ForceSimple {
 	
-	private static final float STRENGTH = 0.1F;
+	private static final float STRENGTH = 0.05F;
 	
 	private float scale;
 	
@@ -24,7 +24,7 @@ public class ForceAttractive implements ForceSimple {
 		Point2d dst = toForce.getPosition();
 		float dist = src.length(dst);
 		Vector2d v = new Vector2d(dst, src);
-		v.multiply((float)timeStep * scale * STRENGTH * source.getMass() * toForce.getMass() / dist / dist / dist);
+		v.multiply((float)timeStep * scale * STRENGTH * source.getMass() * toForce.getMass() / dist / dist);
 		return v;
 	}
 
