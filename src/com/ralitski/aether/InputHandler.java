@@ -24,11 +24,7 @@ public class InputHandler implements InputUser, ControllerUser {
 	private static final int KEY_UP_2 = Keyboard.KEY_UP;
 	private static final int KEY_DOWN_2 = Keyboard.KEY_DOWN;
 	
-	private static final float speed2 = 0.3F;
-	private static final Vector2d UP2 = new Vector2d(0, speed2);
-	private static final Vector2d DOWN2 = new Vector2d(0, -speed2);
-	private static final Vector2d LEFT2 = new Vector2d(-speed2, 0);
-	private static final Vector2d RIGHT2 = new Vector2d(speed2, 0);
+	private static final float speed = 0.4F;
 	
 	//
 	
@@ -50,23 +46,43 @@ public class InputHandler implements InputUser, ControllerUser {
 		//TODO: dont use input events, check per tick
 		GameContext context = game.getContext();
 		float rot = context.getRotationDegrees();
+		Vector2d accel1 = new Vector2d();
+		if(Keyboard.isKeyDown(KEY_UP_1)) {
+			accel1.addY(speed);
+		}
+		if(Keyboard.isKeyDown(KEY_DOWN_1)) {
+			accel1.addY(-speed);
+		}
+		if(Keyboard.isKeyDown(KEY_LEFT_1)) {
+			accel1.addX(-speed);
+		}
+		if(Keyboard.isKeyDown(KEY_RIGHT_1)) {
+			accel1.addX(speed);
+		}
+		accel1.rotateDegrees(-rot);
+		if(!accel1.isEmpty()) accel1.setMagnitude(speed);
+		player1.getBody().accelerate(accel1);
+		Vector2d accel2 = new Vector2d();
+		if(Keyboard.isKeyDown(KEY_UP_2)) {
+			accel2.addY(speed);
+		}
+		if(Keyboard.isKeyDown(KEY_DOWN_2)) {
+			accel2.addY(-speed);
+		}
+		if(Keyboard.isKeyDown(KEY_LEFT_2)) {
+			accel2.addX(-speed);
+		}
+		if(Keyboard.isKeyDown(KEY_RIGHT_2)) {
+			accel2.addX(speed);
+		}
+		accel2.rotateDegrees(-rot);
+		if(!accel2.isEmpty()) accel2.setMagnitude(speed);
+		player2.getBody().accelerate(accel2);
 	}
 
 	@Override
 	public void onControllerEvent(ControllerEvent event) {
-		//TODO
-		System.out.println(event);
-		if(event instanceof ControllerAxisEvent) {
-			ControllerAxisEvent aEvent = (ControllerAxisEvent)event;
-			ControllerAxisType type = aEvent.getType();
-			System.out.println(aEvent.getValue());
-			switch(type) {
-			case AXIS_X:
-			case AXIS_Y:
-			case POV_X:
-			case POV_Y:
-			}
-		}
+		//TODO: press start button to escape
 	}
 
 	@Override
@@ -77,69 +93,6 @@ public class InputHandler implements InputUser, ControllerUser {
 	@Override
 	public void onKeyEvent(KeyEvent event) {
 		//TODO
-		if(event.getType() == KeyEventType.DOWN) {
-			//burst of speed?
-			keyDown(event.getKey());
-		} else if(event.getType() == KeyEventType.HOLD) {
-			//continued acceleration
-			keyDown(event.getKey());
-		}
 	}
-	
-	private void keyDown(int key) {
-		switch(key) {
-		case KEY_UP_1:
-			player1.getBody().accelerate(UP2);
-			break;
-		case KEY_UP_2:
-			player2.getBody().accelerate(UP2);
-			break;
-		case KEY_DOWN_1:
-			player1.getBody().accelerate(DOWN2);
-			break;
-		case KEY_DOWN_2:
-			player2.getBody().accelerate(DOWN2);
-			break;
-		case KEY_LEFT_1:
-			player1.getBody().accelerate(LEFT2);
-			break;
-		case KEY_LEFT_2:
-			player2.getBody().accelerate(LEFT2);
-			break;
-		case KEY_RIGHT_1:
-			player1.getBody().accelerate(RIGHT2);
-			break;
-		case KEY_RIGHT_2:
-			player2.getBody().accelerate(RIGHT2);
-			break;
-		}
-	}
-
-//	switch(key) {
-//	case KEY_UP_1:
-//		move.acceleratePlayer1(UP);
-//		break;
-//	case KEY_UP_2:
-//		move.acceleratePlayer2(UP);
-//		break;
-//	case KEY_DOWN_1:
-//		move.acceleratePlayer1(DOWN);
-//		break;
-//	case KEY_DOWN_2:
-//		move.acceleratePlayer2(DOWN);
-//		break;
-//	case KEY_LEFT_1:
-//		move.acceleratePlayer1(LEFT);
-//		break;
-//	case KEY_LEFT_2:
-//		move.acceleratePlayer2(LEFT);
-//		break;
-//	case KEY_RIGHT_1:
-//		move.acceleratePlayer1(RIGHT);
-//		break;
-//	case KEY_RIGHT_2:
-//		move.acceleratePlayer2(RIGHT);
-//		break;
-//	}
 	
 }

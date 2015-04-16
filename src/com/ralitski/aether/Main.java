@@ -11,6 +11,7 @@ package com.ralitski.aether;
  * add support for random textures (ie, circle1.png circle2.png circle3.png)
  * change BoundingBox2d to support rotation (for screen and world stuff)
  * change input to support rotated movement
+ * keep track of controller joystick as mouse movement in gui
  * 
  * @author ralitski
  *
