@@ -4,12 +4,9 @@ import org.lwjgl.input.Keyboard;
 
 import com.ralitski.util.input.ControllerUser;
 import com.ralitski.util.input.InputUser;
-import com.ralitski.util.input.event.ControllerAxisEvent;
-import com.ralitski.util.input.event.ControllerAxisEvent.ControllerAxisType;
 import com.ralitski.util.input.event.ControllerEvent;
 import com.ralitski.util.input.event.KeyEvent;
 import com.ralitski.util.input.event.MouseEvent;
-import com.ralitski.util.input.event.KeyEvent.KeyEventType;
 import com.ralitski.util.math.geom.d2.Vector2d;
 
 public class InputHandler implements InputUser, ControllerUser {

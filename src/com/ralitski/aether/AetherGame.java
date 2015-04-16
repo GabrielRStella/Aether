@@ -64,6 +64,7 @@ public class AetherGame implements InputUser, ControllerUser {
 		input.update(timeStep);
 		world.update(timeStep);
 		viewBox.update();
+		viewBox.getViewBox().setAngleDegrees(context.getRotationDegrees());
 		context.update(timeStep);
 	}
 	
