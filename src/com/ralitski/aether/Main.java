@@ -10,7 +10,7 @@ package com.ralitski.aether;
  * change BoundingBox2d to support rotation (for screen and world stuff)
  * keep track of controller joystick as mouse movement in gui
  * add objects that keep track of a few keyboard/controller states and return a vector() on update
- * support for n player planets
+ * support for n player planets (using above-mentioned input objects)
  * menus and options
  * 
  * @author ralitski
