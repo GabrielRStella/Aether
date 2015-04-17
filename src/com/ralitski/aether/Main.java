@@ -12,6 +12,7 @@ package com.ralitski.aether;
  * add objects that keep track of a few keyboard/controller states and return a vector() on update
  * support for n player planets (using above-mentioned input objects)
  * menus and options
+ * better input API
  * 
  * @author ralitski
  *
