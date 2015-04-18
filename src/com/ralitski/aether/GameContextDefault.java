@@ -61,4 +61,8 @@ public class GameContextDefault implements GameContext {
 	
 	private float prevRot;
 
+	@Override
+	public void renderLayer(int layer) {
+	}
+
 }

@@ -12,18 +12,12 @@ import com.ralitski.util.math.geom.d2.Point2d;
 
 public class AetherWorld {
 	
-//	/**
-//	 * The distance used to prune and produce worlds
-//	 */
-//	private static final float DISTANCE_PLAYER = 30F; /* placeholder value. TODO: tune this */
 	/**
 	 * The distance used to produce worlds
 	 */
 	private static final float DISTANCE_PLANET = 50F; /* placeholder value. TODO: tune this */
-	/**
-	 * scale used to not prune worlds near viewbox
-	 */
-	private static final float SCALE_PRUNE = 1.3F;
+	
+	//
 	
 	private AetherGame game;
 	
@@ -65,7 +59,7 @@ public class AetherWorld {
 		//remove planets a certain distance away from players
 		//add planets in direction of player motion
 		BoundingBox2d box = game.getViewBox().getViewBox();
-		BoundingBox2d check = box.scale(SCALE_PRUNE);
+		BoundingBox2d check = box.scale(planetCreator.getBoxScale());
 		Iterator<Planet> planets = worldPlanets.iterator();
 		while(planets.hasNext()) {
 			Planet planet = planets.next();
@@ -77,13 +71,7 @@ public class AetherWorld {
 			force.act(body, playerPlanet2.getBody(), timeStep);
 			
 			//remove planets a certain distance away from the player (when they are not visible and unlikely to have a noticeable force)
-			Point2d p = body.getPosition();
-			int x = (int)p.getX();
-			int y = (int)p.getY();
-//			if(!check.contains(x, y) && !checkDist(p, playerPlanet1.getBody().getPosition()) && !checkDist(p, playerPlanet2.getBody().getPosition())) {
-//				planets.remove();
-//			}
-			if(!check.contains(x, y)) {
+			if(planetCreator.prune(planet, box, check)) {
 				planets.remove();
 			}
 		}
@@ -105,10 +93,6 @@ public class AetherWorld {
 			}
 		}
 	}
-	
-//	private boolean checkDist(Point2d point, Point2d check) {
-//		return point.length(check) < DISTANCE_PLAYER;
-//	}
 	
 	public boolean checkLocation(Point2d p) {
 		for(Planet planet : worldPlanets) {

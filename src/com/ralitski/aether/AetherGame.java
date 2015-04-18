@@ -82,10 +82,13 @@ public class AetherGame implements InputUser, ControllerUser {
 		w2 /= 2F;
 		h2 /= 2F;
 		
+		//scale view to world coordinates
 		GL11.glScalef(xScale, yScale, 1);
 		GL11.glTranslatef(-box.getMinX(), -box.getMinY(), 0);
 		renderer.renderBackground(viewBox.getViewBox(), rot);
+		context.renderLayer(GameContext.RENDER_POST_BACKGROUND);
 
+		//rotate view
 		GL11.glTranslatef(box.getMinX(), box.getMinY(), 0);
 		w2 = box.getWidth() / 2F;
 		h2 = box.getHeight() / 2F;
@@ -93,12 +96,18 @@ public class AetherGame implements InputUser, ControllerUser {
 		GL11.glRotatef(rot, 0, 0, 1);
 		GL11.glTranslatef(-w2, -h2, 0);
 		GL11.glTranslatef(-box.getMinX(), -box.getMinY(), 0);
-		
+
+		context.renderLayer(GameContext.RENDER_PRE_PLANET);
 		for(Planet planet : world.getPlanets()) {
 			renderer.renderPlanet(planet);
 		}
+		context.renderLayer(GameContext.RENDER_POST_PLANET);
+		
+		context.renderLayer(GameContext.RENDER_PRE_PLAYER);
 		renderer.renderPlayer1(world.getPlayer1());
 		renderer.renderPlayer2(world.getPlayer2());
+		context.renderLayer(GameContext.RENDER_POST_PLAYER);
+		
 		GL11.glPopMatrix();
 	}
 }

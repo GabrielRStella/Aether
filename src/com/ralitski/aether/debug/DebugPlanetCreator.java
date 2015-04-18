@@ -65,4 +65,22 @@ public class DebugPlanetCreator implements PlanetCreator {
 			new ForceAccelerate()
 	};
 
+	@Override
+	public float getBoxScale() {
+		// TODO Auto-generated method stub
+		return 1.3F;
+	}
+
+	@Override
+	public boolean prune(Planet planet, BoundingBox2d viewbox, BoundingBox2d check) {
+		return !check.contains(planet.getBody().getPosition());
+	}
+//	if(!check.contains(x, y) && !checkDist(p, playerPlanet1.getBody().getPosition()) && !checkDist(p, playerPlanet2.getBody().getPosition())) {
+//	planets.remove();
+//}
+	
+//	private boolean checkDist(Point2d point, Point2d check) {
+//		return point.length(check) < DISTANCE_PLAYER;
+//	}
+
 }

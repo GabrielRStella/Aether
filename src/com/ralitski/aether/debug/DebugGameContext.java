@@ -56,4 +56,8 @@ public class DebugGameContext implements GameContext {
 		return 0;
 	}
 
+	@Override
+	public void renderLayer(int layer) {
+	}
+
 }

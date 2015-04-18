@@ -15,6 +15,7 @@ public class GuiGame extends Gui {
 
 	public GuiGame(Gui parent, AetherDisplay display, GameContext context) {
 		super(parent);
+		display.setTitle("Aether (" + context.getTitle() + ")");
 //		this.context = context;
 		this.game = new AetherGame(this, display, context);
 		controller = new ControllerMonitor(game);
@@ -27,9 +28,9 @@ public class GuiGame extends Gui {
 	}
 	
 	public void render2d(float partial) {
-		game.render();
 		super.render2d(partial);
-		//render context?
+		game.render();
+//		render context
 	}
 
 	@Override
