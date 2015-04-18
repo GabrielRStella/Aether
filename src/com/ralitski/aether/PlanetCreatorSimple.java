@@ -91,6 +91,16 @@ public class PlanetCreatorSimple implements PlanetCreator {
 			return new Planet(body, ForceEmpty.INSTANCE);
 		}
 	}
+
+	@Override
+	public float getBoxScale() {
+		return 1.3F;
+	}
+
+	@Override
+	public boolean prune(Planet planet, BoundingBox2d viewbox, BoundingBox2d check) {
+		return !check.contains(planet.getBody().getPosition());
+	}
 	
 	private class ForceGenerator implements Generator<Force> {
 		
