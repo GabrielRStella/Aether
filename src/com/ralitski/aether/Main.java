@@ -2,9 +2,7 @@ package com.ralitski.aether;
 
 /**
  * TODO:
- * GameContext
  * modding/plugins (loader, hooks)
- * possibly add GameContext rendering? idk
  * allow player to switch between GameContexts before game starts
  * add support for random textures (ie, circle1.png circle2.png circle3.png)
  * change BoundingBox2d to support rotation (for screen and world stuff)
