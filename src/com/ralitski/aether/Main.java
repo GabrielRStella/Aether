@@ -13,6 +13,7 @@ package com.ralitski.aether;
  * better input API
  * rotating world
  * add goal
+ * menu text...?
  * 
  * @author ralitski
  *

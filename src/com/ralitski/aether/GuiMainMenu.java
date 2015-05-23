@@ -24,7 +24,7 @@ public class GuiMainMenu extends Gui implements ComponentEventListener {
 		Frame top = new Frame(this);
 		setTopLevel(top);
 		
-		Button btnPlay = new Button(this, 200, 100, "Play asdhga sdhjasgdasdkjag ");
+		Button btnPlay = new Button(this, 200, 50, "Play");
 		top.add(btnPlay);
 		btnPlay.setId(1);
 		btnPlay.addComponentEventListener(this);

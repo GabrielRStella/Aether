@@ -25,12 +25,12 @@ public class GuiGameMenu extends Gui implements ComponentEventListener {
 		Frame top = new Frame(this);
 		setTopLevel(top);
 		
-		Button btnClose = new Button(this, 200, 100, "Close");
+		Button btnClose = new Button(this, 200, 50, "Close");
 		top.add(btnClose);
 		btnClose.setId(1);
 		btnClose.addComponentEventListener(this);
 
-		Button btnExit = new Button(this, 200, 100, "Exit");
+		Button btnExit = new Button(this, 200, 50, "Exit");
 		top.add(btnExit);
 		btnExit.setId(2);
 		btnExit.addComponentEventListener(this);
