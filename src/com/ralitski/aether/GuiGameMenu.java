@@ -16,28 +16,33 @@ public class GuiGameMenu extends Gui implements ComponentEventListener {
 		super(owner);
 	}
 	
+	public void update() {
+		super.update();
+		parent.update();
+	}
+	
 	public void init() {
 		Frame top = new Frame(this);
 		setTopLevel(top);
-
-		Button btnExit = new Button(this, 200, 100, "Exit");
-		top.add(btnExit);
-		btnExit.setId(1);
-		btnExit.addComponentEventListener(this);
 		
 		Button btnClose = new Button(this, 200, 100, "Close");
 		top.add(btnClose);
-		btnClose.setId(2);
+		btnClose.setId(1);
 		btnClose.addComponentEventListener(this);
+
+		Button btnExit = new Button(this, 200, 100, "Exit");
+		top.add(btnExit);
+		btnExit.setId(2);
+		btnExit.addComponentEventListener(this);
 		
 		RenderStyleSimple white = new RenderStyleSimple();
 		white.setStyle("color", Color.WHITE);
 		white.setClassType("white");
 		btnExit.setRenderStyle(0, white);
 		btnClose.setRenderStyle(0, white);
-		BoxPosition.CENTER.position(btnExit.getBounds(), null, 0, top.getBounds());
 		BoxPosition.CENTER.position(btnClose.getBounds(), null, 0, top.getBounds());
-		BoxPosition.BELOW.position(btnClose.getBounds(), btnExit.getBounds(), 10, top.getBounds());
+		BoxPosition.CENTER.position(btnExit.getBounds(), null, 0, top.getBounds());
+		BoxPosition.BELOW.position(btnExit.getBounds(), btnClose.getBounds(), 10, top.getBounds());
 		
 		top.refresh();
 	}
@@ -46,11 +51,11 @@ public class GuiGameMenu extends Gui implements ComponentEventListener {
 	public void onComponentEvent(ComponentEvent event) {
 		Component c = event.getSource();
 		int id = c.getId();
-		if(id == 1) {
+		if(id == 2) {
 			//exit
 			close();
 			parent.close();
-		} else if(id == 2) {
+		} else if(id == 1) {
 			close();
 		}
 	}

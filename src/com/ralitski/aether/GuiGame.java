@@ -44,9 +44,11 @@ public class GuiGame extends Gui {
 	
 	@Override
 	public void update() {
-		controller.update();
 		double d = ticker.time();
-		if(d != 0D) game.update(d);
+		if(getOwner().getCurrentScreen() == this) {
+			controller.update();
+			if(d != 0D) game.update(d);
+		}
 	}
 
 }

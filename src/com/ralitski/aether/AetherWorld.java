@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import com.ralitski.aether.force.Boundary;
+import com.ralitski.aether.force.ForceRedirect;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
 
@@ -13,14 +15,15 @@ public class AetherWorld {
 	/**
 	 * The distance used to produce worlds
 	 */
-	private static final float DISTANCE_PLANET = 50F; /* placeholder value. TODO: tune this */
+	private static final float DISTANCE_PLANET = 35F; /* placeholder value. TODO: tune this */
 	
 	//
 	
 	private AetherGame game;
 	
 	private Player[] playerPlanets;
-//	private Force playerBounds;
+	private Body center;
+	private Force playerBounds;
 	private List<Planet> worldPlanets;
 	private Random random;
 	private PlanetCreator planetCreator;
@@ -37,7 +40,8 @@ public class AetherWorld {
 		}
 		worldPlanets = new LinkedList<>();
 		random = new Random();
-//		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), context.getBoundaryStrength()));
+		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), context.getBoundaryStrength()));
+		center = new Body(null);
 //		this.detector = context.getCollisionDetector();
 	}
 	
@@ -73,7 +77,8 @@ public class AetherWorld {
 			}
 		}
 		for(Player player : playerPlanets) {
-//			playerBounds.act(player.getBody(), playerPlanet2.getBody(), timeStep);
+			playerBounds.act(player.getBody(), center, timeStep);
+			playerBounds.act(center, player.getBody(), timeStep);
 			float slow = 0.9F * (1F - (float)timeStep);
 			player.getBody().accelerate(slow);
 			player.move(timeStep);
