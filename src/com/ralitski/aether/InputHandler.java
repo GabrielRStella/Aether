@@ -80,6 +80,7 @@ public class InputHandler implements InputUser, ControllerUser {
 	@Override
 	public void onControllerEvent(ControllerEvent event) {
 		//TODO: press start button to escape
+		System.out.println(event);
 	}
 
 	@Override
