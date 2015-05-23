@@ -13,6 +13,10 @@ public class InputMouseMove extends InputAbstract {
 	private State state;
 	private float sensitivity;
 	
+	private int ticks;
+	private int prevTicks;
+	private float prevMove;
+	
 	public InputMouseMove(float sensitivity) {
 		this.sensitivity = sensitivity;
 		state = new State();
@@ -21,20 +25,25 @@ public class InputMouseMove extends InputAbstract {
 
 	@Override
 	public float down() {
-		float move = 0;
-		if(direction == UP || direction == DOWN) {
-			move = Mouse.getDY();
-			if(direction == DOWN) move = -move;
-		} else {
-			move = Mouse.getDX();
-			if(direction == LEFT) move = -move;
+		if(prevTicks != ticks) {
+			prevTicks = ticks;
+			float move = 0;
+			if(direction == UP || direction == DOWN) {
+				move = Mouse.getDY();
+				if(direction == DOWN) move = -move;
+			} else {
+				move = Mouse.getDX();
+				if(direction == LEFT) move = -move;
+			}
+			prevMove = move;
 		}
-		return move * sensitivity;
+		return prevMove * sensitivity;
 	}
 
 	@Override
 	public void update() {
 		state.update(down());
+		ticks++;
 	}
 
 	@Override

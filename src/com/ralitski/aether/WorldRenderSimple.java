@@ -88,16 +88,7 @@ public class WorldRenderSimple implements WorldRender {
 	}
 
 	@Override
-	public void renderPlayer1(Player player) {
-		renderPlayer(player);
-	}
-
-	@Override
-	public void renderPlayer2(Player player) {
-		renderPlayer(player);
-	}
-	
-	private void renderPlayer(Player player) {
+	public void renderPlayer(Player player, int index, int count) {
 		Body body = player.getBody();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		circle.glBind();
@@ -122,7 +113,6 @@ public class WorldRenderSimple implements WorldRender {
 		
 		body.getColor().inverse().glColor();
 		TexturedCenteredSquareRenderListCW.FULL.call();
-		
 		
 		GL11.glPopMatrix();
 	}

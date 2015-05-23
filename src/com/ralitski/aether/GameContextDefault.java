@@ -65,4 +65,9 @@ public class GameContextDefault implements GameContext {
 	public void renderLayer(int layer) {
 	}
 
+	@Override
+	public int getPlayerCount() {
+		return 2;
+	}
+
 }

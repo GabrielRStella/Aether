@@ -22,4 +22,5 @@ public interface GameContext {
 	String getTitle();
 	float getPlayerBoundaryDistance();
 	float getBoundaryStrength();
+	int getPlayerCount();
 }

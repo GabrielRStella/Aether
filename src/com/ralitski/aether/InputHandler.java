@@ -10,33 +10,17 @@ import com.ralitski.util.input.event.MouseEvent;
 import com.ralitski.util.math.geom.d2.Vector2d;
 
 public class InputHandler implements InputUser, ControllerUser {
-
-	private static final int KEY_LEFT_1 = Keyboard.KEY_A;
-	private static final int KEY_RIGHT_1 = Keyboard.KEY_D;
-	private static final int KEY_UP_1 = Keyboard.KEY_W;
-	private static final int KEY_DOWN_1 = Keyboard.KEY_S;
-	
-	private static final int KEY_LEFT_2 = Keyboard.KEY_LEFT;
-	private static final int KEY_RIGHT_2 = Keyboard.KEY_RIGHT;
-	private static final int KEY_UP_2 = Keyboard.KEY_UP;
-	private static final int KEY_DOWN_2 = Keyboard.KEY_DOWN;
 	
 	private static final float speed = 0.4F;
 	
 	//
 	
 	private AetherGame game;
-	private Player player1;
-	private Player player2;
+	private AetherWorld world;
 	
 	public InputHandler(AetherGame game, AetherWorld world) {
-		this(game, world.getPlayer1(), world.getPlayer2());
-	}
-	
-	public InputHandler(AetherGame game, Player player1, Player player2) {
 		this.game = game;
-		this.player1 = player1;
-		this.player2 = player2;
+		this.world = world;
 	}
 	
 	public void update(double timeStep) {

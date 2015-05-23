@@ -8,16 +8,12 @@ import com.ralitski.util.math.geom.d2.Vector2d;
 public class ViewBox {
 	
 	public static final float SCALE_BASE = 1.5F;
-	public static final float SCALE_SPEED = 7F;
 	
 	public static final float MIN_WIDTH = 100;
 	public static final float MIN_HEIGHT = 100;
 
 	private AetherGame game;
 	private BoundingBox2d viewBox;
-	
-	private Vector2d prevVelocity1 = new Vector2d();
-	private Vector2d prevVelocity2 = new Vector2d();
 	
 	public ViewBox(AetherGame game) {
 		this.game = game;
@@ -28,51 +24,33 @@ public class ViewBox {
 		return viewBox;
 	}
 
-	//this seems like a lot of calculations to do per-tick just for a viewbox...oh well, hopefully it'll look nice.
+	//this seems like a lot of calculations to do per-tick just for a viewbox...oh well, it looks nice.
 	public void update() {
 		//local variables, amirite
 		AetherWorld world = game.getWorld();
-		Player player1 = world.getPlayer1();
-		Player player2 = world.getPlayer2();
-		Body body1 = player1.getBody();
-		Point2d pos1 = body1.getPosition();
-		Vector2d v1 = body1.getVelocity();
-		Vector2d temp = prevVelocity1;
-		prevVelocity1 = v1;
-		v1 = v1.subtractCopy(temp);
-		Body body2 = player2.getBody();
-		Point2d pos2 = body2.getPosition();
-		Vector2d v2 = body2.getVelocity();
-		temp = prevVelocity2;
-		prevVelocity2 = v2;
-		v2 = v2.subtractCopy(temp);
-		float x1 = pos1.getX();
-		float x2 = pos2.getX();
-		float y1 = pos1.getY();
-		float y2 = pos2.getY();
-		float minX, maxX, minY, maxY;
-		float minVX, maxVX, minVY, maxVY;
-		if(x1 < x2) {
-			minX = x1;
-			maxX = x2;
-			minVX = v1.getX();
-			maxVX = v2.getX();
-		} else {
-			minX = x2;
-			maxX = x1;
-			minVX = v2.getX();
-			maxVX = v1.getX();
+//		Player player1 = world.getPlayer1();
+//		Player player2 = world.getPlayer2();
+		int index = 0;
+		int count = game.getContext().getPlayerCount();
+		float[] xs = new float[count];
+		float[] ys = new float[count];
+		for(Player player : world.getPlayers()) {
+			Body body = player.getBody();
+			Point2d pos = body.getPosition();
+			float x = pos.getX();
+			float y = pos.getY();
+			xs[index] = x;
+			ys[index] = y;
+			index++;
 		}
-		if(y1 < y2) {
-			minY = y1;
-			maxY = y2;
-			minVY = v1.getY();
-			maxVY = v2.getY();
-		} else {
-			minY = y2;
-			maxY = y1;
-			minVY = v2.getY();
-			maxVY = v1.getY();
+		float minX = Integer.MAX_VALUE, maxX = Integer.MIN_VALUE, minY = Integer.MAX_VALUE, maxY = Integer.MIN_VALUE;
+		for(int i = 0; i < count; i++) {
+			float x = xs[i];
+			float y = ys[i];
+			minX = Math.min(minX, x);
+			maxX = Math.max(maxX, x);
+			minY = Math.min(minY, y);
+			maxY = Math.max(maxY, y);
 		}
 		float width = maxX - minX;
 		float height = maxY - minY;
@@ -86,10 +64,6 @@ public class ViewBox {
 		float aMaxX = maxX;
 		float aMinY = minY;
 		float aMaxY = maxY;
-		minX += minVX * SCALE_SPEED;
-		maxX += maxVX * SCALE_SPEED;
-		minY += minVY * SCALE_SPEED;
-		maxY += maxVY * SCALE_SPEED;
 		width = maxX - minX;
 		height = maxY - minY;
 		minX = Math.min(minX, aMinX);

@@ -5,8 +5,13 @@ import java.util.Random;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 
 public interface PlanetCreator {
-	Player createPlayer1();
-	Player createPlayer2();
+	/**
+	 * 
+	 * @param index The index of this player (range 0 - (count - 1))
+	 * @param count The total number of players
+	 * @return
+	 */
+	Player createPlayer(int index, int count);
 	Planet createPlanet(BoundingBox2d check, Random random);
 	float getPlanetDensity();
 	/**

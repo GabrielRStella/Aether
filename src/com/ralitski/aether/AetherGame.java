@@ -103,8 +103,11 @@ public class AetherGame implements InputUser, ControllerUser {
 		context.renderLayer(GameContext.RENDER_POST_PLANET);
 		
 		context.renderLayer(GameContext.RENDER_PRE_PLAYER);
-		renderer.renderPlayer1(world.getPlayer1());
-		renderer.renderPlayer2(world.getPlayer2());
+		int pCount = context.getPlayerCount();
+		int i = 0;
+		for(Player player : world.getPlayers()) {
+			renderer.renderPlayer(player, i++, pCount);
+		}
 		context.renderLayer(GameContext.RENDER_POST_PLAYER);
 		
 		GL11.glPopMatrix();

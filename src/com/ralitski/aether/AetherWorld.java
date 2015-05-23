@@ -1,5 +1,6 @@
 package com.ralitski.aether;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,9 +22,8 @@ public class AetherWorld {
 	
 	private AetherGame game;
 	
-	private Player playerPlanet1;
-	private Player playerPlanet2;
-	private Force playerBounds;
+	private List<Player> playerPlanets;
+//	private Force playerBounds;
 	private List<Planet> worldPlanets;
 	private Random random;
 	private PlanetCreator planetCreator;
@@ -33,20 +33,19 @@ public class AetherWorld {
 	public AetherWorld(AetherGame game, GameContext context) {
 		this.game = game;
 		this.planetCreator = context.getPlanetCreator();
-		playerPlanet1 = planetCreator.createPlayer1();
-		playerPlanet2 = planetCreator.createPlayer2();
+		int pCount = context.getPlayerCount();
+		playerPlanets = new ArrayList<>(pCount);
+		for(int i = 0; i < pCount; i++) {
+			playerPlanets.add(planetCreator.createPlayer(i, pCount));
+		}
 		worldPlanets = new LinkedList<>();
 		random = new Random();
-		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), context.getBoundaryStrength()));
+//		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), context.getBoundaryStrength()));
 //		this.detector = context.getCollisionDetector();
 	}
 	
-	public Player getPlayer1() {
-		return playerPlanet1;
-	}
-	
-	public Player getPlayer2() {
-		return playerPlanet2;
+	public List<Player> getPlayers() {
+		return playerPlanets;
 	}
 	
 	public Iterable<Planet> getPlanets() {
@@ -67,21 +66,21 @@ public class AetherWorld {
 			Body body = planet.getBody();
 //			if(!detector.detectCollision(playerPlanet1, planet)) force.act(body, playerPlanet1.getBody());
 //			if(!detector.detectCollision(playerPlanet2, planet)) force.act(body, playerPlanet2.getBody());
-			force.act(body, playerPlanet1.getBody(), timeStep);
-			force.act(body, playerPlanet2.getBody(), timeStep);
+			for(Player player : playerPlanets) {
+				force.act(body, player.getBody(), timeStep);
+			}
 			
 			//remove planets a certain distance away from the player (when they are not visible and unlikely to have a noticeable force)
 			if(planetCreator.prune(planet, box, check)) {
 				planets.remove();
 			}
 		}
-		playerBounds.act(playerPlanet1.getBody(), playerPlanet2.getBody(), timeStep);
-		playerBounds.act(playerPlanet2.getBody(), playerPlanet1.getBody(), timeStep);
-		float slow = 0.9F * (1F - (float)timeStep);
-		playerPlanet1.getBody().accelerate(slow);
-		playerPlanet2.getBody().accelerate(slow);
-		playerPlanet1.move(timeStep);
-		playerPlanet2.move(timeStep);
+		for(Player player : playerPlanets) {
+//			playerBounds.act(player.getBody(), playerPlanet2.getBody(), timeStep);
+			float slow = 0.9F * (1F - (float)timeStep);
+			player.getBody().accelerate(slow);
+			player.move(timeStep);
+		}
 		int size = (int)Math.sqrt(check.getWidth() * check.getHeight());
 		float fill = worldPlanets.size() / (size == 0 ? 1 : size);
 		if(fill < planetCreator.getPlanetDensity() && random.nextInt(10) == 0) {

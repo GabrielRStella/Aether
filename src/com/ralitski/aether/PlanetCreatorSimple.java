@@ -49,16 +49,11 @@ public class PlanetCreatorSimple implements PlanetCreator {
 	}
 
 	@Override
-	public Player createPlayer1() {
-		Body body = new Body(Color.WHITE, new Circle(Point2d.origin(), 3));
+	public Player createPlayer(int index, int count) {
+		float part = (float)index / (float)count / 2F;
+		Color c = new Color(part, part, part);
+		Body body = new Body(c, new Circle(Point2d.origin(), 3));
 		body.accelerate(new Vector2d(-5, 5));
-		return new Player(body);
-	}
-
-	@Override
-	public Player createPlayer2() {
-		Body body = new Body(Color.BLACK, new Circle(Point2d.origin(), 3));
-		body.accelerate(new Vector2d(5, -5));
 		return new Player(body);
 	}
 
