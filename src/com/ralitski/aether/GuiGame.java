@@ -30,7 +30,6 @@ public class GuiGame extends Gui {
 	public void render2d(float partial) {
 		super.render2d(partial);
 		game.render();
-//		render context
 	}
 
 	@Override

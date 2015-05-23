@@ -11,6 +11,7 @@ import com.ralitski.util.gui.render.FontRenderer;
 import com.ralitski.util.gui.render.ImageFontRenderer;
 import com.ralitski.util.gui.render.RenderList;
 import com.ralitski.util.gui.render.RenderStyle;
+import com.ralitski.util.input.InputMonitor;
 import com.ralitski.util.render.DepthFunc;
 import com.ralitski.util.render.RenderManagerUserAbstract;
 import com.ralitski.util.render.camera.Camera;
@@ -30,6 +31,7 @@ import com.ralitski.util.render.list.TexturedUncenteredSquareRenderListCW;
 public abstract class AetherDisplayParent extends RenderManagerUserAbstract implements GuiOwner {
 	
 	private FontRenderer fontRenderer;
+	private InputMonitor input;
 	
 	protected GuiManager guiManager;
 	private boolean flipTextures = true;
@@ -41,15 +43,18 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 	
 	public void setup() {
 		super.setup();
+		renderManager.setEnableCull(false);
 		renderManager.setDepthFunc(DepthFunc.GL_LEQUAL);
 		renderManager.setBlendAlpha();
 		fontRenderer = new ImageFontRenderer(this);
 		guiManager = new GuiManager(this);
 		guiManager.openScreen(getMainMenu(guiManager));
+		input = new InputMonitor(guiManager);
 	}
 	
 	@Override
 	public void updateTick() {
+		input.update();
 		guiManager.update();
 	}
 	

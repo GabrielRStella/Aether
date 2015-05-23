@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Random;
 
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
+import com.ralitski.util.math.geom.d2.Point2d;
 
 public class AetherWorld {
 	
 	/**
 	 * The distance used to produce worlds
 	 */
-//	private static final float DISTANCE_PLANET = 50F; /* placeholder value. TODO: tune this */
+	private static final float DISTANCE_PLANET = 50F; /* placeholder value. TODO: tune this */
 	
 	//
 	
@@ -84,16 +85,16 @@ public class AetherWorld {
 			int toSpawn = random.nextInt(4) + 1;
 			for(int i = 0; i <= toSpawn; i++) {
 				Planet planet = planetCreator.createPlanet(check, random);
-//				if(checkLocation(planet.getBody().getPosition()))
+				if(checkLocation(planet.getBody().getPosition()))
 					worldPlanets.add(planet);
 			}
 		}
 	}
 	
-//	public boolean checkLocation(Point2d p) {
-//		for(Planet planet : worldPlanets) {
-//			if(planet.getBody().getPosition().length(p) < DISTANCE_PLANET) return false;
-//		}
-//		return true;
-//	}
+	public boolean checkLocation(Point2d p) {
+		for(Planet planet : worldPlanets) {
+			if(planet.getBody().getPosition().length(p) < DISTANCE_PLANET) return false;
+		}
+		return true;
+	}
 }

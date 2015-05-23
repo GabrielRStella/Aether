@@ -3,6 +3,7 @@ package com.ralitski.aether;
 import org.lwjgl.input.Keyboard;
 
 import com.ralitski.aether.input.InputBundle;
+import com.ralitski.util.gui.Gui;
 import com.ralitski.util.input.ControllerUser;
 import com.ralitski.util.input.InputUser;
 import com.ralitski.util.input.event.ControllerEvent;
@@ -44,7 +45,7 @@ public class InputHandler implements InputUser, ControllerUser {
 				Vector2d v = input[i].get();
 				v.rotateDegrees(-rot);
 				if(!v.isEmpty()) v.setMagnitude(speed);
-				player.getBody().accelerate(v);				
+				player.getBody().accelerate(v);
 			}
 		}
 	}
@@ -62,9 +63,12 @@ public class InputHandler implements InputUser, ControllerUser {
 
 	@Override
 	public void onKeyEvent(KeyEvent event) {
-		//TODO: escape button
 		if(event.getType() == KeyEventType.DOWN && event.getKey() == Keyboard.KEY_ESCAPE) {
-			
+			//open game menu
+			Gui game = this.game.getOwner();
+			GuiGameMenu gui = new GuiGameMenu(game);
+			gui.init();
+			game.getOwner().openScreen(gui);
 		}
 	}
 	

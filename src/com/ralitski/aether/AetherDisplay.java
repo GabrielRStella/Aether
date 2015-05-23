@@ -8,13 +8,18 @@ public class AetherDisplay extends AetherDisplayParent {
 	@Override
 	protected Gui getMainMenu(GuiManager guiManager) {
 		setTitle("Aether");
+		GuiMainMenu gui = new GuiMainMenu(guiManager, this);
+		gui.init();
+		//TODO: add menu stuff
+		return gui;
+	}
+	
+	public void newGame(Gui gui) {
+		GuiGame game = new GuiGame(gui, this, getGameContext());
 		GameContext context = getGameContext();
 		context.setup();
-		setTitle(context.getTitle());
-		Gui gui = new Gui(guiManager);
-		GuiGame game = new GuiGame(gui, this, context);
-		//TODO: add menu stuff
-		return game;
+		setTitle("Aether - " + context.getTitle());
+		this.guiManager.openScreen(game);
 	}
 	
 	private GameContext getGameContext() {
