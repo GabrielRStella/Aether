@@ -11,6 +11,8 @@ package com.ralitski.aether;
  * support for n player planets (using above-mentioned input objects)
  * menus and options
  * better input API
+ * rotating world
+ * add goal
  * 
  * @author ralitski
  *

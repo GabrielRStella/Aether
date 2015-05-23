@@ -130,6 +130,9 @@ public class ViewBox {
 			minX -= dif;
 			maxX += dif;
 		}
-		viewBox = new BoundingBox2d(minX, minY, maxX, maxY);
+		float cX = (minX + maxX) / 2F;
+		float cY = (minY + maxY) / 2F;
+		viewBox = new BoundingBox2d(minX - cX, minY - cY, maxX - cX, maxY - cY);
+		viewBox.setCenter(new Point2d(cX, cY));
 	}
 }

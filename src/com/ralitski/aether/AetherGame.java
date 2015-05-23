@@ -10,6 +10,7 @@ import com.ralitski.util.input.event.ControllerEvent;
 import com.ralitski.util.input.event.KeyEvent;
 import com.ralitski.util.input.event.MouseEvent;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
+import com.ralitski.util.render.list.GLListHelper;
 
 public class AetherGame implements InputUser, ControllerUser {
 	
@@ -89,13 +90,11 @@ public class AetherGame implements InputUser, ControllerUser {
 		context.renderLayer(GameContext.RENDER_POST_BACKGROUND);
 
 		//rotate view
-		GL11.glTranslatef(box.getMinX(), box.getMinY(), 0);
-		w2 = box.getWidth() / 2F;
-		h2 = box.getHeight() / 2F;
-		GL11.glTranslatef(w2, h2, 0);
+		float x = box.getCenter().getX();
+		float y = box.getCenter().getY();
+		GL11.glTranslatef(x, y, 0);
 		GL11.glRotatef(rot, 0, 0, 1);
-		GL11.glTranslatef(-w2, -h2, 0);
-		GL11.glTranslatef(-box.getMinX(), -box.getMinY(), 0);
+		GL11.glTranslatef(-x, -y, 0);
 
 		context.renderLayer(GameContext.RENDER_PRE_PLANET);
 		for(Planet planet : world.getPlanets()) {

@@ -72,6 +72,7 @@ public class PlanetCreatorSimple implements PlanetCreator {
 		} else {
 			position.setY(random.nextBoolean() ? boundary.getMinY() : boundary.getMaxY());
 		}
+		position.rotate(boundary.getAngleDegrees());
 		
 		float size = random.nextFloat() * 3F + 1F;
 		
