@@ -50,7 +50,7 @@ public class PlanetCreatorSimple implements PlanetCreator {
 
 	@Override
 	public Player createPlayer(int index, int count) {
-		float part = (float)index / (float)count / 2F;
+		float part = (float)index / (float)(count - 1);
 		Color c = new Color(part, part, part);
 		Body body = new Body(c, new Circle(Point2d.origin(), 3));
 		body.accelerate(new Vector2d(-5, 5));

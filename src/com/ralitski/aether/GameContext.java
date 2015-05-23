@@ -17,6 +17,7 @@ public interface GameContext {
 	void update(double timeStep);
 	float getRotationDegrees();
 	void renderLayer(int layer);
+	void setInput(InputHandler input);
 	
 	//TODO: game constants
 	String getTitle();

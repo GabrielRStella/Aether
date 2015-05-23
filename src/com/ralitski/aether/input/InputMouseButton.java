@@ -7,7 +7,8 @@ public class InputMouseButton extends InputAbstract {
 	private int button;
 	private State state;
 	
-	public InputMouseButton() {
+	public InputMouseButton(int button) {
+		this.button = button;
 		state = new State();
 		state.setCallback(this);
 	}

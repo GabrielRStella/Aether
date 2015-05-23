@@ -17,7 +17,6 @@ import com.ralitski.util.render.img.Color;
 import com.ralitski.util.render.img.GLImage;
 import com.ralitski.util.render.img.GLTexture;
 import com.ralitski.util.render.img.Image;
-import com.ralitski.util.render.img.IterableColorSet;
 import com.ralitski.util.render.list.GLListHelper;
 import com.ralitski.util.render.list.TexturedCenteredSquareRenderListCW;
 
@@ -25,8 +24,7 @@ public class WorldRenderSimple implements WorldRender {
 	
 	private GLTexture circle;
 	
-	private Pastel colorIter;
-	private IterableColorSet colors;
+	private ColorTransition colors;
 	
 	public WorldRenderSimple() {
 		TexturedCenteredSquareRenderListCW.FULL.compile();
@@ -37,10 +35,7 @@ public class WorldRenderSimple implements WorldRender {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		colorIter = new Pastel();
-		colors = new IterableColorSet(colorIter, 20);
-//		colors.setTicker(Ticker.ticksPerSecond(0.05F));
-		colors.setTicker(Ticker.ticksPerSecond(0.1F));
+		colors = new ColorTransition(new Pastel(), Ticker.ticksPerSecond(0.1F));
 	}
 
 	@Override

@@ -17,7 +17,8 @@ public class InputMouseMove extends InputAbstract {
 	private int prevTicks;
 	private float prevMove;
 	
-	public InputMouseMove(float sensitivity) {
+	public InputMouseMove(int direction, float sensitivity) {
+		this.direction = direction;
 		this.sensitivity = sensitivity;
 		state = new State();
 		state.setCallback(this);

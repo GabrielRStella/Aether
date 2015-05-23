@@ -7,7 +7,8 @@ public class InputKeyboard extends InputAbstract {
 	private int key;
 	private State state;
 	
-	public InputKeyboard() {
+	public InputKeyboard(int key) {
+		this.key = key;
 		state = new State();
 		state.setCallback(this);
 	}

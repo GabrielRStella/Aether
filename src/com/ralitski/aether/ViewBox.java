@@ -3,7 +3,6 @@ package com.ralitski.aether;
 import com.ralitski.util.gui.GuiManager;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
-import com.ralitski.util.math.geom.d2.Vector2d;
 
 public class ViewBox {
 	

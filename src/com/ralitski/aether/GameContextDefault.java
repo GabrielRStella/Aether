@@ -1,8 +1,12 @@
 package com.ralitski.aether;
 
+import org.lwjgl.input.Keyboard;
+
 import com.ralitski.aether.force.ForceAccelerate;
 import com.ralitski.aether.force.ForceAttractive;
 import com.ralitski.aether.force.ForceTorque;
+import com.ralitski.aether.input.InputBundle;
+import com.ralitski.aether.input.InputKeyboard;
 import com.ralitski.util.render.img.Color;
 
 public class GameContextDefault implements GameContext {
@@ -59,7 +63,7 @@ public class GameContextDefault implements GameContext {
 		return 0;//  (prevRot += 0.002F);
 	}
 	
-	private float prevRot;
+//	private float prevRot;
 
 	@Override
 	public void renderLayer(int layer) {
@@ -68,6 +72,24 @@ public class GameContextDefault implements GameContext {
 	@Override
 	public int getPlayerCount() {
 		return 2;
+	}
+
+	@Override
+	public void setInput(InputHandler input) {
+		InputBundle p1 = new InputBundle(
+				new InputKeyboard(Keyboard.KEY_UP),
+				new InputKeyboard(Keyboard.KEY_DOWN),
+				new InputKeyboard(Keyboard.KEY_LEFT),
+				new InputKeyboard(Keyboard.KEY_RIGHT)
+				);
+		input.setInput(0, p1);
+		InputBundle p2 = new InputBundle(
+				new InputKeyboard(Keyboard.KEY_W),
+				new InputKeyboard(Keyboard.KEY_S),
+				new InputKeyboard(Keyboard.KEY_A),
+				new InputKeyboard(Keyboard.KEY_D)
+				);
+		input.setInput(1, p2);
 	}
 
 }
