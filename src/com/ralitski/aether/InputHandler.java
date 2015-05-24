@@ -3,7 +3,6 @@ package com.ralitski.aether;
 import org.lwjgl.input.Keyboard;
 
 import com.ralitski.aether.input.InputBundle;
-import com.ralitski.util.gui.Gui;
 import com.ralitski.util.input.ControllerUser;
 import com.ralitski.util.input.InputUser;
 import com.ralitski.util.input.event.ControllerEvent;

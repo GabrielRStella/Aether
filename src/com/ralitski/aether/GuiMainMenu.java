@@ -1,6 +1,5 @@
 package com.ralitski.aether;
 
-import com.ralitski.util.Ticker;
 import com.ralitski.util.gui.Button;
 import com.ralitski.util.gui.Component;
 import com.ralitski.util.gui.ComponentEvent;
@@ -9,20 +8,15 @@ import com.ralitski.util.gui.GuiManager;
 import com.ralitski.util.gui.ImageCanvas;
 import com.ralitski.util.gui.Panel;
 import com.ralitski.util.gui.layout.CenterLayout;
-import com.ralitski.util.gui.render.RenderStyleSimple;
-import com.ralitski.util.render.img.Color;
 import com.ralitski.util.render.img.Image;
 
 public class GuiMainMenu extends GuiMenu implements ComponentEventListener {
 
 	private AetherDisplay display;
-	private ColorTransition colors;
-	private Color color;
 	
 	public GuiMainMenu(GuiManager owner, AetherDisplay display) {
 		super(owner);
 		this.display = display;
-		colors = new ColorTransition(new ColorsFruity(), Ticker.ticksPerSecond(0.2F));
 	}
 	
 	public void doInit(Panel panel) {
@@ -46,12 +40,9 @@ public class GuiMainMenu extends GuiMenu implements ComponentEventListener {
 		btnPlay.addComponentEventListener(this);
 		
 		btnPlay.setRenderStyle(0, style_button);
-		canvas.setRenderStyle(0, style_button);
-
-		RenderStyleSimple colored = new RenderStyleSimple();
-		colored.setStyle("color", color = colors.next());
-		colored.setClassType("colored");
-		canvas2.setRenderStyle(0, colored);
+		btnPlay.setRenderStyle(1, style_button_text);
+		canvas.setRenderStyle(0, style_white);
+		canvas2.setRenderStyle(0, style_colored);
 	}
 
 	@Override
@@ -65,9 +56,6 @@ public class GuiMainMenu extends GuiMenu implements ComponentEventListener {
 	}
 	
 	public void update() {
-		Color c = colors.next();
-		color.setRed(c.getRed());
-		color.setGreen(c.getGreen());
-		color.setBlue(c.getBlue());
+		super.update();
 	}
 }

@@ -128,13 +128,23 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glColor4f(1, 1, 1, 1);
 		} else {
+			if(style.getStyle(c, "shadow") == Boolean.TRUE) {
+
+				GL11.glPushMatrix();
+				Integer off = style.getStyle(c, "shadow-offset");
+				GL11.glTranslatef(off, -off, 0);
+				RenderStyle shadowStyle = style.getStyle(c, "shadow-style");
+				drawBox(box, c, shadowStyle);
+				GL11.glPopMatrix();
+			}
+			drawBorder(box, c, style);
 			Image image = (Image)style.getStyle(c, "image");
+			Color color = (Color)style.getStyle(c, "color");
+			if(color == null) {
+				GL11.glColor4f(1, 1, 1, 1);
+			} else color.glColor();
 			if(image == null) {
 				GL11.glDisable(GL11.GL_TEXTURE_2D);
-				Color color = (Color)style.getStyle(c, "color");
-				if(color == null) {
-					GL11.glColor4f(1, 1, 1, 1);
-				} else color.glColor();
 			} else {
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				GLImage glImage = new GLImage(image);
@@ -160,11 +170,19 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 
 	@Override
 	public void drawImage(Image image, Box box, Component c, RenderStyle style) {
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GLImage glImage = null;
 		if(style == null) {
 			GL11.glColor4f(1, 1, 1, 1);
 		} else {
+			if(style.getStyle(c, "shadow") == Boolean.TRUE) {
+				GL11.glPushMatrix();
+				Integer off = style.getStyle(c, "shadow-offset");
+				GL11.glTranslatef(off, -off, 0);
+				RenderStyle shadowStyle = style.getStyle(c, "shadow-style");
+				drawImage(image, box, c, shadowStyle);
+				GL11.glPopMatrix();
+			}
+			drawBorder(box, c, style);
 			//creating a new GLImage each time builds up massive lag, so we cache it
 			glImage = style.getStyle(c, "AetherDisplayParent_tmp_" + image.toString());
 			Color color = (Color)style.getStyle(c, "color");
@@ -172,6 +190,7 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 				GL11.glColor4f(1, 1, 1, 1);
 			} else color.glColor();
 		}
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		if(glImage == null) {
 			glImage = new GLImage(image);
 			glImage.glPrepare();
@@ -189,6 +208,53 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 		if(isCW) TexturedUncenteredSquareRenderListCW.FULL.call();
 		else TexturedUncenteredSquareRenderListCCW.FULL.call();
 		GL11.glPopMatrix();
+	}
+	
+	private void drawBorder(Box box, Component c, RenderStyle style) {
+		if(style.getStyle(c, "border") == Boolean.TRUE) {
+			Integer i = style.getStyle(c, "border-width");
+			if(i != null) {
+				int width = i.intValue();
+				Color bColor = style.getStyle(c, "border-color");
+				if(bColor != null) {
+					//draw border
+					GL11.glDisable(GL11.GL_TEXTURE_2D);
+					bColor.glColor();
+					
+					//left border
+					GL11.glPushMatrix();
+					GL11.glTranslatef(box.getMinX() - width, box.getMinY() - width, 0);
+					GL11.glScalef(width, box.getHeight() + width * 2, 1);
+					if(isCW) GLListHelper.getSquareListUncenteredCW().call();
+					else GLListHelper.getSquareListUncenteredCCW().call();
+					GL11.glPopMatrix();
+					
+					//right border
+					GL11.glPushMatrix();
+					GL11.glTranslatef(box.getMaxX(), box.getMinY() - width, 0);
+					GL11.glScalef(width, box.getHeight() + width * 2, 1);
+					if(isCW) GLListHelper.getSquareListUncenteredCW().call();
+					else GLListHelper.getSquareListUncenteredCCW().call();
+					GL11.glPopMatrix();
+					
+					//top border
+					GL11.glPushMatrix();
+					GL11.glTranslatef(box.getMinX() - width, box.getMinY() - width, 0);
+					GL11.glScalef(box.getWidth() + width * 2, width, 1);
+					if(isCW) GLListHelper.getSquareListUncenteredCW().call();
+					else GLListHelper.getSquareListUncenteredCCW().call();
+					GL11.glPopMatrix();
+					
+					//bottom border
+					GL11.glPushMatrix();
+					GL11.glTranslatef(box.getMinX() - width, box.getMaxY(), 0);
+					GL11.glScalef(box.getWidth() + width * 2, width, 1);
+					if(isCW) GLListHelper.getSquareListUncenteredCW().call();
+					else GLListHelper.getSquareListUncenteredCCW().call();
+					GL11.glPopMatrix();
+				}
+			}
+		}
 	}
 
 	@Override

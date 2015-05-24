@@ -6,8 +6,7 @@ import com.ralitski.util.gui.ComponentEvent;
 import com.ralitski.util.gui.ComponentEventListener;
 import com.ralitski.util.gui.Gui;
 import com.ralitski.util.gui.Panel;
-import com.ralitski.util.gui.render.RenderStyleSimple;
-import com.ralitski.util.render.img.Color;
+import com.ralitski.util.gui.Text;
 
 public class GuiGameMenu extends GuiMenu implements ComponentEventListener {
 	
@@ -21,6 +20,9 @@ public class GuiGameMenu extends GuiMenu implements ComponentEventListener {
 	}
 	
 	public void doInit(Panel panel) {
+		Text paused = new Text(this, "Paused");
+		panel.add(paused);
+		
 		Button btnClose = new Button(this, 200, 50, "Close");
 		panel.add(btnClose);
 		btnClose.setId(1);
@@ -32,7 +34,10 @@ public class GuiGameMenu extends GuiMenu implements ComponentEventListener {
 		btnExit.addComponentEventListener(this);
 		
 		btnExit.setRenderStyle(0, style_button);
+		btnExit.setRenderStyle(1, style_button_text);
 		btnClose.setRenderStyle(0, style_button);
+		btnClose.setRenderStyle(1, style_button_text);
+		paused.setRenderStyle(0, style_text);
 	}
 
 	@Override

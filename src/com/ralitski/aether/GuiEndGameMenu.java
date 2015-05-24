@@ -30,6 +30,7 @@ public class GuiEndGameMenu extends GuiMenu implements ComponentEventListener {
 		btnExit.addComponentEventListener(this);
 
 		btnExit.setRenderStyle(0, style_button);
+		btnExit.setRenderStyle(1, style_button_text);
 		gameOver.setRenderStyle(0, style_text);
 	}
 
