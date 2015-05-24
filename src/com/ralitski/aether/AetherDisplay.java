@@ -41,6 +41,7 @@ public class AetherDisplay extends AetherDisplayParent {
 	}
 	
 	public void resize() {
+		super.resize();
 		guiManager.getCurrentScreen().onResize();
 	}
 

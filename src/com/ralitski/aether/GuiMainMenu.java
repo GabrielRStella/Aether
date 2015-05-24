@@ -8,6 +8,7 @@ import com.ralitski.util.gui.ComponentEventListener;
 import com.ralitski.util.gui.Frame;
 import com.ralitski.util.gui.Gui;
 import com.ralitski.util.gui.GuiManager;
+import com.ralitski.util.gui.layout.BoxLayout;
 import com.ralitski.util.gui.render.RenderStyleSimple;
 import com.ralitski.util.render.img.Color;
 
@@ -23,6 +24,7 @@ public class GuiMainMenu extends Gui implements ComponentEventListener {
 	
 	public void init() {
 		top = new Frame(this);
+		top.setLayout(new BoxLayout());
 		setTopLevel(top);
 		
 		Button btnPlay = new Button(this, 200, 50, "Play");
@@ -34,7 +36,6 @@ public class GuiMainMenu extends Gui implements ComponentEventListener {
 		white.setStyle("color", Color.WHITE);
 		white.setClassType("white");
 		btnPlay.setRenderStyle(0, white);
-		BoxPosition.CENTER.position(btnPlay.getBounds(), null, 0, top.getBounds());
 		
 		RenderStyleSimple black = new RenderStyleSimple();
 		black.setStyle("color", Color.GRAY);
@@ -42,7 +43,7 @@ public class GuiMainMenu extends Gui implements ComponentEventListener {
 		top.setRenderStyle(0, black);
 		top.setRenderSelf(true);
 		
-		top.refresh();
+		top.refreshAll();
 	}
 
 	@Override

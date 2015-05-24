@@ -7,6 +7,9 @@ import com.ralitski.util.gui.ComponentEvent;
 import com.ralitski.util.gui.ComponentEventListener;
 import com.ralitski.util.gui.Frame;
 import com.ralitski.util.gui.Gui;
+import com.ralitski.util.gui.Panel;
+import com.ralitski.util.gui.layout.BorderLayout;
+import com.ralitski.util.gui.layout.BoxLayout;
 import com.ralitski.util.gui.render.RenderStyleSimple;
 import com.ralitski.util.render.img.Color;
 
@@ -25,15 +28,20 @@ public class GuiGameMenu extends Gui implements ComponentEventListener {
 	
 	public void init() {
 		top = new Frame(this);
+		top.setLayout(new BorderLayout());
 		setTopLevel(top);
+		Panel panel = new Panel(this);
+		panel.setResizable(true);
+		panel.setLayout(new BoxLayout());
+		top.add(panel, "c");
 		
 		Button btnClose = new Button(this, 200, 50, "Close");
-		top.add(btnClose);
+		panel.add(btnClose);
 		btnClose.setId(1);
 		btnClose.addComponentEventListener(this);
 
 		Button btnExit = new Button(this, 200, 50, "Exit");
-		top.add(btnExit);
+		panel.add(btnExit);
 		btnExit.setId(2);
 		btnExit.addComponentEventListener(this);
 		
@@ -42,11 +50,8 @@ public class GuiGameMenu extends Gui implements ComponentEventListener {
 		white.setClassType("white");
 		btnExit.setRenderStyle(0, white);
 		btnClose.setRenderStyle(0, white);
-		BoxPosition.CENTER.position(btnClose.getBounds(), null, 0, top.getBounds());
-		BoxPosition.CENTER.position(btnExit.getBounds(), null, 0, top.getBounds());
-		BoxPosition.BELOW.position(btnExit.getBounds(), btnClose.getBounds(), 10, top.getBounds());
-		
-		top.refresh();
+
+		top.refreshAll();
 	}
 
 	@Override
