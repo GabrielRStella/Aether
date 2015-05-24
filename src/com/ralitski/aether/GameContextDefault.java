@@ -50,12 +50,12 @@ public class GameContextDefault implements GameContext {
 
 	@Override
 	public float getPlayerBoundaryDistance() {
-		return 100;
+		return 60;
 	}
 
 	@Override
 	public float getBoundaryStrength() {
-		return 4;
+		return 6;
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class GameContextDefault implements GameContext {
 
 	@Override
 	public int getPlayerCount() {
-		return 2;
+		return 3;
 	}
 
 	@Override

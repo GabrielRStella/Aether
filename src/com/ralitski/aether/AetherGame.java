@@ -2,6 +2,7 @@ package com.ralitski.aether;
 
 import org.lwjgl.opengl.GL11;
 
+import com.ralitski.aether.event.EventSystem;
 import com.ralitski.util.Settings;
 import com.ralitski.util.gui.Gui;
 import com.ralitski.util.gui.GuiManager;
@@ -21,6 +22,7 @@ public class AetherGame implements InputUser, ControllerUser {
 	private InputHandler input;
 	private WorldRender renderer;
 	private Settings settings;
+	private EventSystem events;
 	
 	public AetherGame(Gui owner, AetherDisplay display, GameContext context) {
 		this.owner = owner;
@@ -32,6 +34,7 @@ public class AetherGame implements InputUser, ControllerUser {
 		context.setInput(input);
 		settings = new Settings(context.getTitle());
 		settings.load();
+		events = new EventSystem();
 	}
 	
 	public Gui getOwner() {
@@ -48,6 +51,10 @@ public class AetherGame implements InputUser, ControllerUser {
 	
 	public ViewBox getViewBox() {
 		return viewBox;
+	}
+	
+	public EventSystem getEventSystem() {
+		return events;
 	}
 
 	@Override

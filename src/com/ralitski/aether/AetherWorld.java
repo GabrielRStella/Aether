@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import com.ralitski.aether.events.EventPlanetPrune;
+import com.ralitski.aether.events.EventPlanetSpawn;
 import com.ralitski.aether.force.Boundary;
 import com.ralitski.aether.force.ForceRedirect;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
@@ -65,24 +67,26 @@ public class AetherWorld {
 			Planet planet = planets.next();
 			Force force = planet.getForce();
 			Body body = planet.getBody();
-//			if(!detector.detectCollision(playerPlanet1, planet)) force.act(body, playerPlanet1.getBody());
-//			if(!detector.detectCollision(playerPlanet2, planet)) force.act(body, playerPlanet2.getBody());
 			for(Player player : playerPlanets) {
 				force.act(body, player.getBody(), timeStep);
 			}
 			
 			//remove planets a certain distance away from the player (when they are not visible and unlikely to have a noticeable force)
 			if(planetCreator.prune(planet, box, check)) {
+				EventPlanetPrune prune = new EventPlanetPrune(planet);
+				game.getEventSystem().callEvent(prune);
 				planets.remove();
 			}
 		}
+		float slow = 0.9F * (1F - (float)timeStep);
 		for(Player player : playerPlanets) {
 			playerBounds.act(player.getBody(), center, timeStep);
 			playerBounds.act(center, player.getBody(), timeStep);
-			float slow = 0.9F * (1F - (float)timeStep);
 			player.getBody().accelerate(slow);
 			player.move(timeStep);
 		}
+//		center.accelerate(slow);
+		center.move(timeStep);
 		int size = (int)Math.sqrt(check.getWidth() * check.getHeight());
 		float fill = worldPlanets.size() / (size == 0 ? 1 : size);
 		if(fill < planetCreator.getPlanetDensity() && random.nextInt(10) == 0) {
@@ -90,15 +94,18 @@ public class AetherWorld {
 			int toSpawn = random.nextInt(4) + 1;
 			for(int i = 0; i <= toSpawn; i++) {
 				Planet planet = planetCreator.createPlanet(check, random);
-				if(checkLocation(planet.getBody().getPosition()))
-					worldPlanets.add(planet);
+				if(checkLocation(planet.getBody().getPosition())) {
+					EventPlanetSpawn spawn = new EventPlanetSpawn(planet);
+					game.getEventSystem().callEvent(spawn);
+					if(!spawn.isCancelled()) worldPlanets.add(planet);
+				}
 			}
 		}
 	}
 	
 	public boolean checkLocation(Point2d p) {
 		for(Planet planet : worldPlanets) {
-			if(planet.getBody().getPosition().length(p) < DISTANCE_PLANET) return false;
+			if(planet.getBody().getPosition().length(p) < DISTANCE_PLANET + (random.nextFloat() * DISTANCE_PLANET)) return false;
 		}
 		return true;
 	}

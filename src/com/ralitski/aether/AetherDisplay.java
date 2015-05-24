@@ -39,5 +39,9 @@ public class AetherDisplay extends AetherDisplayParent {
 	public void getError(int source, Throwable e) {
 		e.printStackTrace();
 	}
+	
+	public void resize() {
+		guiManager.getCurrentScreen().onResize();
+	}
 
 }

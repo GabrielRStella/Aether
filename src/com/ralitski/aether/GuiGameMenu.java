@@ -12,6 +12,8 @@ import com.ralitski.util.render.img.Color;
 
 public class GuiGameMenu extends Gui implements ComponentEventListener {
 	
+	private Frame top;
+	
 	public GuiGameMenu(Gui owner) {
 		super(owner);
 	}
@@ -22,7 +24,7 @@ public class GuiGameMenu extends Gui implements ComponentEventListener {
 	}
 	
 	public void init() {
-		Frame top = new Frame(this);
+		top = new Frame(this);
 		setTopLevel(top);
 		
 		Button btnClose = new Button(this, 200, 50, "Close");
@@ -58,6 +60,10 @@ public class GuiGameMenu extends Gui implements ComponentEventListener {
 		} else if(id == 1) {
 			close();
 		}
+	}
+	
+	public void onResize() {
+		top.refresh();
 	}
 
 }

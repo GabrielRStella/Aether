@@ -14,6 +14,7 @@ import com.ralitski.util.render.img.Color;
 public class GuiMainMenu extends Gui implements ComponentEventListener {
 
 	private AetherDisplay display;
+	private Frame top;
 	
 	public GuiMainMenu(GuiManager owner, AetherDisplay display) {
 		super(owner);
@@ -21,7 +22,7 @@ public class GuiMainMenu extends Gui implements ComponentEventListener {
 	}
 	
 	public void init() {
-		Frame top = new Frame(this);
+		top = new Frame(this);
 		setTopLevel(top);
 		
 		Button btnPlay = new Button(this, 200, 50, "Play");
@@ -54,6 +55,8 @@ public class GuiMainMenu extends Gui implements ComponentEventListener {
 		}
 	}
 	
-	
+	public void onResize() {
+		top.refresh();
+	}
 
 }

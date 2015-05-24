@@ -50,6 +50,8 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 		guiManager = new GuiManager(this);
 		guiManager.openScreen(getMainMenu(guiManager));
 		input = new InputMonitor(guiManager);
+		if(isCW) TexturedUncenteredSquareRenderListCW.FULL.compile();
+		else TexturedUncenteredSquareRenderListCCW.FULL.compile();
 	}
 	
 	@Override
