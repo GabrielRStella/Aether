@@ -7,8 +7,6 @@ import com.ralitski.util.gui.ComponentEventListener;
 import com.ralitski.util.gui.Gui;
 import com.ralitski.util.gui.Panel;
 import com.ralitski.util.gui.Text;
-import com.ralitski.util.gui.render.RenderStyleSimple;
-import com.ralitski.util.render.img.Color;
 
 public class GuiEndGameMenu extends GuiMenu implements ComponentEventListener {
 
