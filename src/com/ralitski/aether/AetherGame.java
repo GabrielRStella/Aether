@@ -72,12 +72,14 @@ public class AetherGame implements InputUser, ControllerUser {
 		input.onControllerEvent(event);
 	}
 	
-	public void update(double timeStep) {
-		input.update(timeStep);
-		world.update(timeStep);
+	public void update(double timeStep, boolean tick) {
+		if(tick) {
+			input.update(timeStep);
+			world.update(timeStep);
+		}
 		viewBox.update();
 		viewBox.getViewBox().setAngleDegrees(context.getRotationDegrees());
-		context.update(timeStep);
+		context.update(timeStep, tick);
 	}
 	
 	public void render() {
@@ -122,5 +124,17 @@ public class AetherGame implements InputUser, ControllerUser {
 		context.renderLayer(GameContext.RENDER_POST_PLAYER);
 		
 		GL11.glPopMatrix();
+	}
+
+	public void pause() {
+		GuiGameMenu gui = new GuiGameMenu(owner);
+		gui.init();
+		owner.getOwner().openScreen(gui);
+	}
+	
+	public void endGame() {
+		GuiEndGameMenu gui = new GuiEndGameMenu(owner);
+		gui.init();
+		owner.getOwner().openScreen(gui);
 	}
 }

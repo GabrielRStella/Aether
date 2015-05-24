@@ -1,49 +1,57 @@
 package com.ralitski.aether;
 
-import com.ralitski.util.gui.BoxPosition;
+import com.ralitski.util.Ticker;
 import com.ralitski.util.gui.Button;
 import com.ralitski.util.gui.Component;
 import com.ralitski.util.gui.ComponentEvent;
 import com.ralitski.util.gui.ComponentEventListener;
-import com.ralitski.util.gui.Frame;
-import com.ralitski.util.gui.Gui;
 import com.ralitski.util.gui.GuiManager;
-import com.ralitski.util.gui.layout.BoxLayout;
+import com.ralitski.util.gui.ImageCanvas;
+import com.ralitski.util.gui.Panel;
+import com.ralitski.util.gui.layout.CenterLayout;
 import com.ralitski.util.gui.render.RenderStyleSimple;
 import com.ralitski.util.render.img.Color;
+import com.ralitski.util.render.img.Image;
 
-public class GuiMainMenu extends Gui implements ComponentEventListener {
+public class GuiMainMenu extends GuiMenu implements ComponentEventListener {
 
 	private AetherDisplay display;
-	private Frame top;
+	private ColorTransition colors;
+	private Color color;
 	
 	public GuiMainMenu(GuiManager owner, AetherDisplay display) {
 		super(owner);
 		this.display = display;
+		colors = new ColorTransition(new ColorsFruity(), Ticker.ticksPerSecond(0.2F));
 	}
 	
-	public void init() {
-		top = new Frame(this);
-		top.setLayout(new BoxLayout());
-		setTopLevel(top);
+	public void doInit(Panel panel) {
+		
+		Panel imgPanel = new Panel(this);
+		imgPanel.setResizable(true);
+		imgPanel.setLayout(new CenterLayout());
+		panel.add(imgPanel);
+
+		Image img = Image.loadImage("./src/res/logo_bg_solid.png");
+		ImageCanvas canvas = new ImageCanvas(this, img, 0.75F);
+		imgPanel.add(canvas);
+		
+		Image img2 = Image.loadImage("./src/res/logo.png");
+		ImageCanvas canvas2 = new ImageCanvas(this, img2, 0.75F);
+		imgPanel.add(canvas2);
 		
 		Button btnPlay = new Button(this, 200, 50, "Play");
-		top.add(btnPlay);
+		panel.add(btnPlay);
 		btnPlay.setId(1);
 		btnPlay.addComponentEventListener(this);
 		
-		RenderStyleSimple white = new RenderStyleSimple();
-		white.setStyle("color", Color.WHITE);
-		white.setClassType("white");
-		btnPlay.setRenderStyle(0, white);
-		
-		RenderStyleSimple black = new RenderStyleSimple();
-		black.setStyle("color", Color.GRAY);
-		black.setClassType("black");
-		top.setRenderStyle(0, black);
-		top.setRenderSelf(true);
-		
-		top.refreshAll();
+		btnPlay.setRenderStyle(0, style_button);
+		canvas.setRenderStyle(0, style_button);
+
+		RenderStyleSimple colored = new RenderStyleSimple();
+		colored.setStyle("color", color = colors.next());
+		colored.setClassType("colored");
+		canvas2.setRenderStyle(0, colored);
 	}
 
 	@Override
@@ -56,8 +64,10 @@ public class GuiMainMenu extends Gui implements ComponentEventListener {
 		}
 	}
 	
-	public void onResize() {
-		top.refresh();
+	public void update() {
+		Color c = colors.next();
+		color.setRed(c.getRed());
+		color.setGreen(c.getGreen());
+		color.setBlue(c.getBlue());
 	}
-
 }

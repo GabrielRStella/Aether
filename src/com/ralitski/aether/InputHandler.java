@@ -65,10 +65,7 @@ public class InputHandler implements InputUser, ControllerUser {
 	public void onKeyEvent(KeyEvent event) {
 		if(event.getType() == KeyEventType.DOWN && event.getKey() == Keyboard.KEY_ESCAPE) {
 			//open game menu
-			Gui game = this.game.getOwner();
-			GuiGameMenu gui = new GuiGameMenu(game);
-			gui.init();
-			game.getOwner().openScreen(gui);
+			game.pause();
 		}
 	}
 	

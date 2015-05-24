@@ -37,8 +37,8 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 	private boolean flipTextures = true;
 	private boolean isCW = true;
 
-    public AetherDisplayParent() {
-    	super(false);
+    public AetherDisplayParent(int width, int height) {
+    	super(width, height, false);
     }
 	
 	public void setup() {
@@ -161,17 +161,23 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 	@Override
 	public void drawImage(Image image, Box box, Component c, RenderStyle style) {
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GLImage glImage = new GLImage(image);
-		glImage.glPrepare();
-		glImage.glBind();
+		GLImage glImage = null;
 		if(style == null) {
 			GL11.glColor4f(1, 1, 1, 1);
 		} else {
+			//creating a new GLImage each time builds up massive lag, so we cache it
+			glImage = style.getStyle(c, "AetherDisplayParent_tmp_" + image.toString());
 			Color color = (Color)style.getStyle(c, "color");
 			if(color == null) {
 				GL11.glColor4f(1, 1, 1, 1);
 			} else color.glColor();
 		}
+		if(glImage == null) {
+			glImage = new GLImage(image);
+			glImage.glPrepare();
+			if(style != null) style.setStyle("AetherDisplayParent_tmp_" + image.toString(), glImage);
+		}
+		glImage.glBind();
 		GL11.glPushMatrix();
 		if(flipTextures) {
 			GL11.glTranslatef(box.getMinX(), box.getMinY() + box.getHeight(), 0);

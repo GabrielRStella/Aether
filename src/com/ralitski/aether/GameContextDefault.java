@@ -46,7 +46,7 @@ public class GameContextDefault implements GameContext {
 	}
 
 	@Override
-	public void update(double timeStep) {}
+	public void update(double timeStep, boolean tick) {}
 
 	@Override
 	public float getPlayerBoundaryDistance() {
@@ -71,7 +71,7 @@ public class GameContextDefault implements GameContext {
 
 	@Override
 	public int getPlayerCount() {
-		return 3;
+		return 2;
 	}
 
 	@Override

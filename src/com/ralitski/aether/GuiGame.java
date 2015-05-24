@@ -1,12 +1,15 @@
 package com.ralitski.aether;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import com.ralitski.util.Ticker;
 import com.ralitski.util.gui.Gui;
 import com.ralitski.util.input.ControllerMonitor;
 import com.ralitski.util.input.event.KeyEvent;
 import com.ralitski.util.input.event.MouseEvent;
 
-public class GuiGame extends Gui {
+public class GuiGame extends Gui implements WindowListener {
 	
 	private ControllerMonitor controller;
 //	private GameContext context; //may be used...eventually...idk
@@ -45,10 +48,46 @@ public class GuiGame extends Gui {
 	@Override
 	public void update() {
 		double d = ticker.time();
-		if(getOwner().getCurrentScreen() == this) {
-			controller.update();
-			if(d != 0D) game.update(d);
-		}
+		boolean tick = getOwner().getCurrentScreen() == this;
+		if(tick) controller.update();
+		if(d != 0D) game.update(d, tick);
 	}
+
+    @Override
+    public void windowOpened(WindowEvent event) {
+        // TODO window created
+    }
+
+    @Override
+    public void windowActivated(WindowEvent event) {
+        // TODO window focused
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent event) {
+        // TODO window focus lost
+    	game.pause();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent event) {
+        // TODO window closed via call to dispose()
+    }
+
+    @Override
+    public void windowClosing(WindowEvent event) {
+        //red X button clicked
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent event) {
+        // TODO window selected from taskbar
+    }
+
+    @Override
+    public void windowIconified(WindowEvent event) {
+        // TODO window minimized to taskbar
+    	game.pause();
+    }
 
 }

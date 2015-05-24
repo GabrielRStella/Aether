@@ -14,7 +14,7 @@ public interface GameContext {
 	ViewBox getViewBox(AetherGame game);
 	CollisionDetector getCollisionDetector();
 	void setup();
-	void update(double timeStep);
+	void update(double timeStep, boolean tick);
 	float getRotationDegrees();
 	void renderLayer(int layer);
 	void setInput(InputHandler input);

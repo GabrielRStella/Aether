@@ -30,7 +30,7 @@ public class AetherWorld {
 	private Random random;
 	private PlanetCreator planetCreator;
 	//will be used to detect collisions in consumption mode
-//	private CollisionDetector detector;
+	private CollisionDetector detector;
 	
 	public AetherWorld(AetherGame game, GameContext context) {
 		this.game = game;
@@ -44,7 +44,7 @@ public class AetherWorld {
 		random = new Random();
 		playerBounds = new ForceRedirect(new Boundary(context.getPlayerBoundaryDistance(), context.getBoundaryStrength()));
 		center = new Body(null);
-//		this.detector = context.getCollisionDetector();
+		this.detector = context.getCollisionDetector();
 	}
 	
 	public Player[] getPlayers() {
@@ -67,6 +67,11 @@ public class AetherWorld {
 			Planet planet = planets.next();
 			Force force = planet.getForce();
 			Body body = planet.getBody();
+			for(Player player : playerPlanets) {
+				if(detector.detectCollision(player, planet)) {
+					game.endGame();
+				}
+			}
 			for(Player player : playerPlanets) {
 				force.act(body, player.getBody(), timeStep);
 			}
