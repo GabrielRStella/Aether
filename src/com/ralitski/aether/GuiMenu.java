@@ -15,7 +15,6 @@ import com.ralitski.util.render.img.Color;
 
 public abstract class GuiMenu extends Gui {
 	
-	private static final Color fruity = Color.BLACK.clone();
 	public static final RenderStyle style_white = new ImmutableStyle(
 			new RenderStyleSimple()
 			.setStyle("color", Color.WHITE)
@@ -24,16 +23,16 @@ public abstract class GuiMenu extends Gui {
 		);
 	public static final RenderStyle style_button = new ImmutableStyle(
 			new RenderStyleSimple()
-			.setStyle("color", fruity)
+			.setStyle("color", Color.WHITE)
 			.setStyle("border", true)
 			.setStyle("border-width", 4)
-			.setStyle("border-color", Color.WHITE)
+			.setStyle("border-color", Color.BLACK)
 			.setClassType("menu_button")
 		);
 	public static final RenderStyle style_button_text = new ImmutableStyle(
 			new RenderStyleSimple()
-			.setStyle("color", Color.WHITE)
-			.setStyle("font-color", Color.WHITE)
+			.setStyle("color", Color.BLACK)
+			.setStyle("font-color", Color.BLACK)
 			.setStyle("font-size", 30)
 			.setClassType("menu_button_text")
 		);
@@ -45,24 +44,20 @@ public abstract class GuiMenu extends Gui {
 			.setStyle("shadow", true)
 			.setStyle("shadow-offset", 3)
 			.setStyle("shadow-style", new RenderStyleSimple()
-				.setStyle("color", fruity)
-				.setStyle("font-color", fruity)
+				.setStyle("color", Color.BLACK)
+				.setStyle("font-color", Color.BLACK)
 				.setStyle("font-size", 70)
 				)
 			.setClassType("menu_text")
 		);
 	public static final RenderStyle style_colored = new ImmutableStyle(
 			new RenderStyleSimple()
-			.setStyle("color", fruity)
+			.setStyle("color", Color.BLACK)
 			.setClassType("menu_colored")
 		);
 
-	private static final ColorTransition colors = new ColorTransition(new ColorsFruity(), Ticker.ticksPerSecond(0.2F));;
+//	private static final ColorTransition colors = new ColorTransition(new ColorsFruity(), Ticker.ticksPerSecond(0.2F));;
 	private static final ColorTransition bgColors = new ColorTransition(new ColorsPastel(), Ticker.ticksPerSecond(0.1F));
-	
-	/* 
-	 * TODO: standard cascading styles
-	 */
 
 	private Frame top;
 	
@@ -96,7 +91,7 @@ public abstract class GuiMenu extends Gui {
 	
 	public void onOpen(boolean reentry) {
 		top.refresh();
-		colors.next();
+//		colors.next();
 		bgColors.next();
 	}
 	
@@ -120,10 +115,10 @@ public abstract class GuiMenu extends Gui {
 	}
 	
 	public void update() {
-		Color c = colors.next();
-		fruity.setRed(c.getRed());
-		fruity.setGreen(c.getGreen());
-		fruity.setBlue(c.getBlue());
+//		Color c = colors.next();
+//		fruity.setRed(c.getRed());
+//		fruity.setGreen(c.getGreen());
+//		fruity.setBlue(c.getBlue());
 	}
 
 }

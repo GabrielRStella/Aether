@@ -21,19 +21,19 @@ public class GuiMainMenu extends GuiMenu implements ComponentEventListener {
 	
 	public void doInit(Panel panel) {
 		
-		Panel imgPanel = new Panel(this);
-		imgPanel.setResizable(true);
-		imgPanel.setLayout(new CenterLayout());
-		panel.add(imgPanel);
-
-		Image img = Image.loadImage("./src/res/logo_bg_solid.png");
-		ImageCanvas canvas = new ImageCanvas(this, img, 0.75F);
-		imgPanel.add(canvas);
-		
-		Image img2 = Image.loadImage("./src/res/logo.png");
-		ImageCanvas canvas2 = new ImageCanvas(this, img2, 0.75F);
-		imgPanel.add(canvas2);
-		
+//		Panel imgPanel = new Panel(this);
+//		imgPanel.setResizable(true);
+//		imgPanel.setLayout(new CenterLayout());
+//		panel.add(imgPanel);
+//
+//		Image img = Image.loadImage("./src/res/logo_bg_solid.png");
+//		ImageCanvas canvas = new ImageCanvas(this, img, 0.75F);
+//		imgPanel.add(canvas);
+//		
+//		Image img2 = Image.loadImage("./src/res/logo.png");
+//		ImageCanvas canvas2 = new ImageCanvas(this, img2, 0.75F);
+//		imgPanel.add(canvas2);
+//		
 		Button btnPlay = new Button(this, 200, 50, "Play");
 		panel.add(btnPlay);
 		btnPlay.setId(1);
@@ -41,8 +41,8 @@ public class GuiMainMenu extends GuiMenu implements ComponentEventListener {
 		
 		btnPlay.setRenderStyle(0, style_button);
 		btnPlay.setRenderStyle(1, style_button_text);
-		canvas.setRenderStyle(0, style_white);
-		canvas2.setRenderStyle(0, style_colored);
+//		canvas.setRenderStyle(0, style_colored);
+//		canvas2.setRenderStyle(0, style_white);
 	}
 
 	@Override

@@ -2,6 +2,9 @@ package com.ralitski.aether;
 
 /**
  * TODO:
+ * 
+ * fix gui system RenderList bug
+ * 
  * modding/plugins (loader, hooks)
  * allow player to switch between GameContexts before game starts
  * add support for random textures (ie, circle1.png circle2.png circle3.png) - or differently shaped planets

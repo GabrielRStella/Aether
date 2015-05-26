@@ -17,7 +17,6 @@ public class AetherDisplay extends AetherDisplayParent implements WindowListener
 		setTitle("Aether");
 		GuiMainMenu gui = new GuiMainMenu(guiManager, this);
 		gui.init();
-		//TODO: add menu stuff
 		return gui;
 	}
 	
@@ -25,7 +24,6 @@ public class AetherDisplay extends AetherDisplayParent implements WindowListener
 		GuiGame game = new GuiGame(gui, this, getGameContext());
 		GameContext context = getGameContext();
 		context.setup();
-		setTitle("Aether - " + context.getTitle());
 		this.guiManager.openScreen(game);
 	}
 	
