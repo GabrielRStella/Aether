@@ -14,6 +14,7 @@ package com.ralitski.aether;
  * keep track of controller joystick as mouse movement in gui
  * menus and options
  * better input API
+ * shaders (antialias, diffusion)
  * rotating world
  * add goal
  * 

@@ -3,6 +3,8 @@ package com.ralitski.aether;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import com.ralitski.aether.gui.GuiGame;
+import com.ralitski.aether.gui.GuiMainMenu;
 import com.ralitski.util.gui.Gui;
 import com.ralitski.util.gui.GuiManager;
 

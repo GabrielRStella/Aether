@@ -1,8 +1,11 @@
-package com.ralitski.aether;
+package com.ralitski.aether.gui;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import com.ralitski.aether.AetherDisplay;
+import com.ralitski.aether.AetherGame;
+import com.ralitski.aether.GameContext;
 import com.ralitski.util.Ticker;
 import com.ralitski.util.gui.Gui;
 import com.ralitski.util.input.ControllerMonitor;

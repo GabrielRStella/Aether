@@ -1,5 +1,7 @@
-package com.ralitski.aether;
+package com.ralitski.aether.gui;
 
+import com.ralitski.aether.ColorTransition;
+import com.ralitski.aether.ColorsPastel;
 import com.ralitski.util.Ticker;
 import com.ralitski.util.gui.Frame;
 import com.ralitski.util.gui.Gui;

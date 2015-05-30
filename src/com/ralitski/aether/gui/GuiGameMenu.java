@@ -1,4 +1,4 @@
-package com.ralitski.aether;
+package com.ralitski.aether.gui;
 
 import com.ralitski.util.gui.Button;
 import com.ralitski.util.gui.Component;
@@ -8,11 +8,10 @@ import com.ralitski.util.gui.Gui;
 import com.ralitski.util.gui.Panel;
 import com.ralitski.util.gui.Text;
 
-public class GuiEndGameMenu extends GuiMenu implements ComponentEventListener {
-
-	public GuiEndGameMenu(Gui parent) {
-		super(parent);
-		// TODO Auto-generated constructor stub
+public class GuiGameMenu extends GuiMenu implements ComponentEventListener {
+	
+	public GuiGameMenu(Gui owner) {
+		super(owner);
 	}
 	
 	public void update() {
@@ -21,17 +20,24 @@ public class GuiEndGameMenu extends GuiMenu implements ComponentEventListener {
 	}
 	
 	public void doInit(Panel panel) {
-		Text gameOver = new Text(this, "Game Over");
-		panel.add(gameOver);
+		Text paused = new Text(this, "Paused");
+		panel.add(paused);
+		
+		Button btnClose = new Button(this, 200, 50, "Close");
+		panel.add(btnClose);
+		btnClose.setId(1);
+		btnClose.addComponentEventListener(this);
 
 		Button btnExit = new Button(this, 200, 50, "Exit");
 		panel.add(btnExit);
 		btnExit.setId(2);
 		btnExit.addComponentEventListener(this);
-
+		
 		btnExit.setRenderStyle(0, style_button);
 		btnExit.setRenderStyle(1, style_button_text);
-		gameOver.setRenderStyle(0, style_text);
+		btnClose.setRenderStyle(0, style_button);
+		btnClose.setRenderStyle(1, style_button_text);
+		paused.setRenderStyle(0, style_text);
 	}
 
 	@Override
@@ -42,6 +48,8 @@ public class GuiEndGameMenu extends GuiMenu implements ComponentEventListener {
 			//exit
 			close();
 			parent.close();
+		} else if(id == 1) {
+			close();
 		}
 	}
 	

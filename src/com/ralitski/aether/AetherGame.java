@@ -3,6 +3,8 @@ package com.ralitski.aether;
 import org.lwjgl.opengl.GL11;
 
 import com.ralitski.aether.event.EventSystem;
+import com.ralitski.aether.gui.GuiEndGameMenu;
+import com.ralitski.aether.gui.GuiGameMenu;
 import com.ralitski.util.Settings;
 import com.ralitski.util.gui.Gui;
 import com.ralitski.util.gui.GuiManager;

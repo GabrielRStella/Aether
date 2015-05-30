@@ -1,5 +1,6 @@
-package com.ralitski.aether;
+package com.ralitski.aether.gui;
 
+import com.ralitski.aether.AetherDisplay;
 import com.ralitski.util.gui.Button;
 import com.ralitski.util.gui.Component;
 import com.ralitski.util.gui.ComponentEvent;
