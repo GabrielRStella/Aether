@@ -170,7 +170,6 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 
 	@Override
 	public void drawImage(Image image, Box box, Component c, RenderStyle style) {
-		GLImage glImage = null;
 		if(style == null) {
 			GL11.glColor4f(1, 1, 1, 1);
 		} else {
@@ -184,18 +183,14 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 			}
 			drawBorder(box, c, style);
 			//creating a new GLImage each time builds up massive lag, so we cache it
-			glImage = style.getStyle(c, "AetherDisplayParent_tmp_" + image.toString());
 			Color color = (Color)style.getStyle(c, "color");
 			if(color == null) {
 				GL11.glColor4f(1, 1, 1, 1);
 			} else color.glColor();
 		}
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		if(glImage == null) {
-			glImage = new GLImage(image);
-			glImage.glPrepare();
-			if(style != null) style.setStyle("AetherDisplayParent_tmp_" + image.toString(), glImage);
-		}
+		GLImage glImage = new GLImage(image);
+		glImage.glPrepare();
 		glImage.glBind();
 		GL11.glPushMatrix();
 		if(flipTextures) {
