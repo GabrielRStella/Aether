@@ -4,8 +4,9 @@ package com.ralitski.aether;
  * TODO:
  * 
  * get rid of old GLImage objects
- * lag profiler
+ * test lag profiler
  * fix lag on game start
+ * pass profiler data to lag calculators
  * 
  * modding/plugins (loader, hooks)
  * allow player to switch between GameContexts before game starts

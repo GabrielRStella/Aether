@@ -11,6 +11,7 @@ import com.ralitski.aether.GameContext;
 import com.ralitski.aether.InputHandler;
 import com.ralitski.aether.Planet;
 import com.ralitski.aether.Player;
+import com.ralitski.aether.Profiler;
 import com.ralitski.aether.ViewBox;
 import com.ralitski.aether.WorldRender;
 import com.ralitski.aether.event.EventSystem;
@@ -89,9 +90,15 @@ public class GuiGame extends Gui implements WindowListener, ControllerUser {
 	}
 	
 	public void render2d(float partial) {
+		Profiler profiler = AetherDisplay.getInstance().getProfiler();
+		profiler.startSection("render");
+		
 		super.render2d(partial);
 		render();
+		
+		profiler.endSection();
 	}
+	
 	public void render() {
 		//fit to viewbox
 		GL11.glPushMatrix();
@@ -105,12 +112,19 @@ public class GuiGame extends Gui implements WindowListener, ControllerUser {
 		float yScale = h2 / box.getHeight();
 		w2 /= 2F;
 		h2 /= 2F;
+
 		
 		//scale view to world coordinates
 		GL11.glScalef(xScale, yScale, 1);
 		GL11.glTranslatef(-box.getMinX(), -box.getMinY(), 0);
+
+		Profiler profiler = AetherDisplay.getInstance().getProfiler();
+		profiler.startSection("background");
+		
 		renderer.renderBackground(viewBox.getViewBox(), rot);
 		context.renderLayer(GameContext.RENDER_POST_BACKGROUND);
+		
+		profiler.endSection();
 
 		//rotate view
 		float x = box.getCenter().getX();
@@ -119,12 +133,15 @@ public class GuiGame extends Gui implements WindowListener, ControllerUser {
 		GL11.glRotatef(rot, 0, 0, 1);
 		GL11.glTranslatef(-x, -y, 0);
 
+		profiler.startSection("planet");
+		profiler.endSection();
 		context.renderLayer(GameContext.RENDER_PRE_PLANET);
 		for(Planet planet : world.getPlanets()) {
 			renderer.renderPlanet(planet);
 		}
 		context.renderLayer(GameContext.RENDER_POST_PLANET);
-		
+
+		profiler.startSection("player");
 		context.renderLayer(GameContext.RENDER_PRE_PLAYER);
 		int pCount = context.getPlayerCount();
 		int i = 0;
@@ -132,16 +149,22 @@ public class GuiGame extends Gui implements WindowListener, ControllerUser {
 			renderer.renderPlayer(player, i++, pCount);
 		}
 		context.renderLayer(GameContext.RENDER_POST_PLAYER);
+		profiler.endSection();
 		
 		GL11.glPopMatrix();
 	}
 	
 	@Override
 	public void update() {
+		Profiler profiler = AetherDisplay.getInstance().getProfiler();
+		profiler.startSection("logic");
+		
 		double d = ticker.time();
 		boolean tick = getOwner().getCurrentScreen() == this;
 		if(tick) controller.update();
 		if(d != 0D) update(d, tick);
+		
+		profiler.endSection();
 	}
 	
 	public void update(double timeStep, boolean tick) {

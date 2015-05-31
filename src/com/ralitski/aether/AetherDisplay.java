@@ -10,12 +10,33 @@ import com.ralitski.util.gui.GuiManager;
 
 public class AetherDisplay extends AetherDisplayParent implements WindowListener {
 	
+	private static AetherDisplay instance;
+	
+	public static AetherDisplay getInstance() {
+		return instance;
+	}
+	
+	private Profiler profiler = new Profiler();
+	
 	public AetherDisplay() {
 		super(1200, 600);
+	}
+	
+	@Override
+	public void updateTick() {
+		profiler.startTick();
+		super.updateTick();
+		profiler.endTick();
+		for(String s : profiler.getSections()) {
+			s = "tick" + s;
+			System.out.println(s + " " + profiler.getTime(s));
+		}
+		//TODO: pass profiler to lag calculators and whatever
 	}
 
 	@Override
 	protected Gui getMainMenu(GuiManager guiManager) {
+		instance = this;
 		setTitle("Aether");
 		GuiMainMenu gui = new GuiMainMenu(guiManager, this);
 		gui.init();
@@ -31,6 +52,10 @@ public class AetherDisplay extends AetherDisplayParent implements WindowListener
 	
 	private GameContext getGameContext() {
 		return new GameContextDefault();
+	}
+	
+	public Profiler getProfiler() {
+		return profiler;
 	}
 
 	@Override
