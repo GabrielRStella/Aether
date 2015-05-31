@@ -2,6 +2,7 @@ package com.ralitski.aether;
 
 import org.lwjgl.input.Keyboard;
 
+import com.ralitski.aether.gui.GuiGame;
 import com.ralitski.aether.input.InputBundle;
 import com.ralitski.util.input.ControllerUser;
 import com.ralitski.util.input.InputUser;
@@ -17,12 +18,12 @@ public class InputHandler implements InputUser, ControllerUser {
 	
 	//
 	
-	private AetherGame game;
+	private GuiGame game;
 	private AetherWorld world;
 	
 	private InputBundle[] input;
 	
-	public InputHandler(AetherGame game, AetherWorld world) {
+	public InputHandler(GuiGame game, AetherWorld world) {
 		this.game = game;
 		this.world = world;
 		input = new InputBundle[game.getContext().getPlayerCount()];

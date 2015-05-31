@@ -9,6 +9,7 @@ import com.ralitski.aether.events.EventPlanetPrune;
 import com.ralitski.aether.events.EventPlanetSpawn;
 import com.ralitski.aether.force.Boundary;
 import com.ralitski.aether.force.ForceRedirect;
+import com.ralitski.aether.gui.GuiGame;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
 
@@ -21,7 +22,7 @@ public class AetherWorld {
 	
 	//
 	
-	private AetherGame game;
+	private GuiGame game;
 	
 	private Player[] playerPlanets;
 	private Body center;
@@ -32,7 +33,7 @@ public class AetherWorld {
 	//will be used to detect collisions in consumption mode
 	private CollisionDetector detector;
 	
-	public AetherWorld(AetherGame game, GameContext context) {
+	public AetherWorld(GuiGame game, GameContext context) {
 		this.game = game;
 		this.planetCreator = context.getPlanetCreator();
 		int pCount = context.getPlayerCount();
@@ -59,7 +60,7 @@ public class AetherWorld {
 //		timeStep *= 100F;
 		//apply forces to players
 		//remove planets a certain distance away from players
-		//add planets in direction of player motion
+		//add planets on edge of viewbox
 		BoundingBox2d box = game.getViewBox().getViewBox();
 		BoundingBox2d check = box.scale(planetCreator.getBoxScale());
 		Iterator<Planet> planets = worldPlanets.iterator();

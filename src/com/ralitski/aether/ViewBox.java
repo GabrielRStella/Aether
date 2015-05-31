@@ -1,5 +1,6 @@
 package com.ralitski.aether;
 
+import com.ralitski.aether.gui.GuiGame;
 import com.ralitski.util.gui.GuiManager;
 import com.ralitski.util.math.geom.d2.BoundingBox2d;
 import com.ralitski.util.math.geom.d2.Point2d;
@@ -11,10 +12,10 @@ public class ViewBox {
 	public static final float MIN_WIDTH = 100;
 	public static final float MIN_HEIGHT = 100;
 
-	private AetherGame game;
+	private GuiGame game;
 	private BoundingBox2d viewBox;
 	
-	public ViewBox(AetherGame game) {
+	public ViewBox(GuiGame game) {
 		this.game = game;
 		viewBox = new BoundingBox2d();
 	}
@@ -84,7 +85,7 @@ public class ViewBox {
 			maxY += extra;
 		}
 		//fit to screen ratio
-		GuiManager manager = game.getOwner().getOwner();
+		GuiManager manager = game.getOwner();
 		float x = manager.getWindowWidth();
 		float y = manager.getWindowHeight();
 		float ratio = y / x;

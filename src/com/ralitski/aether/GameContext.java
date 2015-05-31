@@ -1,5 +1,7 @@
 package com.ralitski.aether;
 
+import com.ralitski.aether.gui.GuiGame;
+
 public interface GameContext {
 	//render layer constants
 	int RENDER_POST_BACKGROUND = 0;
@@ -11,7 +13,7 @@ public interface GameContext {
 	//methods
 	PlanetCreator getPlanetCreator();
 	WorldRender getRenderer();
-	ViewBox getViewBox(AetherGame game);
+	ViewBox getViewBox(GuiGame game);
 	CollisionDetector getCollisionDetector();
 	void setup();
 	void update(double timeStep, boolean tick);

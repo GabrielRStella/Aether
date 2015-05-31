@@ -5,6 +5,7 @@ import org.lwjgl.input.Keyboard;
 import com.ralitski.aether.force.ForceAccelerate;
 import com.ralitski.aether.force.ForceAttractive;
 import com.ralitski.aether.force.ForceTorque;
+import com.ralitski.aether.gui.GuiGame;
 import com.ralitski.aether.input.InputBundle;
 import com.ralitski.aether.input.InputKeyboard;
 import com.ralitski.util.render.img.Color;
@@ -26,7 +27,7 @@ public class GameContextDefault implements GameContext {
 	}
 
 	@Override
-	public ViewBox getViewBox(AetherGame game) {
+	public ViewBox getViewBox(GuiGame game) {
 		return new ViewBox(game);
 	}
 
