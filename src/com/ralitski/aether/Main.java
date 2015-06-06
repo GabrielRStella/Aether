@@ -4,8 +4,8 @@ package com.ralitski.aether;
  * TODO:
  * 
  * get rid of old GLImage objects
- * test/fix lag profiler
  * fix lag on game start
+ * test/fix lag profiler
  * pass profiler data to lag calculators
  * 
  * modding/plugins (loader, hooks)
