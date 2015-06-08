@@ -26,4 +26,9 @@ public interface Plugin {
 	/*
 	 * https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/plugin/Plugin.html
 	 */
+	/*
+	 * note: "refresh" and "reload" will be different
+	 * refresh disables and enables plugins, but keeps classes and such
+	 * reload completely trashes old plugins and reloads from disk
+	 */
 }
