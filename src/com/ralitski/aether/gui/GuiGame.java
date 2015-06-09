@@ -134,12 +134,12 @@ public class GuiGame extends Gui implements WindowListener, ControllerUser {
 		GL11.glTranslatef(-x, -y, 0);
 
 		profiler.startSection("planet");
-		profiler.endSection();
 		context.renderLayer(GameContext.RENDER_PRE_PLANET);
 		for(Planet planet : world.getPlanets()) {
 			renderer.renderPlanet(planet);
 		}
 		context.renderLayer(GameContext.RENDER_POST_PLANET);
+		profiler.endSection();
 
 		profiler.startSection("player");
 		context.renderLayer(GameContext.RENDER_PRE_PLAYER);
