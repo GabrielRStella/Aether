@@ -1,19 +1,25 @@
-package com.ralitski.aether.mod;
+package com.ralitski.aether.mod.java;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
+
+import com.ralitski.aether.mod.Plugin;
+import com.ralitski.aether.mod.PluginLoader;
 
 public abstract class JavaPlugin implements Plugin {
 	
 	JavaPluginLoader loader;
-	File jarFile;
+	File jarFileLoc;
+	JarFile jarFile;
 	File dataFolder;
+	boolean enabled;
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+		return enabled;
 	}
 
 	@Override
@@ -29,7 +35,8 @@ public abstract class JavaPlugin implements Plugin {
 
 	@Override
 	public InputStream getResource(String name) throws IOException {
-		return loader.getResource(jarFile, name);
+		JarEntry entry = jarFile.getJarEntry(name);
+		return entry != null ? jarFile.getInputStream(entry) : null;
 	}
 
 	@Override

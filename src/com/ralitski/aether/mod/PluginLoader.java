@@ -11,5 +11,6 @@ import java.io.File;
 public interface PluginLoader {
 
 	Plugin loadPlugin(File file);
-	
+	boolean enable(Plugin plugin);
+	boolean disable(Plugin plugin);
 }

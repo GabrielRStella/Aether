@@ -16,23 +16,28 @@ public class AetherDisplay extends AetherDisplayParent implements WindowListener
 		return instance;
 	}
 	
+	//
+	
 	private Profiler profiler = new Profiler();
 	
 	public AetherDisplay() {
 		super(1200, 600);
 	}
-	
-	@Override
-	public void updateTick() {
+
+    @Override
+    public boolean update(boolean tick, float partial) {
 		profiler.startTick();
-		super.updateTick();
+    	boolean flag = super.update(tick, partial);
 		profiler.endTick();
+		
 		for(String s : profiler.getSections()) {
-			s = "tick" + s;
-			System.out.println(s + " " + profiler.getTime(s));
+			String s2 = "tick" + s;
+			System.out.println(s2 + " " + profiler.getTime(s));
 		}
 		//TODO: pass profiler to lag calculators and whatever
-	}
+		
+		return flag;
+    }
 
 	@Override
 	protected Gui getMainMenu(GuiManager guiManager) {

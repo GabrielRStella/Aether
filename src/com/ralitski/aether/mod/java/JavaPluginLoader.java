@@ -1,15 +1,18 @@
-package com.ralitski.aether.mod;
+package com.ralitski.aether.mod.java;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+
+import com.ralitski.aether.mod.Plugin;
+import com.ralitski.aether.mod.PluginLoader;
 
 public class JavaPluginLoader implements PluginLoader {
 
 	@Override
 	public Plugin loadPlugin(File file) {
+		if(file.exists() && file.getName().endsWith(".jar")) {
+		}
 		return null;
 	}
 
@@ -18,10 +21,35 @@ public class JavaPluginLoader implements PluginLoader {
 		return null;
 	}
 
-	public InputStream getResource(File jarFile, String name) throws IOException {
-		JarFile file = new JarFile(jarFile);
-		JarEntry entry = file.getJarEntry(name);
-		return entry != null ? file.getInputStream(entry) : null;
+	@Override
+	public boolean enable(Plugin plugin) {
+		if(plugin instanceof JavaPlugin) {
+			JavaPlugin jPlugin = (JavaPlugin)plugin;
+			try {
+				jPlugin.jarFile = new JarFile(jPlugin.jarFileLoc);
+				jPlugin.enabled = true;
+				return true;
+			} catch (IOException e) {
+				return false;
+			}
+		}
+		return plugin instanceof JavaPlugin;
+	}
+
+	@Override
+	public boolean disable(Plugin plugin) {
+		if(plugin instanceof JavaPlugin) {
+			JavaPlugin jPlugin = (JavaPlugin)plugin;
+			try {
+				jPlugin.jarFile.close();
+				jPlugin.jarFile = null;
+				jPlugin.enabled = false;
+				return true;
+			} catch (IOException e) {
+				return false;
+			}
+		}
+		return false;
 	}
 	
 	/*
