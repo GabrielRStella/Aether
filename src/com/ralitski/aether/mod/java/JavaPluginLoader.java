@@ -16,11 +16,6 @@ public class JavaPluginLoader implements PluginLoader {
 		return null;
 	}
 
-	public File getDataFolder(JavaPlugin javaPlugin) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public boolean enable(Plugin plugin) {
 		if(plugin instanceof JavaPlugin) {
