@@ -25,9 +25,9 @@ public class AetherDisplay extends AetherDisplayParent implements WindowListener
 	}
 
     @Override
-    public boolean update(boolean tick, float partial) {
+    public boolean update(boolean tick, float partial, float partialFromLast) {
 		profiler.startTick();
-    	boolean flag = super.update(tick, partial);
+    	boolean flag = super.update(tick, partial, partialFromLast);
 		profiler.endTick();
 		
 		for(String s : profiler.getSections()) {

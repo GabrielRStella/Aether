@@ -67,21 +67,21 @@ public abstract class AetherDisplayParent extends RenderManagerUserAbstract impl
 	 */
 
 	@Override
-	public void render3dTransformed(float partial) {
+	public void render3dTransformed(float partial, float partialFromLast) {
 		guiManager.render3d(partial);
 	}
 
 	@Override
-	public void render2d(float partial) {
+	public void render2d(float partial, float partialFromLast) {
 		guiManager.render2d(partial);
 	}
 
 	@Override
-	public void render3dUntransformed(float partial) {
+	public void render3dUntransformed(float partial, float partialFromLast) {
 	}
 
 	@Override
-	public void render3dRotated(float partial) {
+	public void render3dRotated(float partial, float partialFromLast) {
 	}
 
 	@Override

@@ -8,8 +8,6 @@ package com.ralitski.aether.mod;
  */
 public class PluginManager {
 	
-	
-	
 	public void refresh() {
 		
 	}
